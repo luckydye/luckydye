@@ -1,5 +1,7 @@
 ### Hi there 👋
 
+I work as a Frontend Developer, but work on all sorts of stuff on the side.
+
 <!--
 **luckydye/luckydye** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 

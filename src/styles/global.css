@@ -1,0 +1,12 @@
+body {
+  margin: 60px;
+  font-family: monospace;
+  font-size: 16px;
+  color: #eee;
+  background: #0c0c0c;
+}
+
+a[href] {
+  text-decoration: underline;
+  color: #e7b52b;
+}

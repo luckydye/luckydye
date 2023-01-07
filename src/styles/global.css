@@ -10,3 +10,14 @@ a[href] {
   text-decoration: underline;
   color: #e7b52b;
 }
+
+gyro-terminal {
+  background: #131313;
+  cursor: text;
+  display: flex;
+  height: 400px;
+}
+
+::selection {
+  background: grey;
+}

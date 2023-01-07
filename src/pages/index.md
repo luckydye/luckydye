@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/layout.astro
+layout: ../layouts/terminal.astro
 title: luckydye
 author: Tim Havlicek
 description: My homepage.

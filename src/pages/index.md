@@ -13,7 +13,7 @@ I work as a Frontend Developer, but work on all sorts of stuff on the side.
 [![Twitch](/TwitchGlitchPurple.png)](https://www.twitch.tv/luckydye)
 [![Twitter](/2021-Twitter-logo-blue.png)](https://twitter.com/timh4v)
 [![Github](/github-mark-white.png)](https://github.com/luckydye)
-[![Instagram](/instagram.webp)](https://www.instagram.com/luckydye/)
+[![Instagram](/instagram.png)](https://www.instagram.com/luckydye/)
 
 
 ### Some of my older projects:

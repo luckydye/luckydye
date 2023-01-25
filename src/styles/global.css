@@ -1,9 +1,26 @@
 body {
-  margin: 60px;
-  font-family: monospace;
+  margin: 40px;
+  font-family: "Source Code Pro", monospace;
   font-size: 16px;
   color: #eee;
   background: #0c0c0c;
+  max-width: 900px;
+  margin: auto;
+  padding: 40px;
+  font-weight: 300;
+}
+
+hr {
+  opacity: 0.5;
+  margin: 40px 0;
+}
+
+h1 {
+  overflow: hidden;
+}
+
+h3 {
+  margin-top: 60px;
 }
 
 a[href] {
@@ -20,4 +37,42 @@ gyro-terminal {
 
 ::selection {
   background: grey;
+}
+
+img {
+  height: 40px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 20px 20px;
+  object-fit: contain;
+  max-width: 200px;
+}
+
+img[alt="Twitch"],
+img[alt="Twitter"],
+img[alt="Github"],
+img[alt="Instagram"] {
+  height: 24px;
+  margin: 10px 0;
+}
+
+ul {
+  padding: 0 0 0 15px;
+}
+
+li {
+  margin: 4px 0;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
+}
+
+a + a {
+  margin-left: 15px;
 }

@@ -2,6 +2,10 @@
 
 I work as a Frontend Developer, but work on all sorts of stuff on the side.
 
+[![Twitch](https://luckydye.dev/TwitchGlitchPurple.png)](https://www.twitch.tv/luckydye)
+[![Twitter](https://luckydye.dev/2021-Twitter-logo-blue.png)](https://twitter.com/timh4v)
+[![Github](https://luckydye.dev/github-mark-white.png)](https://github.com/luckydye)
+[![Instagram](https://luckydye.dev/instagram.webp)](https://www.instagram.com/luckydye/)
 
 #### Some of my projects:
 

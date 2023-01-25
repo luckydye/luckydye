@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/layout.astro
-title: luckydye
+title: luckydye - wip
 author: Tim Havlicek
 description: Work in progress projects.
 --- 

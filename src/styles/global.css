@@ -47,8 +47,6 @@ a[href] {
   left: 0;
   width: 100%;
   height: auto;
-  pointer-events: none;
-  z-index: -1;
 }
 
 .background iframe {
@@ -99,4 +97,9 @@ tr {
 
 a + a {
   margin-left: 22px;
+}
+
+main {
+  z-index: 10;
+  position: relative;
 }

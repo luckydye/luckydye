@@ -37,7 +37,7 @@ h3 {
 
 a[href] {
   text-decoration: underline;
-  color: #e7b52b;
+  color: #eee;
 }
 
 .background {
@@ -102,4 +102,12 @@ a + a {
 main {
   z-index: 10;
   position: relative;
+}
+
+gyro-terminal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

@@ -3,30 +3,17 @@ import "../styles/global.css";
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="background">
-      <iframe
-        frameborder="0"
-        allowfullscreen
-        allow="autoplay; fullscreen; xr-spatial-tracking"
-        src="https://luckydye.github.io/luckydye-background/dist"
-      >
-      </iframe>
-    </div>
-
-    <main>
-      <slot />
-    </main>
-  </body>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap" rel="stylesheet" />
+	</head>
+	<body>
+		<main>
+			<slot />
+		</main>
+	</body>
 </html>

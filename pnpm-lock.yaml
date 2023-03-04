@@ -1,10 +1,17 @@
 lockfileVersion: 5.4
 
-specifiers:
-  astro: ^1.9.0
+importers:
 
-dependencies:
-  astro: 1.9.2
+  .:
+    specifiers:
+      astro: ^1.9.0
+      terminal: 'workspace:'
+    dependencies:
+      astro: 1.9.2
+      terminal: link:pacakges/terminal
+
+  pacakges/terminal:
+    specifiers: {}
 
 packages:
 

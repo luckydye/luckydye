@@ -55,48 +55,10 @@ a[href] {
 	background: grey;
 }
 
-img {
-	height: 40px;
-	display: inline-block;
-	vertical-align: bottom;
-	margin: 20px 20px;
-	object-fit: contain;
-	max-width: 200px;
-}
-
-img[alt="Twitch"],
-img[alt="Twitter"],
-img[alt="Github"],
-img[alt="Instagram"] {
-	height: 24px;
-	margin: 10px 0;
-}
-
-ul {
-	padding: 0 0 0 15px;
-}
-
-li {
-	margin: 4px 0;
-}
-
-table {
-	width: 100%;
-}
-
-tr {
-	display: flex;
-	justify-content: space-between;
-}
-
-a + a {
-	margin-left: 22px;
-}
-
 main {
 	z-index: 10;
 	position: relative;
-	max-width: 1200px;
+	max-width: 900px;
 	margin: auto;
 }
 

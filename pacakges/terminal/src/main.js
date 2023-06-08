@@ -48,7 +48,7 @@ async function sleep(seconds = 1) {
 	});
 }
 
-export async function initTerminal() {
+export async function initTerminal(prefix) {
 	const nativeModules = [EchoModule, ...FileSystem.modules];
 
 	const terminal = Console.getTerminal();
@@ -82,6 +82,8 @@ export async function initTerminal() {
 				e.defaultPrevented = true;
 			}
 		});
+
+		Console.INPUT_PREFIX = prefix;
 
 		while (true) {
 			const value = await terminal.read(Console.INPUT_PREFIX);

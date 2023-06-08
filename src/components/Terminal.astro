@@ -1,2 +1,17 @@
+---
+---
+
 <div id="terminal"></div>
-<script src="../terminal.ts"></script>
+
+<script>
+	import { initTerminal } from "terminal";
+
+	async function init() {
+		const term = await initTerminal("luckydye@web:~$ ");
+		const ele = term.getTerminal();
+		const root = document.getElementById("terminal");
+		if (root) root.append(ele);
+	}
+
+	init();
+</script>

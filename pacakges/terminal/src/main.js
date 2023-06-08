@@ -3,48 +3,38 @@ import Console from "./Console.js";
 import FileSystem from "./FileSystem.js";
 import EchoModule from "./modules/echo.js";
 
-const brand = `       *@*
-    @&, @*
-@&      @*
-@       @*
-@       @*
-@       @*     @@,
-@       @*     (  .#@,
-@       @*     (       @
-@       @*     (       @
-@       @*     (       @
-@       @*     (       @
-@       @*     (       @
-@#*     @*     (       @
-   *#&( @*     (       @
-       .**     (       @
-               (       @
-               (       @
-               (    *%@.
-               (%&%.
-
-
-
-`;
-
 async function startSequence() {
 	return new Promise(async (resolve) => {
 		Console.clear();
-
-		await Console.simulateWrite(brand, 1);
 
 		// [![Twitch](/TwitchGlitchPurple.png)](https://www.twitch.tv/luckydye)
 		// [![Twitter](/2021-Twitter-logo-blue.png)](https://twitter.com/timh4v)
 		// [![Github](/github-mark-white.png)](https://github.com/luckydye)
 		// [![Instagram](/instagram.png)](https://www.instagram.com/luckydye/)
 
-		await Console.printHTML(400, 24, `<a href="https://www.twitch.tv/luckydye" target="_blank">Twitch</a>`);
-		await Console.printHTML(400, 24, `<a href="https://twitter.com/timh4v" target="_blank">Twitter</a>`);
-		await Console.printHTML(400, 24, `<a href="https://github.com/luckydye" target="_blank">Github</a>`);
-		await Console.printHTML(400, 24, `<a href="https://www.instagram.com/luckydye/" target="_blank">Instagram</a>`);
+		// await Console.printHTML(
+		// 	400,
+		// 	24,
+		// 	`<a href="https://www.twitch.tv/luckydye" target="_blank">Twitch</a>`
+		// );
+		// await Console.printHTML(
+		// 	400,
+		// 	24,
+		// 	`<a href="https://twitter.com/timh4v" target="_blank">Twitter</a>`
+		// );
+		// await Console.printHTML(
+		// 	400,
+		// 	24,
+		// 	`<a href="https://github.com/luckydye" target="_blank">Github</a>`
+		// );
+		// await Console.printHTML(
+		// 	400,
+		// 	24,
+		// 	`<a href="https://www.instagram.com/luckydye/" target="_blank">Instagram</a>`
+		// );
 
-		await Console.print("");
-		await Console.print("");
+		// await Console.print("");
+		// await Console.print("");
 
 		setTimeout(() => {
 			resolve();

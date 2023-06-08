@@ -1,10 +1,10 @@
-const BORDER_PADDING = [64, 64];
+const BORDER_PADDING = [0, 0];
 const CURSOR_OFFSET = [1, 0];
 const FONT_SIZE = 14;
 const FONT_FAMILY = "monospace";
 const FONT_WEIGHT = 200;
-const FONT_COLOR = "#eee";
-const SLECTION_COLOR = "#717171";
+const FONT_COLOR = "#333";
+const SLECTION_COLOR = "#333";
 const SHADOW_BLUR = 0;
 const CURSOR_HEIGHT = 16;
 const CURSOR_WIDTH = 6;
@@ -84,6 +84,14 @@ export default class Terminal extends HTMLElement {
 		return cursor;
 	}
 
+	get width() {
+		return canvas.width / globalThis.devicePixelRatio;
+	}
+
+	get height() {
+		return canvas.height / globalThis.devicePixelRatio;
+	}
+
 	focus() {
 		canvas.focus();
 	}
@@ -105,7 +113,7 @@ export default class Terminal extends HTMLElement {
 			const dir = Math.sign(e.deltaY) * 2;
 
 			const cursorY = this.getCursorPosition()[1];
-			const maxY = Math.max(0, cursorY - (canvas.height - this.lineHeight * 3));
+			const maxY = Math.max(0, cursorY - (this.height - this.lineHeight * 3));
 
 			view[1] = Math.max(0, Math.min(maxY, view[1] + dir * this.lineHeight));
 		});
@@ -208,7 +216,10 @@ export default class Terminal extends HTMLElement {
 	}
 
 	pixelToBufferPos(x, y) {
-		return [Math.floor((x - BORDER_PADDING[0]) / CHAR_WIDTH), Math.floor((y - BORDER_PADDING[1]) / this.lineHeight)];
+		return [
+			Math.floor((x - BORDER_PADDING[0]) / CHAR_WIDTH),
+			Math.floor((y - BORDER_PADDING[1]) / this.lineHeight),
+		];
 	}
 
 	getContext() {
@@ -218,38 +229,39 @@ export default class Terminal extends HTMLElement {
 	init() {
 		const style = document.createElement("style");
 		style.innerHTML = `
-            :host {
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-            }
-            :host(:focus) {
-                z-index: 1000000;
-                opacity: 1;
-                pointer-events: all;
-            }
-            canvas {
-                filter: contrast(1.1) blur(.33px);
-                outline: none;
-            }
-            .inline-element {
-                position: absolute;
-                top: calc(var(--elementY) * 1px - var(--scrollY) * 1px);
-                left: calc(var(--elementX) * 1px);
-                height: calc(var(--elementHeight) * 1px);
-                width: calc(var(--elementWidth) * 1px);
-                display: block;
-                overflow: hidden;
-                color: #eee;
-                font-family: monospace;
-                user-select: none;
-            }
-            .inline-element + * {
-                display: inline;
-            }
-			a[href] {
-				color: inherit;
-			}
+					:host {
+							display: block;
+							width: 100%;
+							height: 100%;
+							overflow: hidden;
+					}
+					:host(:focus) {
+							z-index: 1000000;
+							opacity: 1;
+							pointer-events: all;
+					}
+					canvas {
+							filter: contrast(1.1) blur(.33px);
+							outline: none;
+					}
+					.inline-element {
+							position: absolute;
+							top: calc(var(--elementY) * 1px - var(--scrollY) * 1px);
+							left: calc(var(--elementX) * 1px);
+							height: calc(var(--elementHeight) * 1px);
+							width: calc(var(--elementWidth) * 1px);
+							display: block;
+							overflow: hidden;
+							color: #eee;
+							font-family: monospace;
+							user-select: none;
+					}
+					.inline-element + * {
+							display: inline;
+					}
+					a[href] {
+						color: inherit;
+					}
         `;
 		this.shadowRoot.appendChild(style);
 		this.shadowRoot.appendChild(canvas);
@@ -399,8 +411,7 @@ export default class Terminal extends HTMLElement {
 				cursor[0] += str.length;
 		}
 
-		const cursorY = this.getCursorPosition()[1];
-		view[1] = Math.max(0, cursorY - (canvas.height - this.lineHeight * 3));
+		this.autoScroll();
 	}
 
 	handleInput(e) {
@@ -479,18 +490,26 @@ export default class Terminal extends HTMLElement {
 	}
 
 	reformat() {
-		canvas.width = this.clientWidth;
-		canvas.height = this.clientHeight;
+		canvas.width = this.clientWidth * globalThis.devicePixelRatio;
+		canvas.height = this.clientHeight * globalThis.devicePixelRatio;
+		canvas.style.width = `${this.clientWidth}px`;
 
-		const cursorY = this.getCursorPosition()[1];
-		view[1] = Math.max(0, cursorY - (canvas.height - this.lineHeight * 3));
+		this.autoScroll();
 
 		this.bounds = this.getClientRects()[0];
 	}
 
+	autoScroll() {
+		const cursorY = this.getCursorPosition()[1];
+		view[1] = Math.max(0, cursorY - (this.height - this.lineHeight * 3));
+	}
+
 	draw(context) {
+		context.resetTransform();
+		context.scale(globalThis.devicePixelRatio, globalThis.devicePixelRatio);
+
 		context.globalCompositeOperation = "normal";
-		context.fillStyle = "#0c0c0c";
+		context.fillStyle = "#fff";
 		context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
 		if (canvas.width <= 0) return;
@@ -532,14 +551,17 @@ export default class Terminal extends HTMLElement {
 	}
 
 	bufferToPixelPos(x, y) {
-		return [x * CHAR_WIDTH + BORDER_PADDING[0] - view[0], y * this.lineHeight + BORDER_PADDING[1] - view[1]];
+		return [
+			x * CHAR_WIDTH + BORDER_PADDING[0] - view[0],
+			y * this.lineHeight + BORDER_PADDING[1] - view[1],
+		];
 	}
 
 	drawSelection() {
 		const start = this.bufferToPixelPos(...selection[0]);
 		const end = this.bufferToPixelPos(...selection[1]);
 
-		context.globalCompositeOperation = "screen";
+		context.globalCompositeOperation = "difference";
 		context.shadowColor = "";
 		context.shadowBlur = 0;
 
@@ -606,7 +628,12 @@ export default class Terminal extends HTMLElement {
 		}
 
 		const x = BORDER_PADDING[0] + cursor[0] * CHAR_WIDTH;
-		const y = BORDER_PADDING[1] + posY * CHAR_HEIGHT + posY * LINE_PADDING + CHAR_HEIGHT / 2 - CURSOR_HEIGHT / 2;
+		const y =
+			BORDER_PADDING[1] +
+			posY * CHAR_HEIGHT +
+			posY * LINE_PADDING +
+			CHAR_HEIGHT / 2 -
+			CURSOR_HEIGHT / 2;
 
 		return [x + CURSOR_OFFSET[0], y + CURSOR_OFFSET[1]];
 	}

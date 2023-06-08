@@ -1,5 +1,12 @@
 ---
 import "../styles/global.css";
+import Intro from "../components/Intro.astro";
+import Project from "../components/Project.astro";
+import Projects from "../components/Projects.astro";
+import Post from "../components/Post.astro";
+import Socials from "../components/Socials.astro";
+import Badges from "../components/Badges.astro";
+import Terminal from "../components/Terminal.astro";
 ---
 
 <html lang="en">
@@ -11,6 +18,20 @@ import "../styles/global.css";
 		></script>
 	</head>
 	<body>
-		<script src="../terminal.ts"></script>
+		<main>
+			<Intro />
+
+			<Project />
+
+			<Post />
+
+			<Projects />
+
+			<Socials />
+
+			<Badges />
+
+			<Terminal />
+		</main>
 	</body>
 </html>

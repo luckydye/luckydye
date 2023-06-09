@@ -1,10 +1,10 @@
 const BORDER_PADDING = [0, 0];
 const CURSOR_OFFSET = [1, 0];
 const FONT_SIZE = 14;
-const FONT_FAMILY = "monospace";
+const FONT_FAMILY = "Source Code Pro";
 const FONT_WEIGHT = 200;
-const FONT_COLOR = "#333";
-const SLECTION_COLOR = "#333";
+const FONT_COLOR = "#e4e4e4";
+const SLECTION_COLOR = "#4e5b5c";
 const SHADOW_BLUR = 0;
 const CURSOR_HEIGHT = 16;
 const CURSOR_WIDTH = 6;
@@ -98,6 +98,8 @@ export default class Terminal extends HTMLElement {
 
 	constructor() {
 		super();
+
+		this.tabIndex = 0;
 
 		this.bounds = { x: 0, y: 0 };
 
@@ -509,8 +511,7 @@ export default class Terminal extends HTMLElement {
 		context.scale(globalThis.devicePixelRatio, globalThis.devicePixelRatio);
 
 		context.globalCompositeOperation = "normal";
-		context.fillStyle = "#fff";
-		context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+		context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
 		if (canvas.width <= 0) return;
 

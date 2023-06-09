@@ -2,7 +2,25 @@
 import Logo from "../assets/min_logo 1.svg";
 ---
 
-<div>
-	<img src={Logo} height="300px" />
-	Intro
+<div class="container block md:grid gap-10 mt-20 mb-20">
+	<img class="logo block mx-auto md:mx-14" src={Logo} height="300px" />
+
+	<div class="mr-0 md:mr-10">
+		<h1>Hi, I'm Tim. I have over 6 years of experience in Programming.</h1>
+		<p>
+			I have been maintaining websites for multi billion-dollar Companies and building Full Stack
+			web applications and APIs using a Serverless as well as Self-hosted approach. I enjoy solving
+			complex problems and designing User-Interfaces and Tools to improve work efficiency for
+			clients and other employees.
+		</p>
+	</div>
 </div>
+
+<style>
+	.container {
+		grid-template-columns: auto 1fr;
+	}
+	.logo {
+		opacity: 0.25;
+	}
+</style>

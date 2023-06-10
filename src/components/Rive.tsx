@@ -1,11 +1,16 @@
-import { onCleanup, createSignal } from "solid-js";
+import riveWASMResource from '@rive-app/canvas/rive.wasm';
+import { Rive, RuntimeLoader } from '@rive-app/canvas';
+import {createSignal } from "solid-js";
 
-const [globalCount] = signal;
+RuntimeLoader.setWasmUrl(riveWASMResource);
 
 export default () => {
-  const [count, setCount] = createSignal(0);
-  const interval = setInterval(() => setCount((count) => count + 1), 1000);
-  onCleanup(() => clearInterval(interval));
+
+
+  const riveInstance = new Rive({
+    src: src,
+    ...
+  });
 
   return (
     <div>

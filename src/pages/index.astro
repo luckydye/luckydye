@@ -21,21 +21,33 @@ import Terminal from "../components/Terminal.astro";
 	</head>
 	<body>
 		<main>
-			<Intro />
+			<div class="container">
+				<Intro />
+			</div>
 
-			<Project />
+			<div class="container">
+				<Socials />
+			</div>
 
-			<Post />
+			<!-- <div class="container">
+				<Project />
+			</div>
 
-			<Projects />
+			<div class="container">
+				<Post />
+			</div>
 
-			<h2>Github</h2>
+			<div class="container">
+				<Projects />
+			</div>
 
-			<Socials />
+			<div class="container">
+				<h2>Github</h2>
+			</div> -->
 
-			<br />
-
-			<Terminal />
+			<div class="container mt-20">
+				<Terminal />
+			</div>
 		</main>
 	</body>
 </html>
@@ -54,11 +66,6 @@ import Terminal from "../components/Terminal.astro";
 
 	.container {
 		padding: 0 20px;
-	}
-
-	gyro-terminal {
 		position: relative;
-		width: 900px;
-		height: 250px;
 	}
 </style>

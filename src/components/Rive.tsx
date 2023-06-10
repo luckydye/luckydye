@@ -9,8 +9,17 @@ export default ({ src, width, height }) => {
   canvas.width = width * window.devicePixelRatio;
   canvas.height = height * window.devicePixelRatio;
 
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
+  canvas.style.width = `var(--width, ${width + "px"})`;
+  canvas.style.height = `var(--height, ${height + "px"})`;
+
+  const effectCanvas = document.createElement("canvas");
+  effectCanvas.width = width * window.devicePixelRatio;
+  effectCanvas.height = height * window.devicePixelRatio;
+
+  effectCanvas.style.width = `var(--width, ${width + "px"})`;
+  effectCanvas.style.height = `var(--height, ${height + "px"})`;
+
+  const effectContext = effectCanvas.getContext("2d");
 
   const [loaded, setLoaded] = createSignal(false);
 
@@ -23,5 +32,23 @@ export default ({ src, width, height }) => {
     },
   });
 
-  return <div class={`${!loaded ? "hidden" : ""}`}>{canvas}</div>;
+  function tick() {
+    effectContext.clearRect(0, 0, canvas.width, canvas.height);
+
+    effectContext.globalAlpha = 0.5;
+    effectContext.filter = "blur(15px)";
+
+    effectContext.drawImage(canvas, 0, 0);
+
+    effectContext.globalAlpha = 1;
+    effectContext.filter = "blur(0px)";
+
+    effectContext.drawImage(canvas, 0, 0);
+
+    requestAnimationFrame(tick);
+  }
+
+  tick();
+
+  return <div class={`rive ${!loaded ? "hidden" : ""}`}>{effectCanvas}</div>;
 };

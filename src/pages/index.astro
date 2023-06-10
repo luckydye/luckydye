@@ -5,7 +5,6 @@ import Project from "../components/Project.astro";
 import Projects from "../components/Projects.astro";
 import Post from "../components/Post.astro";
 import Socials from "../components/Socials.astro";
-import Badges from "../components/Badges.astro";
 import Terminal from "../components/Terminal.astro";
 ---
 
@@ -15,8 +14,10 @@ import Terminal from "../components/Terminal.astro";
 		<meta name="description" content="My homepage." />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<script defer data-domain="luckydye.dev" src="https://collect.luckydye.de/js/script.js"
-		></script>
+		<script
+			defer
+			data-domain="luckydye.dev"
+			src="https://collect.luckydye.de/js/script.js"></script>
 	</head>
 	<body>
 		<main>
@@ -32,11 +33,32 @@ import Terminal from "../components/Terminal.astro";
 
 			<Socials />
 
-			<Badges />
-
 			<br />
 
 			<Terminal />
 		</main>
 	</body>
 </html>
+
+<style>
+	.card {
+		background: var(--color-bg-1);
+	}
+
+	main {
+		z-index: 10;
+		position: relative;
+		max-width: 1200px;
+		margin: auto;
+	}
+
+	.container {
+		padding: 0 20px;
+	}
+
+	gyro-terminal {
+		position: relative;
+		width: 900px;
+		height: 250px;
+	}
+</style>

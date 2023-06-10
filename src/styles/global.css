@@ -3,78 +3,57 @@
 @tailwind utilities;
 
 :root {
-	--color-bg-0: #161718;
-	--color-bg-1: #1e1e20;
-	--color-fg-0: #4e5b5c;
-	--color-accent: #eb8c34;
-	--color-text: #f9f6f4;
+  --color-bg-0: #161718;
+  --color-bg-1: #1e1e20;
+  --color-fg-0: #4e5b5c;
+  --color-accent: #eb8c34;
+  --color-text: #f9f6f4;
 }
 
 html {
-	height: 100%;
+  height: 100%;
 }
 
 body {
-	margin: 0;
-	font-family: "Poppins", sans-serif;
-	background: var(--color-bg-0);
-	color: var(--color-text);
-	margin: auto;
-	padding: 0;
-	font-weight: 300;
-	height: 100%;
-	box-sizing: border-box;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--color-bg-0);
+  color: var(--color-text);
+  margin: auto;
+  padding: 0;
+  font-weight: 300;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 hr {
-	opacity: 0.5;
-	margin: 40px 0;
+  opacity: 0.5;
+  margin: 40px 0;
 }
 
 h1 {
-	font-size: 2.2rem;
-	line-height: 2.8rem;
-	font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 2.8rem;
+  font-weight: 300;
 }
 
 h2 {
-	font-size: 2.6rem;
-	letter-spacing: 0.05em;
-	font-weight: 400;
-	color: var(--color-accent);
+  font-size: 2.6rem;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  color: var(--color-accent);
 }
 
 h3 {
-	font-size: 2.6rem;
-	letter-spacing: 0.05em;
-	font-weight: 400;
+  font-size: 2.6rem;
+  letter-spacing: 0.05em;
+  font-weight: 400;
 }
 
 a[href] {
-	text-decoration: underline;
-}
-
-.card {
-	background: var(--color-bg-1);
+  text-decoration: underline;
 }
 
 ::selection {
-	background: var(--color-fg-0);
-}
-
-main {
-	z-index: 10;
-	position: relative;
-	max-width: 900px;
-	margin: auto;
-}
-
-.container {
-	padding: 0 20px;
-}
-
-gyro-terminal {
-	position: relative;
-	width: 900px;
-	height: 250px;
+  background: var(--color-fg-0);
 }

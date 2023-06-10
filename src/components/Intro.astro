@@ -1,17 +1,21 @@
 ---
 import Logo from "../assets/min_logo 1.svg";
+import Rive from "./Rive";
 ---
 
 <div class="container block md:grid gap-10 mt-20 mb-20">
-	<img class="logo block mx-auto md:mx-14" src={Logo} height="300px" />
+	<div class="logo block mx-auto md:mx-14">
+		<!-- <img src={Logo} height="300px" /> -->
+		<Rive width={300} height={500} src="/logo.riv" client:only />
+	</div>
 
-	<div class="mr-0 md:mr-10">
+	<div class="caption mr-0 md:mr-10">
 		<h1>Hi, I'm Tim. I have over 6 years of experience in Programming.</h1>
 		<p>
-			I have been maintaining websites for multi billion-dollar Companies and building Full Stack
-			web applications and APIs using a Serverless as well as Self-hosted approach. I enjoy solving
-			complex problems and designing User-Interfaces and Tools to improve work efficiency for
-			clients and other employees.
+			I have been maintaining websites for multi billion-dollar Companies and
+			building Full Stack web applications. I enjoy solving complex problems and
+			designing User-Interfaces and Tools to improve work efficiency for clients
+			and colleagues.
 		</p>
 	</div>
 </div>
@@ -19,8 +23,14 @@ import Logo from "../assets/min_logo 1.svg";
 <style>
 	.container {
 		grid-template-columns: auto 1fr;
+		align-items: center;
 	}
 	.logo {
-		opacity: 0.25;
+		width: 300px;
+		height: 500px;
+		opacity: 0.33;
+	}
+	.caption {
+		max-width: 650px;
 	}
 </style>

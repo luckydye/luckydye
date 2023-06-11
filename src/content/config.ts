@@ -1,4 +1,3 @@
-// 1. Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
 
 const postCollection = defineCollection({
@@ -9,25 +8,36 @@ const postCollection = defineCollection({
   }),
 });
 
+const projectCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    link: z.string(),
+    image: z.string(),
+  }),
+});
+
 const linkCollection = defineCollection({
   type: "data",
-  schema: z.object({}),
+  schema: z.object({
+    title: z.string(),
+    link: z.string(),
+    description: z.optional(z.string()),
+    icon: z.optional(z.string()),
+  }),
 });
 
 const gallaryCollection = defineCollection({
   type: "data",
   schema: z.object({
-    images: z.array(
-      z.object({
-        // title: z.string()
-      })
-    ),
+    images: z.array(z.string()),
   }),
 });
 
 export const collections = {
   post: postCollection,
-  project: postCollection,
+  project: projectCollection,
   link: linkCollection,
   gallary: gallaryCollection,
 };

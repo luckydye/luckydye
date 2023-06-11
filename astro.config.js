@@ -4,6 +4,9 @@ import solid from "@astrojs/solid-js";
 
 export default defineConfig({
   base: "",
+  experimental: {
+    assets: true,
+  },
   integrations: [
     solid(),
     tailwind({

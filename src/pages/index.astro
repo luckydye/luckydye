@@ -1,13 +1,13 @@
 ---
 import "../styles/global.css";
-import Intro from "../components/Intro.astro";
-import Project from "../components/Project.astro";
-import Projects from "../components/Projects.astro";
-import Post from "../components/Post.astro";
-import Socials from "../components/Socials.astro";
-import Terminal from "../components/Terminal.astro";
 
 import { getEntry, getEntries, getCollection } from "astro:content";
+
+import Intro from "../components/Intro.astro";
+import Project from "../components/Project.astro";
+import Terminal from "../components/Terminal.astro";
+import Link from "../components/Link.astro";
+import Gallary from "../components/Gallary.astro";
 
 const posts = await getCollection("post");
 const projects = await getCollection("project");
@@ -26,11 +26,14 @@ console.log(gallaries);
 		<meta name="description" content="My homepage." />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+		<link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+
 		<script
 			defer
 			data-domain="luckydye.dev"
 			src="https://collect.luckydye.de/js/script.js"></script>
 	</head>
+
 	<body>
 		<main>
 			<div class="container">
@@ -38,7 +41,11 @@ console.log(gallaries);
 			</div>
 
 			<div class="container">
-				{JSON.stringify(projects)}
+				<Project {...projects[0].data} />
+			</div>
+
+			<div class="container">
+				<Link {...links[0].data} />
 			</div>
 
 			<div class="container">
@@ -54,8 +61,8 @@ console.log(gallaries);
 			</div>
 
 			<div class="container">
-				{JSON.stringify(gallaries[0])}
-				{JSON.stringify(gallaries[1])}
+				<Gallary images={gallaries[0].data.images} />
+				<Gallary images={gallaries[1].data.images} />
 			</div>
 
 			<div class="container">
@@ -63,7 +70,7 @@ console.log(gallaries);
 			</div>
 
 			<div class="container">
-				{JSON.stringify(gallaries[2])}
+				<Gallary images={gallaries[2].data.images} />
 			</div>
 
 			<!-- <div class="container">

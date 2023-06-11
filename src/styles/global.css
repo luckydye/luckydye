@@ -23,7 +23,7 @@ body {
 
 hr {
   opacity: 0.5;
-  margin: 40px 0;
+  margin: 15px 0;
 }
 
 h1 {
@@ -34,8 +34,8 @@ h1 {
 }
 
 h2 {
-  font-size: 2.6rem;
-  letter-spacing: 0.05em;
+  font-size: 1.6rem;
+  line-height: 1.33;
   font-weight: 400;
   color: var(--color-accent);
 }
@@ -53,8 +53,8 @@ p {
 }
 
 a[href] {
-  text-decoration: underline;
   color: inherit;
+  text-decoration: none;
 }
 
 ::selection {

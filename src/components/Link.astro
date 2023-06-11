@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+interface Props {
+  title: string;
+  link: string;
+  description?: string;
+  icon?: string;
+}
+
+const { title, description, link, icon } = Astro.props;
+---
+
+<div>
+  <a href={link}>
+    <h2>{title}</h2>
+  </a>
+  <div>
+    {icon ? <Image src={icon} alt={title} /> : null}
+  </div>
+  <p>{description}</p>
+</div>

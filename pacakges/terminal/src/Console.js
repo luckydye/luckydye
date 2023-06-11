@@ -22,9 +22,7 @@ function saveModuleRegistry(reg) {
 let idle = true;
 
 export default class Console {
-	static get INPUT_PREFIX() {
-		return "terminal@web:~$ ";
-	}
+	static INPUT_PREFIX = "terminal@web:~$ ";
 
 	static async loadModules() {
 		const moduleRegistry = getModuleRegistry();

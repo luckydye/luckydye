@@ -6,6 +6,18 @@ import Projects from "../components/Projects.astro";
 import Post from "../components/Post.astro";
 import Socials from "../components/Socials.astro";
 import Terminal from "../components/Terminal.astro";
+
+import { getEntry, getEntries, getCollection } from "astro:content";
+
+const posts = await getCollection("post");
+const projects = await getCollection("project");
+const links = await getCollection("link");
+const gallaries = await getCollection("gallary");
+
+console.log(posts);
+console.log(projects);
+console.log(links);
+console.log(gallaries);
 ---
 
 <html lang="en">
@@ -23,6 +35,35 @@ import Terminal from "../components/Terminal.astro";
 		<main>
 			<div class="container">
 				<Intro />
+			</div>
+
+			<div class="container">
+				{JSON.stringify(projects)}
+			</div>
+
+			<div class="container">
+				{JSON.stringify(links[0])}
+			</div>
+
+			<div class="container">
+				{JSON.stringify(posts[0])}
+			</div>
+
+			<div class="container">
+				{JSON.stringify(links[1])}
+			</div>
+
+			<div class="container">
+				{JSON.stringify(gallaries[0])}
+				{JSON.stringify(gallaries[1])}
+			</div>
+
+			<div class="container">
+				{JSON.stringify(posts[1])}
+			</div>
+
+			<div class="container">
+				{JSON.stringify(gallaries[2])}
 			</div>
 
 			<!-- <div class="container">
@@ -45,7 +86,7 @@ import Terminal from "../components/Terminal.astro";
 				<h2>Github</h2>
 			</div> -->
 
-			<div class="container mt-20">
+			<div class="container">
 				<Terminal />
 			</div>
 		</main>

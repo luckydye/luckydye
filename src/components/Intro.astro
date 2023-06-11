@@ -1,21 +1,28 @@
 ---
 import Rive from "./Rive";
+import Socials from "./Socials.astro";
 ---
 
-<div class="container grid my-10 sm:my-20">
-	<div class="logo block sm:mx-10 mx-2">
+<div class="container grid py-10 md:py-20">
+	<div class="logo">
 		<!-- <img src={Logo} height="300px" /> -->
 		<Rive width={200} height={400} src="/logo.riv" client:only />
 	</div>
 
-	<div class="caption my-6 mr-10 sm:mr-20">
-		<h1>Hi, I'm Tim. I have over 6 years of experience in Programming.</h1>
-		<p>
-			I have been maintaining websites for multi billion-dollar Companies and
-			building Full Stack web applications. I enjoy solving complex problems and
-			designing User-Interfaces and Tools to improve work efficiency for clients
-			and colleagues.
+	<div class="caption my-6 mr-10 md:mr-20">
+		<h1>Hi, I'm Tim.</h1>
+		<p class="opacity-50">
+			Software Development | Computer Graphics | Photography
 		</p>
+		<p class="mt-5">
+			I have been maintaining websites for multi billion-dollar companies and
+			building Full Stack web applications. I enjoy designing User-Interfaces
+			and Tools to make complex or impossible tasks easy and intuitive.
+		</p>
+
+		<br />
+
+		<Socials />
 	</div>
 </div>
 
@@ -30,8 +37,12 @@ import Rive from "./Rive";
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin: 0 40px;
 		--width: 100%;
 		--height: auto;
+	}
+	.caption {
+		max-width: 600px;
 	}
 	@media screen and (max-width: 640px) {
 		.container {
@@ -40,6 +51,7 @@ import Rive from "./Rive";
 			grid-gap: 0px;
 		}
 		.logo {
+			margin: 0 10px;
 			margin-right: -20px;
 		}
 	}

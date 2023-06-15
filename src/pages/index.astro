@@ -14,10 +14,10 @@ const projects = await getCollection("project");
 const links = await getCollection("link");
 const gallaries = await getCollection("gallary");
 
-console.log(posts);
-console.log(projects);
-console.log(links);
-console.log(gallaries);
+// console.log(posts);
+// console.log(projects);
+// console.log(links);
+// console.log(gallaries);
 ---
 
 <html lang="en">
@@ -40,11 +40,27 @@ console.log(gallaries);
 				<Intro />
 			</div>
 
-			<div class="container">
-				<Project {...projects[0].data} />
+			<div class="container-small overflow-hidden">
+				<script>
+					import "@atrium-ui/mono/components/slider";
+				</script>
+
+				<sv-slider>
+					{
+						projects.map((project) => {
+							return (
+								<div class="slide md:p-10 p-5">
+									<Project {...project.data} />
+								</div>
+							);
+						})
+					}
+					<div slot="arrow-left"></div>
+					<div slot="arrow-right"></div>
+				</sv-slider>
 			</div>
 
-			<div class="container">
+			<!-- <div class="container">
 				<Link {...links[0].data} />
 			</div>
 
@@ -71,7 +87,7 @@ console.log(gallaries);
 
 			<div class="container">
 				<Gallary images={gallaries[2].data.images} />
-			</div>
+			</div> -->
 
 			<!-- <div class="container">
 				<Socials />
@@ -115,5 +131,21 @@ console.log(gallaries);
 	.container {
 		padding: 0 20px;
 		position: relative;
+	}
+
+	.container-small {
+		padding: 0 20px;
+		position: relative;
+		max-width: 900px;
+		margin: auto;
+	}
+
+	@media screen and (max-width: 900px) {
+		sv-slider {
+			pointer-events: none;
+		}
+		sv-slider .slide {
+			pointer-events: all;
+		}
 	}
 </style>

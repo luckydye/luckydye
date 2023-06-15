@@ -8,6 +8,7 @@ import Project from "../components/Project.astro";
 import Terminal from "../components/Terminal.astro";
 import Link from "../components/Link.astro";
 import Gallary from "../components/Gallary.astro";
+import Slider from "../components/Slider";
 
 const posts = await getCollection("post");
 const projects = await getCollection("project");
@@ -45,11 +46,11 @@ const gallaries = await getCollection("gallary");
 					import "@atrium-ui/mono/components/slider";
 				</script>
 
-				<sv-slider>
+				<Slider client:idle>
 					{
-						projects.map((project) => {
+						projects.reverse().map((project) => {
 							return (
-								<div class="slide md:p-10 p-5">
+								<div class="slide lg:p-5 p-2">
 									<Project {...project.data} />
 								</div>
 							);
@@ -57,7 +58,7 @@ const gallaries = await getCollection("gallary");
 					}
 					<div slot="arrow-left"></div>
 					<div slot="arrow-right"></div>
-				</sv-slider>
+				</Slider>
 			</div>
 
 			<!-- <div class="container">
@@ -138,14 +139,5 @@ const gallaries = await getCollection("gallary");
 		position: relative;
 		max-width: 900px;
 		margin: auto;
-	}
-
-	@media screen and (max-width: 900px) {
-		sv-slider {
-			pointer-events: none;
-		}
-		sv-slider .slide {
-			pointer-events: all;
-		}
 	}
 </style>

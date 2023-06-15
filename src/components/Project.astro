@@ -18,8 +18,8 @@ const { title, description, link, image } = Astro.props;
       <Image
         class="background-image"
         src={image}
-        width={225}
-        height={325}
+        width={269}
+        height={269 * 1.5}
         alt={title}
       />
     </div>
@@ -30,7 +30,7 @@ const { title, description, link, image } = Astro.props;
       </div>
       <h2>{title}</h2>
       <hr />
-      <div>{description}</div>
+      <div class="description">{description}</div>
     </div>
   </div>
 </a>
@@ -60,6 +60,9 @@ const { title, description, link, image } = Astro.props;
     height: 100%;
     display: grid;
     grid-template-rows: 1fr auto auto auto;
+  }
+  .description {
+    min-height: 100px;
   }
   .link-indicator {
     opacity: 0.69;

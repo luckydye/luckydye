@@ -43,22 +43,24 @@ const gallaries = await getCollection("gallary");
 
 			<div class="container-small overflow-hidden">
 				<script>
-					import "@atrium-ui/mono/components/slider";
+					import "@atrium-ui/mono/components/track";
 				</script>
 
-				<Slider client:idle>
+				<a-track overflow="full">
 					{
 						projects.reverse().map((project) => {
 							return (
-								<div class="slide lg:p-5 p-2">
-									<Project {...project.data} />
+								<div class="slide">
+									<div class="lg:p-5 p-2">
+										<Project {...project.data} />
+									</div>
 								</div>
 							);
 						})
 					}
 					<div slot="arrow-left"></div>
 					<div slot="arrow-right"></div>
-				</Slider>
+				</a-track>
 			</div>
 
 			<!-- <div class="container">
@@ -137,7 +139,7 @@ const gallaries = await getCollection("gallary");
 	.container-small {
 		padding: 0 20px;
 		position: relative;
-		max-width: 900px;
+		max-width: 1024px;
 		margin: auto;
 	}
 </style>

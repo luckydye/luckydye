@@ -1,1 +1,33 @@
-<div>Post</div>
+---
+import { getEntry } from "astro:content";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+
+const postEntry = await getEntry("post", id);
+const post = postEntry?.data;
+---
+
+<div class="post my-20 mx-4">
+  <a href={`/post/${postEntry?.slug}`}>
+    <h2 class="mt-2">{post?.title}</h2>
+  </a>
+  <p class="date">{post?.date.toLocaleDateString()}</p>
+  <p>{post?.description}</p>
+</div>
+
+<style>
+  .post {
+    border-radius: 8px;
+    background: var(--color-bg-1);
+    padding: 20px 40px;
+    border: 1px solid var(--color-fg-1);
+  }
+  .date {
+    opacity: 0.5;
+    font-weight: 400;
+  }
+</style>

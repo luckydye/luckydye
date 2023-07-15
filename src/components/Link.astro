@@ -1,21 +1,27 @@
 ---
-import { Image } from "astro:assets";
+import { getCollection, getDataEntryById } from "astro:content";
+
 interface Props {
-  title: string;
   link: string;
-  description?: string;
-  icon?: string;
 }
 
-const { title, description, link, icon } = Astro.props;
+const { link } = Astro.props;
+
+const linkEntry = (await getCollection("link")).find((entry) => entry.id === link);
 ---
 
-<div>
-  <a href={link}>
-    <h2>{title}</h2>
-  </a>
-  <div>
-    {icon ? <Image src={icon} alt={title} /> : null}
-  </div>
-  <p>{description}</p>
-</div>
+<a href={linkEntry?.data.link} target={linkEntry?.data.target}>
+  <slot />
+</a>
+
+<style>
+  a[href] {
+    opacity: 0.75;
+    line-height: 1.25;
+    text-decoration: underline;
+  }
+  a[href]:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+</style>

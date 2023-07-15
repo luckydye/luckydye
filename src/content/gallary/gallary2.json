@@ -1,7 +1,3 @@
 {
-  "images": [
-    "/images/photos/Rectangle 11.png",
-    "/images/photos/Rectangle 12.png",
-    "/images/photos/Rectangle 13.png"
-  ]
+  "images": ["./photos/_MGC3888.jpg", "./photos/_MGC3880.jpg", "./photos/_MGC3839.jpg"]
 }

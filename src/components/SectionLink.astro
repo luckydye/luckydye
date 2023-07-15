@@ -1,0 +1,37 @@
+---
+import { getCollection, getDataEntryById } from "astro:content";
+
+import arrowRight from "../assets/arrow-right.svg";
+
+interface Props {
+  link: string;
+}
+
+const { link } = Astro.props;
+
+const linkEntry = (await getCollection("link")).find((entry) => entry.id === link);
+---
+
+<a href={linkEntry?.data.link} target={linkEntry?.data.target}>
+  <div class="link">
+    <slot />
+    <div class="arrow">
+      <img src={arrowRight.src} />
+    </div>
+  </div>
+</a>
+
+<style>
+  .link {
+    text-align: right;
+  }
+  .arrow {
+    display: inline-block;
+    margin-left: 12px;
+  }
+  img {
+    height: 1rem;
+    vertical-align: baseline;
+    margin-bottom: -0.15rem;
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import { getCollection, getDataEntryById } from "astro:content";
+
+interface Props {
+  link: string;
+}
+
+const { link } = Astro.props;
+
+const linkEntry = (await getCollection("link")).find((entry) => entry.id === link);
+---
+
+<a href={linkEntry?.data.link} target={linkEntry?.data.target}>
+  <slot />
+</a>
+
+<style>
+  a[href] {
+    opacity: 0.75;
+    line-height: 1.25;
+    text-decoration: underline;
+  }
+  a[href]:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+
+const { images, title } = Astro.props;
+---
+
+<div class="images">
+  <div class="circle">{title}</div>
+  <a-track overflowscroll class="pl-6 pr-6 pt-6">
+    {
+      images.map((image: string) => {
+        return (
+          <div class="flex-none first:pl-6 last:pr-6">
+            <Image class="slide-image mr-2" src={image} height={500} alt={image} />
+          </div>
+        );
+      })
+    }
+  </a-track>
+</div>
+
+<style>
+  a-track {
+    overflow: visible;
+  }
+
+  .images {
+    position: relative;
+    margin: 40px 0;
+  }
+
+  .circle::before {
+    content: "";
+    display: inline-block;
+    margin-left: 26px;
+    margin-right: 15px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-fg-1);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+
+  .images::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    width: 1px;
+    height: 100%;
+    background: var(--color-fg-1);
+  }
+
+  .slide-image {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-bg-1);
+  }
+
+  @media screen and (max-width: 767px) {
+    .slide-image {
+      height: 240px;
+      width: auto;
+    }
+  }
+</style>

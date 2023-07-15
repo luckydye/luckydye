@@ -1,11 +1,16 @@
+---
+import Link from "./Link.astro";
+---
+
 <div class="container">
-  <a href="https://twitter.com/timh4v">Twitter</a>
-  <a href="https://www.instagram.com/luckydye/">Instagram</a>
-  <a href="https://github.com/luckydye">Github</a>
+  <Link link="twitter">@timh4v</Link>
+  <Link link="instagram">Instagram</Link>
+  <Link link="github">Github</Link>
 </div>
 
 <style>
   .container {
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-gap: 40px;

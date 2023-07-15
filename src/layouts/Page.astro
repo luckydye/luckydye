@@ -1,0 +1,64 @@
+---
+import "../styles/global.css";
+
+import Link from "../components/Link.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <slot name="head" />
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+
+    <script defer data-domain="luckydye.dev" src="https://collect.luckydye.de/js/script.js"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <slot />
+    </main>
+
+    <footer class="pb-40">
+      <div class="container-tiny pt-10 pb-20">
+        <h2 class="mb-4">Connect</h2>
+        <div>
+          <Link link="twitter">@timh4v</Link>
+        </div>
+        <div>
+          <Link link="mail">tim.h4vlicek@gmail.com</Link>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  main {
+    z-index: 10;
+    position: relative;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .container {
+    padding: 0 20px;
+    position: relative;
+  }
+
+  .container-small {
+    position: relative;
+    max-width: 1124px;
+    margin: auto;
+  }
+
+  .container-tiny {
+    position: relative;
+    max-width: 1030px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+  }
+</style>

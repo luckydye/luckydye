@@ -29,7 +29,7 @@ const gallaries = await getCollection("gallary");
 			import "@atrium-ui/mono/components/track";
 		</script>
 
-		<a-track snap overflowscroll>
+		<a-track overflowscroll>
 			{
 				projects.reverse().map((project) => {
 					return (
@@ -67,11 +67,5 @@ const gallaries = await getCollection("gallary");
 <style>
 	a-track {
 		max-width: 100%;
-	}
-
-	@media screen and (min-width: 767px) {
-		.project {
-			width: calc(33% - 1rem - 1rem - 10px);
-		}
 	}
 </style>

@@ -1,6 +1,5 @@
 ---
 import Rive from "./Rive";
-import Socials from "./Socials.astro";
 ---
 
 <div class="container grid">
@@ -9,7 +8,7 @@ import Socials from "./Socials.astro";
     <Rive width={200} height={400} src="/logo.riv" client:only />
   </div>
 
-  <div class="caption my-6 mr-10 md:mr-20">
+  <div class="caption my-6 md:mr-20">
     <h1>Hi, I'm Tim.</h1>
     <p class="opacity-50">Software Development | Computer Graphics | Photography</p>
     <p class="mt-5">
@@ -32,6 +31,7 @@ import Socials from "./Socials.astro";
     align-items: center;
     justify-content: center;
     margin: 0 40px;
+    height: 440px;
     --width: 100%;
     --height: auto;
   }

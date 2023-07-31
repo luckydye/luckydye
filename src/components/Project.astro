@@ -20,9 +20,9 @@ const { title, description, link, image } = Astro.props;
     <div class="caption">
       <div class="link-indicator">
         Open
-        <img class="icon" src={ExternalLinkIcon.src} />
+        <img class="icon" src={ExternalLinkIcon.src} alt="external link" />
       </div>
-      <h3>{title}</h3>
+      <h2 class="headline-accent">{title}</h2>
       <hr />
       <div class="description">{description}</div>
     </div>

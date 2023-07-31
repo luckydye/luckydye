@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import "../styles/global.css";
 
 import { getCollection } from "astro:content";
@@ -15,57 +17,57 @@ const gallaries = await getCollection("gallary");
 ---
 
 <Page>
-	<title slot="head">luckydye</title>
-	<meta slot="head" name="description" content="My homepage." />
+  <title slot="head">luckydye</title>
+  <meta slot="head" name="description" content="My homepage." />
 
-	<div class="container">
-		<div class="py-10 md:py-20 pb-16 md:pb-32">
-			<Intro />
-		</div>
-	</div>
+  <div class="container">
+    <div class="py-10 md:py-20 pb-16 md:pb-32">
+      <Intro />
+    </div>
+  </div>
 
-	<div class="container-small">
-		<script>
-			import "@atrium-ui/mono/components/track";
-		</script>
+  <div class="container-small">
+    <script>
+      import "@atrium-ui/mono/components/track";
+    </script>
 
-		<a-track overflowscroll>
-			{
-				projects.reverse().map((project) => {
-					return (
-						<div class="project flex-none px-4 first:pl-6 last:pr-6">
-							<Project {...project.data} />
-						</div>
-					);
-				})
-			}
-		</a-track>
+    <a-track overflowscroll>
+      {
+        projects.reverse().map((project) => {
+          return (
+            <div class="project flex-none px-4 first:pl-6 last:pr-6">
+              <Project {...project.data} />
+            </div>
+          );
+        })
+      }
+    </a-track>
 
-		<div class="px-6 mt-8 mb-20 md:mb-40">
-			<p>Those are some of many of my projects I developed and implemented.</p>
-		</div>
-	</div>
+    <div class="px-6 mt-8 mb-20 md:mb-40">
+      <p>Those are some of many of my projects I developed and implemented.</p>
+    </div>
+  </div>
 
-	<div class="container-small">
-		<Images title="Photography" images={gallaries[0].data.images} />
-	</div>
+  <div class="container-small">
+    <Images title="Photography" images={gallaries[0].data.images} />
+  </div>
 
-	<!-- <div class="container-small">
+  <!-- <div class="container-small">
 		<Post id="post-1" />
 	</div> -->
 
-	<div class="container-small">
-		<Images images={gallaries[1].data.images} />
-		<Images images={gallaries[2].data.images} />
-	</div>
+  <div class="container-small">
+    <Images images={gallaries[1].data.images} />
+    <Images images={gallaries[2].data.images} />
+  </div>
 
-	<div class="container-tiny mt-16 mb-40">
-		<SectionLink link="instagram">More photos on my Instagram</SectionLink>
-	</div>
+  <div class="container-tiny mt-16 mb-40">
+    <SectionLink link="instagram">More photos on my Instagram</SectionLink>
+  </div>
 </Page>
 
 <style>
-	a-track {
-		max-width: 100%;
-	}
+  a-track {
+    max-width: 100%;
+  }
 </style>

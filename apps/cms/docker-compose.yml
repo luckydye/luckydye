@@ -3,19 +3,18 @@ version: '3'
 services:
 
   payload:
-    build:
-      dockerfile: ./Dockerfile
+    image: registry.luckydye.de/luckydye/cms
     ports:
       - "3001:3001"
     volumes:
-      - .:/home/node/app
+      - content:/data/static
     depends_on:
       - mongo
     environment:
       MONGODB_URI: mongodb://mongo:27017/payload
       PORT: 3001
       NODE_ENV: development
-      PAYLOAD_SECRET: TESTING
+      PAYLOAD_SECRET: ij0sijefp38p-j2vunpv0-28hv2308vh
 
   mongo:
     image: mongo:latest
@@ -30,4 +29,4 @@ services:
 
 volumes:
   data:
-  node_modules:
+  content:

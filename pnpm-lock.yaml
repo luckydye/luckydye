@@ -18,8 +18,8 @@ importers:
         specifier: ^3.7.4
         version: 3.7.4(astro@2.9.1)(react@18.2.0)
       '@atrium-ui/mono':
-        specifier: 0.1.7-15
-        version: 0.1.7-15
+        specifier: 0.1.7-16
+        version: 0.1.7-16
       '@rive-app/canvas':
         specifier: ^1.2.0
         version: 1.2.0
@@ -182,8 +182,8 @@ packages:
       undici: 5.22.1
     dev: false
 
-  /@atrium-ui/mono@0.1.7-15:
-    resolution: {integrity: sha512-yzLlttXBzUFycahF9PAoud8QVinwQqgsg3p4UnlDBTH9CxgZO3L5D2zDuyjGmbjU6rmHxoON6A1EAKKHWMA/lg==}
+  /@atrium-ui/mono@0.1.7-16:
+    resolution: {integrity: sha512-tKaInLqAL2hq9r5/eQnWKt/NC13t2pei/1fHiSLu4W9kZIQegB41aOug0qt5zWt1sp4RwpsI+7+Giw5sGWSQtA==}
     dependencies:
       lit: 2.7.5
     dev: false

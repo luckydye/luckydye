@@ -15,12 +15,25 @@ const { title, description, link, image } = Astro.props;
 <a href={link} target="_blank">
   <div class="card">
     <div class="background">
-      <Image class="background-image" src={image} width={269} height={269 * 1.5} alt={title} />
+      <Image
+        loading="eager"
+        class="background-image"
+        src={image}
+        width={269}
+        height={269 * 1.5}
+        alt={title}
+      />
     </div>
     <div class="caption">
       <div class="link-indicator">
         Open
-        <img class="icon" src={ExternalLinkIcon.src} alt="external link" />
+        <img
+          width="11px"
+          height="11px"
+          class="icon"
+          src={ExternalLinkIcon.src}
+          alt="external link"
+        />
       </div>
       <h2 class="headline-accent">{title}</h2>
       <hr />

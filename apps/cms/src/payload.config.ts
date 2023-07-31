@@ -3,8 +3,10 @@ import path from 'path';
 import Examples from './collections/Examples';
 import Users from './collections/Users';
 
+const url = process.env.NODE_ENV === 'production' ? 'https://cms.luckydye.de' : 'http://localhost:3001';
+
 export default buildConfig({
-  serverURL: 'http://localhost:3001',
+  serverURL: url,
   admin: {
     user: Users.slug,
   },

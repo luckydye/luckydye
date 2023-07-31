@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "dotenv -e .env astro dev",
+    "cms:dev": "cd apps/cms && npm run docker:dev",
     "build": "astro build"
   },
   "dependencies": {},

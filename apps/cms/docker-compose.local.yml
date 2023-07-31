@@ -3,12 +3,14 @@ version: '3'
 services:
 
   payload:
-    build:
-      dockerfile: ./Dockerfile
+    image: node:18-alpine
     ports:
       - "3001:3001"
     volumes:
       - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    working_dir: /home/node/app/
+    command: sh -c "npm install && npm run dev"
     depends_on:
       - mongo
     environment:

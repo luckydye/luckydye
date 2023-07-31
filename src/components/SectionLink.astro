@@ -25,9 +25,13 @@ const linkEntry = (await getCollection("link")).find((entry) => entry.id === lin
   .link {
     text-align: right;
   }
+  .link:hover .arrow {
+    transform: translateX(2px);
+  }
   .arrow {
     display: inline-block;
     margin-left: 12px;
+    transition: transform 0.15s ease-out;
   }
   img {
     height: 1rem;

@@ -1,5 +1,5 @@
 ---
-// export const prerender = true;
+export const prerender = true;
 
 import "../styles/global.css";
 
@@ -43,13 +43,14 @@ const gallaries = await getCollection("gallary");
       }
     </a-track>
 
-    <div class="px-6 mt-8 mb-20 md:mb-40">
+    <div class="container-tiny px-6 mt-8 mb-20 md:mb-40">
       <p>Those are some of many of my projects I developed and implemented.</p>
+      <SectionLink link="github">More projects on my GitHub</SectionLink>
     </div>
   </div>
 
   <div class="container-small">
-    <Images title="Photography" images={gallaries[0].data.images} />
+    <Images title="Photography" images={gallaries[1].data.images} />
   </div>
 
   <!-- <div class="container-small">
@@ -57,8 +58,8 @@ const gallaries = await getCollection("gallary");
 	</div> -->
 
   <div class="container-small">
-    <Images images={gallaries[1].data.images} />
     <Images images={gallaries[2].data.images} />
+    <Images images={gallaries[0].data.images} />
   </div>
 
   <div class="container-tiny mt-16 mb-40">

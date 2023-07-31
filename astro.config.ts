@@ -1,12 +1,14 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import solid from "@astrojs/solid-js";
-import vercelEdge from "@astrojs/vercel/edge";
+import vercel from "@astrojs/vercel/serverless";
 
 export default defineConfig({
-  output: "server",
-  adapter: vercelEdge(),
-  base: "",
+  output: "hybrid",
+  adapter: vercel({
+    analytics: true,
+    imageService: true,
+  }),
   experimental: {
     assets: true,
   },

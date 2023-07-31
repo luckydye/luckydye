@@ -1,0 +1,25 @@
+---
+export const prerender = false;
+
+import "../styles/global.css";
+
+import Page from "../layouts/Page.astro";
+import * as cms from "../cms.js";
+
+const examples = await cms.getExamples();
+---
+
+<Page>
+  <title slot="head">luckydye</title>
+  <meta slot="head" name="description" content="My homepage." />
+
+  <div class="container-tiny">
+    <h1>Shop</h1>
+  </div>
+
+  <div class="container my-80">
+    <pre>{JSON.stringify(examples)}</pre>
+  </div>
+</Page>
+
+<style></style>

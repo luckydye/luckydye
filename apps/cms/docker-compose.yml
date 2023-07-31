@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  payload:
+    image: registry.luckydye.de/luckydye/cms
+    ports:
+      - "3001:3001"
+    volumes:
+      - content:/data/static
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/payload
+      PORT: 3001
+      NODE_ENV: development
+      PAYLOAD_SECRET: ij0sijefp38p-j2vunpv0-28hv2308vh
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - data:/data/db
+    logging:
+      driver: none
+
+volumes:
+  data:
+  content:

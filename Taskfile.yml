@@ -1,0 +1,32 @@
+# https://taskfile.dev
+
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task -l
+
+  setup:
+    desc: Setup the project
+    cmds:
+      - pnpm i
+
+  dev:
+    desc: Start the development server
+    cmds:
+      - npx astro dev
+
+  build:
+    desc: Build the project
+    cmds:
+      - npx astro build
+
+  cms:
+    desc: Start the CMS
+    dir: ./apps/cms
+    cmds:
+      - docker-compose -f docker-compose.local.yml up

@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
 
 import Link from "../components/Link.astro";
 ---
@@ -11,6 +12,8 @@ import Link from "../components/Link.astro";
     <slot name="head" />
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+
+    <ViewTransitions />
   </head>
 
   <body>
@@ -29,34 +32,33 @@ import Link from "../components/Link.astro";
         </div>
       </div>
     </footer>
+    <style is:global>
+      main {
+        overflow: hidden;
+        z-index: 10;
+        position: relative;
+        max-width: 1400px;
+        margin: auto;
+      }
+
+      .container {
+        padding: 0 20px;
+        position: relative;
+      }
+
+      .container-small {
+        position: relative;
+        max-width: 1240px;
+        margin: auto;
+      }
+
+      .container-tiny {
+        position: relative;
+        max-width: 1030px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 40px;
+      }
+    </style>
   </body>
 </html>
-
-<style is:global>
-  main {
-    overflow: hidden;
-    z-index: 10;
-    position: relative;
-    max-width: 1400px;
-    margin: auto;
-  }
-
-  .container {
-    padding: 0 20px;
-    position: relative;
-  }
-
-  .container-small {
-    position: relative;
-    max-width: 1240px;
-    margin: auto;
-  }
-
-  .container-tiny {
-    position: relative;
-    max-width: 1030px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 40px;
-  }
-</style>

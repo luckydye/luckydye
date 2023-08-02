@@ -11,6 +11,7 @@ import Project from "../components/Project.astro";
 import Images from "../components/Images.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Post from "../components/Post.astro";
+import Teaser from "../components/Teaser.astro";
 
 const projects = await getCollection("project");
 const gallaries = await getCollection("gallary");
@@ -55,8 +56,11 @@ const gallaries = await getCollection("gallary");
   </div>
 
   <!-- <div class="container-small">
-		<Post id="post-1" />
-	</div> -->
+    <Post id="post-1" />
+  </div> -->
+  <div class="container-small">
+    <Teaser id="teaser-1" />
+  </div>
 
   <div class="container-small">
     <Images images={gallaries[2].data.images} />

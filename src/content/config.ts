@@ -10,6 +10,15 @@ const postCollection = defineCollection({
   }),
 });
 
+const teaserCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    link: z.string(),
+  }),
+});
+
 const projectCollection = defineCollection({
   type: "content",
   schema: ({ image }) =>
@@ -40,6 +49,7 @@ const gallaryCollection = defineCollection({
 
 export const collections = {
   post: postCollection,
+  teaser: teaserCollection,
   project: projectCollection,
   link: linkCollection,
   gallary: gallaryCollection,

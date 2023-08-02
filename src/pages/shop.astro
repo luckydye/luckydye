@@ -4,21 +4,24 @@ export const prerender = false;
 import "../styles/global.css";
 
 import Page from "../layouts/Page.astro";
+import SectionLink from "../components/SectionLink.astro";
 import * as cms from "../cms.js";
 
-const examples = await cms.getExamples();
+// const examples = await cms.getProducts();
 ---
 
 <Page>
   <title slot="head">luckydye</title>
   <meta slot="head" name="description" content="My homepage." />
 
-  <div class="container-tiny">
-    <h1>Shop</h1>
+  <div class="container-tiny mt-10">
+    <SectionLink align="left" link="home">To my homepage</SectionLink>
+
+    <h1 class="mt-14">Prints</h1>
   </div>
 
   <div class="container my-80">
-    <pre>{JSON.stringify(examples)}</pre>
+    <!-- <pre>{JSON.stringify(examples)}</pre> -->
   </div>
 </Page>
 

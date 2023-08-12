@@ -5,15 +5,18 @@ import arrowRight from "../assets/arrow-right.svg";
 
 interface Props {
   link: string;
+  align: string;
 }
 
-const { link } = Astro.props;
+const { link, align } = Astro.props;
 
-const linkEntry = (await getCollection("link")).find((entry) => entry.id === link);
+const linkEntry = (await getCollection("link")).find(
+  (entry) => entry.id === link
+);
 ---
 
 <a href={linkEntry?.data.link} target={linkEntry?.data.target}>
-  <div class="link">
+  <div class="link" data-align={align}>
     <slot />
     <div class="arrow">
       <img width="20px" height="20px" src={arrowRight.src} alt="arrow right" />
@@ -21,7 +24,7 @@ const linkEntry = (await getCollection("link")).find((entry) => entry.id === lin
   </div>
 </a>
 
-<style>
+<style lang="scss">
   .link {
     text-align: right;
   }
@@ -37,5 +40,27 @@ const linkEntry = (await getCollection("link")).find((entry) => entry.id === lin
     height: 1rem;
     vertical-align: baseline;
     margin-bottom: -0.15rem;
+  }
+
+  .link[data-align="left"] {
+    text-align: left;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+
+    &:hover .arrow {
+      transform: rotate(180deg) translateX(2px);
+    }
+    .arrow {
+      margin-right: 12px;
+      margin-left: 0;
+      transform: rotate(180deg);
+    }
+    img {
+      height: 1rem;
+      vertical-align: baseline;
+      margin-bottom: -0.15rem;
+    }
   }
 </style>

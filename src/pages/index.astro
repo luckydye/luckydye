@@ -1,8 +1,6 @@
 ---
 export const prerender = true;
 
-import "../styles/global.css";
-
 import { getCollection } from "astro:content";
 
 import Page from "../layouts/Page.astro";
@@ -11,9 +9,10 @@ import Project from "../components/Project.astro";
 import Images from "../components/Images.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Post from "../components/Post.astro";
+import Teaser from "../components/Teaser.astro";
 
 const projects = await getCollection("project");
-const gallaries = await getCollection("gallary");
+const gallaries = (await getCollection("gallary")).reverse();
 ---
 
 <Page>
@@ -43,24 +42,42 @@ const gallaries = await getCollection("gallary");
       }
     </a-track>
 
-    <div class="container-tiny px-6 mt-8 mb-20 md:mb-40">
-      <p>Those are some of many of my projects I developed and implemented.</p>
+    <div class="container-tiny px-6 mt-8 mb-20 md:mb-20">
+      <p>Here are some of my many personal projects I developed and implemented.</p>
       <br />
       <SectionLink link="github">More projects on my GitHub</SectionLink>
     </div>
   </div>
 
+  <div class="container-small flex justify-center pb-10">
+    <svg width="50" height="10" viewBox="0 0 50 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="5" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
+      <circle cx="25" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
+      <circle cx="45" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
+    </svg>
+  </div>
+
   <div class="container-small">
-    <Images title="Photography" images={gallaries[1].data.images} />
+    {
+      gallaries.slice(0, 2).map((gallary) => {
+        return <Images {...gallary.data} />;
+      })
+    }
   </div>
 
   <!-- <div class="container-small">
-		<Post id="post-1" />
-	</div> -->
+    <Post id="post-1" />
+  </div> -->
+  <!-- <div class="container-small">
+    <Teaser id="teaser-1" />
+  </div> -->
 
   <div class="container-small">
-    <Images images={gallaries[2].data.images} />
-    <Images images={gallaries[0].data.images} />
+    {
+      gallaries.slice(2).map((gallary) => {
+        return <Images {...gallary.data} />;
+      })
+    }
   </div>
 
   <div class="container-tiny mt-16 mb-40">

@@ -1,15 +1,5 @@
 import { z, defineCollection, image } from "astro:content";
 
-const postCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.date(),
-    author: z.string(),
-  }),
-});
-
 const projectCollection = defineCollection({
   type: "content",
   schema: ({ image }) =>
@@ -30,16 +20,41 @@ const linkCollection = defineCollection({
   }),
 });
 
+const postCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.date(),
+    author: z.string(),
+    createdAt: z.date().optional(),
+  }),
+});
+
+const teaserCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    link: z.string(),
+    createdAt: z.date().optional(),
+  }),
+});
+
 const gallaryCollection = defineCollection({
   type: "data",
   schema: ({ image }) =>
     z.object({
+      title: z.string().optional(),
+      date: z.string().optional(),
       images: z.array(image()),
+      createdAt: z.date().optional(),
     }),
 });
 
 export const collections = {
   post: postCollection,
+  teaser: teaserCollection,
   project: projectCollection,
   link: linkCollection,
   gallary: gallaryCollection,

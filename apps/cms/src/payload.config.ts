@@ -1,23 +1,41 @@
-import { buildConfig } from 'payload/config';
-import path from 'path';
-import Examples from './collections/Examples';
-import Users from './collections/Users';
+import path from "path";
+import { buildConfig } from "payload/config";
+import stripePlugin from "@payloadcms/plugin-stripe";
+import Products from "./collections/Products";
+import Users from "./collections/Users";
 
-const url = process.env.NODE_ENV === 'production' ? 'https://cms.luckydye.de' : 'http://localhost:3001';
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://cms.luckydye.de"
+    : "http://localhost:3001";
 
 export default buildConfig({
   serverURL: url,
   admin: {
     user: Users.slug,
   },
-  collections: [
-    Users,
-    Examples,
-  ],
+  collections: [Users, Products],
   typescript: {
-    outputFile: path.resolve(__dirname, 'payload-types.ts'),
+    outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
-  graphQL: {
-    schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
-  },
-})
+  plugins: [
+    stripePlugin({
+      logs: true,
+      stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+      isTestKey: true,
+      sync: [
+        {
+          collection: "products",
+          stripeResourceType: "products",
+          stripeResourceTypeSingular: "product",
+          fields: [
+            {
+              fieldPath: "title",
+              stripeProperty: "name",
+            },
+          ],
+        },
+      ],
+    }),
+  ],
+});

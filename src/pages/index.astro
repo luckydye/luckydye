@@ -57,7 +57,7 @@ const gallaries = (await getCollection("gallary")).reverse();
     </svg>
   </div>
 
-  <div class="container-small">
+  <div class="container">
     {
       gallaries.slice(0, 2).map((gallary) => {
         return <Images {...gallary.data} />;
@@ -72,7 +72,7 @@ const gallaries = (await getCollection("gallary")).reverse();
     <Teaser id="teaser-1" />
   </div> -->
 
-  <div class="container-small">
+  <div class="container">
     {
       gallaries.slice(2).map((gallary) => {
         return <Images {...gallary.data} />;

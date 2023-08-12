@@ -1,8 +1,6 @@
 ---
 export const prerender = true;
 
-import "../styles/global.css";
-
 import { getCollection } from "astro:content";
 
 import Page from "../layouts/Page.astro";
@@ -45,7 +43,7 @@ const gallaries = await getCollection("gallary");
     </a-track>
 
     <div class="container-tiny px-6 mt-8 mb-20 md:mb-40">
-      <p>Those are some of many of my projects I developed and implemented.</p>
+      <p>Here are some of my many personal projects I developed and implemented.</p>
       <br />
       <SectionLink link="github">More projects on my GitHub</SectionLink>
     </div>
@@ -53,6 +51,7 @@ const gallaries = await getCollection("gallary");
 
   <div class="container-small">
     <Images title="Photography" images={gallaries[1].data.images} />
+    <Images images={gallaries[2].data.images} />
   </div>
 
   <!-- <div class="container-small">
@@ -63,7 +62,6 @@ const gallaries = await getCollection("gallary");
   </div>
 
   <div class="container-small">
-    <Images images={gallaries[2].data.images} />
     <Images images={gallaries[0].data.images} />
   </div>
 

@@ -10,7 +10,7 @@
     "@astrojs/vercel": "^3.7.4",
     "@atrium-ui/mono": "0.1.7-16",
     "@rive-app/canvas": "^1.2.0",
-    "astro": "^2.9.7",
+    "astro": "^2.10.7",
     "solid-js": "^1.7.6",
     "tailwindcss": "^3.0.24"
   }

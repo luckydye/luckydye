@@ -1,11 +1,10 @@
 ---
 import { Image } from "astro:assets";
 
-const { images, title } = Astro.props;
+const { images, title, date } = Astro.props;
 ---
 
 <div class="images">
-  <div class="circle">{title}</div>
   <a-track overflowscroll class="pl-6 pr-6 pt-6">
     {
       images.map((image: string) => {
@@ -17,6 +16,12 @@ const { images, title } = Astro.props;
       })
     }
   </a-track>
+  <div class="circle pt-5">
+    <div class="title">
+      <span>{title}</span>
+      {date && <span class="date">{date}</span>}
+    </div>
+  </div>
 </div>
 
 <style>
@@ -29,6 +34,17 @@ const { images, title } = Astro.props;
     margin: 40px 0;
   }
 
+  .title {
+    display: inline-flex;
+    justify-content: space-between;
+    width: calc(100% - 180px);
+    opacity: 0.7;
+  }
+
+  .date {
+    opacity: 0.5;
+  }
+
   .circle::before {
     content: "";
     display: inline-block;
@@ -36,7 +52,7 @@ const { images, title } = Astro.props;
     margin-right: 15px;
     width: 12px;
     height: 12px;
-    background: var(--color-fg-1);
+    border: 1px solid var(--color-fg-1);
     border-radius: 50%;
     transform: translateX(-50%);
   }
@@ -46,9 +62,9 @@ const { images, title } = Astro.props;
     display: block;
     position: absolute;
     left: 25px;
-    top: 25px;
+    top: 20px;
     width: 1px;
-    height: 100%;
+    height: calc(100% - 40px);
     background: var(--color-fg-1);
   }
 

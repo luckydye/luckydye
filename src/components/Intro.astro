@@ -4,7 +4,6 @@ import Rive from "./Rive";
 
 <div class="container grid">
   <div class="logo">
-    <!-- <img src={Logo} height="300px" /> -->
     <Rive width={200} height={400} src="/logo.riv" client:only />
   </div>
 
@@ -41,12 +40,13 @@ import Rive from "./Rive";
   @media screen and (max-width: 640px) {
     .container {
       align-items: flex-start;
-      grid-template-columns: 120px auto;
+      grid-template-columns: 1fr;
+      grid-template-rows: 250px auto;
       grid-gap: 0px;
     }
     .logo {
-      margin: 0 10px;
-      margin-right: -20px;
+      height: 100%;
+      --height: 300px;
     }
   }
 </style>

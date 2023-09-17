@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400&display=swap");
 
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
 
 :root {
@@ -18,7 +20,6 @@ body {
   color: var(--color-text);
   margin: auto;
   padding: 0;
-  font-weight: 300;
   box-sizing: border-box;
 }
 
@@ -51,12 +52,11 @@ h3, .headline-accent {
 }
 
 p {
-  font-size: 1rem;
   line-height: 1.65;
   margin: 15px 0;
 }
 
-a[href] {
+[href] {
   color: inherit;
   text-decoration: none;
 }
@@ -67,4 +67,36 @@ a[href] {
 
 .rive canvas {
   display: block;
+}
+
+
+
+.content  h1 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+.content  h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+}
+.content  h3 {
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.content pre {
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+.content ul {
+  list-style: circle;
+  margin-left: 1rem;
+}
+.content p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

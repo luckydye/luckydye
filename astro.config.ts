@@ -9,10 +9,6 @@ export default defineConfig({
     analytics: true,
     // imageService: true,
   }),
-  experimental: {
-    assets: true,
-    viewTransitions: true,
-  },
   integrations: [
     solid(),
     tailwind({

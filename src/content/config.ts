@@ -1,4 +1,4 @@
-import { z, defineCollection, image } from "astro:content";
+import { z, defineCollection } from "astro:content";
 
 const projectCollection = defineCollection({
   type: "content",
@@ -27,6 +27,7 @@ const postCollection = defineCollection({
     description: z.string(),
     date: z.date(),
     author: z.string(),
+    tags: z.string().array().optional(),
     createdAt: z.date().optional(),
   }),
 });

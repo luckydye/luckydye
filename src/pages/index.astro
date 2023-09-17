@@ -26,8 +26,9 @@ const gallaries = (await getCollection("gallary")).reverse();
   </div>
 
   <div class="container-small">
+    <!-- These projects should be sorted into the timeline below -->
     <script>
-      import "@atrium-ui/mono/components/track";
+      import "@atrium-ui/mono/track";
     </script>
 
     <a-track overflowscroll>
@@ -58,6 +59,10 @@ const gallaries = (await getCollection("gallary")).reverse();
   </div>
 
   <div class="container">
+    <Post id="tools" />
+  </div>
+
+  <div class="container">
     {
       gallaries.slice(0, 2).map((gallary) => {
         return <Images {...gallary.data} />;
@@ -65,9 +70,6 @@ const gallaries = (await getCollection("gallary")).reverse();
     }
   </div>
 
-  <!-- <div class="container-small">
-    <Post id="post-1" />
-  </div> -->
   <!-- <div class="container-small">
     <Teaser id="teaser-1" />
   </div> -->

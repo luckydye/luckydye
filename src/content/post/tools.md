@@ -3,10 +3,22 @@ title: "Development tools I use daily"
 description: "A showcase of some of the tools I use daily when working on my projects."
 date: 2023-09-17
 author: Tim Havlicek
-tags: [Vite,Biome.js,pnpm]
+tags: [Bash,Task,Anytype,RTX]
 ---
 
-## Task
+This is a list of some of the random tools you find,
+and start to use in every project you are working on,
+simply because they are that useful.
+
+## Bash (aliases, binds and scripts)
+
+This is not mentioned often enough in my oppinion.
+Take the time and make alises and scripts for tasks you do multiple times a day.
+Those couple of seconds you waste during typing the same commands stack up fast.
+
+And just in genreal you should probably learn some bash and GNU tools.
+
+## Taskfile
 
 Highlights and good to knowns.
 
@@ -16,6 +28,24 @@ Highlights and good to knowns.
 
 Highlights and good to knowns.
 
+
+## Anytype
+
+1000%
+
+## Skate
+
+Secrets
+
+## Editor
+
+VSCode btw.
+
+## Some Mac things
+
+- Browserosaurus
+- Raycast
+- Linear Mouse
 
 ## Test
 

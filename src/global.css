@@ -84,3 +84,13 @@ p {
 .rive canvas {
   display: block;
 }
+
+.content ul {
+  list-style: circle;
+  margin-left: 1rem;
+}
+
+.content p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

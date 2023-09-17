@@ -1,0 +1,50 @@
+---
+import type { ContentEntryType } from "astro";
+import { getCollection } from "astro:content";
+
+import Page from "../layouts/Page.astro";
+
+export interface Props {
+  post: ContentEntryType["post"];
+}
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("post");
+  return allPosts.map((post) => {
+    const slug = post.slug;
+    console.log(slug);
+
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+
+const postData = post?.data;
+const { Content } = await post.render();
+---
+
+<Page>
+  <title slot="head">{postData?.title} - luckydye</title>
+  <meta slot="head" name="description" content={postData?.description} />
+
+  <div class="container-tiny my-40 text-lg font-normal">
+    <h2 class="my-2 text-4xl">{postData?.title}</h2>
+
+    <div class="flex justify-between text-base opacity-50 mt-4 mb-10">
+      <div>
+        by {postData.author}
+      </div>
+      <div>
+        {postData?.date.toLocaleDateString()}
+      </div>
+    </div>
+
+    <div class="content">
+      <Content />
+    </div>
+  </div>
+</Page>

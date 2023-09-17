@@ -11,21 +11,20 @@ const postEntry = await getEntry("post", id);
 const post = postEntry?.data;
 ---
 
-<div class="post my-20 mx-4">
-  <a href={`/post/${postEntry?.slug}`}>
-    <h2 class="mt-2">{post?.title}</h2>
+<div class="py-10 my-20 px-8 rounded-md">
+  <a class="block py-2" href={`/${postEntry?.slug}`}>
+    <h2 class="pb-2 text-3xl font-normal">{post?.title}</h2>
   </a>
-  <p class="date">{post?.date.toLocaleDateString()}</p>
-  <p>{post?.description}</p>
+  <div class="flex gap-2 items-center">
+    <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">Post</div>
+    <div class="opacity-75">{post?.date.toLocaleDateString()}</div>
+  </div>
+  <div class="py-2">
+    <p>{post?.description}</p>
+  </div>
 </div>
 
 <style>
-  .post {
-    border-radius: 8px;
-    background: var(--color-bg-1);
-    padding: 20px 40px;
-    border: 1px solid var(--color-fg-1);
-  }
   .date {
     opacity: 0.5;
     font-weight: 400;

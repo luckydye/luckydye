@@ -1,22 +1,25 @@
 # https://taskfile.dev
 
-version: '3'
+version: "3"
 
-dotenv: ['.env']
+dotenv: [".env"]
 
 tasks:
-  default:
-    silent: true
-    cmds:
-      - task -l
-
   setup:
-    desc: Setup the project
+    desc: Install dependencies
+    dir: "{{.TASKFILE_DIR}}"
+    sources:
+      - .rtx.toml
+      - package.json
+      - pnpm-lock.yaml
+      - "**/package.json"
     cmds:
-      - pnpm i
+      - rtx install 2> /dev/null || true
+      - pnpm install
 
   dev:
     desc: Start the development server
+    deps: [setup]
     cmds:
       - npx astro dev
 

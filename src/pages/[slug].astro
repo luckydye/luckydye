@@ -32,11 +32,19 @@ const { Content } = await post.render();
   <meta slot="head" name="description" content={postData?.description} />
 
   <div class="container-tiny my-40 text-lg font-normal">
-    <h2 class="my-2 text-4xl">{postData?.title}</h2>
+    <h2 class="my-2 mb-5 text-4xl">{postData?.title}</h2>
 
-    <div class="flex justify-between text-base opacity-50 mt-4 mb-10">
+    <div class="flex gap-2 items-center mb-10 text-sm text-zinc-400">
+      {
+        postData.tags.map((tag) => {
+          return <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">{tag}</div>;
+        })
+      }
+    </div>
+
+    <div class="flex justify-between text-base opacity-50 pb-10">
       <div>
-        by {postData.author}
+        by <a class="underline" href="/">{postData.author}</a>
       </div>
       <div>
         {postData?.date.toLocaleDateString()}

@@ -69,7 +69,7 @@ p {
   margin: 15px 0;
 }
 
-a[href] {
+[href] {
   color: inherit;
   text-decoration: none;
 }

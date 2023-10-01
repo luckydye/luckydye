@@ -13,6 +13,13 @@
   --color-text: #f9f6f4;
 }
 
+code {
+  color: var(--color-accent);
+  margin-left: 6px;
+  margin-right: 6px;
+  border-radius: 3px;
+}
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;

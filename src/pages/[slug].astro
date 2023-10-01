@@ -36,9 +36,11 @@ const { Content } = await post.render();
 
     <div class="flex gap-2 items-center mb-10 text-sm text-zinc-400">
       {
-        postData.tags.map((tag) => {
-          return <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">{tag}</div>;
-        })
+        postData.tags
+          ? postData.tags.map((tag) => {
+              return <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">{tag}</div>;
+            })
+          : null
       }
     </div>
 

@@ -18,7 +18,8 @@ const postCollection = defineCollection({
       author: z.string().optional(),
       tags: z.string().array().optional(),
       date: z.date().optional(),
-      link: z.string().optional(),
+      url: z.string().optional(),
+      links: z.string().optional(),
       images: z.array(image()).optional(),
     }),
 });

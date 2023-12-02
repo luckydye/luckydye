@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 export type Props = {
-  title: string;
+  title?: string;
   date?: Date;
   images: CollectionEntry<'post'>["data"]["images"];
 };
@@ -16,12 +16,14 @@ const { images, title, date } = Astro.props;
 </script>
 
 <div class="images">
-  <a-track overflowscroll class="pl-6 pr-6 pt-6">
+  <a-track overflowscroll class="pt-6">
     {
       images?.map((image) => {
+        const ar = image.width / image.height;
+        const height = 420;
         return (
           <div class="flex-none first:pl-6 last:pr-6">
-            <img class="slide-image mr-2" {...image} alt={image.src} />
+            <img class="slide-image mr-2" src={image.src} height={height} width={height * ar} alt={image.src} />
           </div>
         );
       })
@@ -43,6 +45,7 @@ const { images, title, date } = Astro.props;
   .images {
     position: relative;
     margin: 40px 0;
+    overflow: hidden;
   }
 
   .title {
@@ -59,7 +62,7 @@ const { images, title, date } = Astro.props;
   .circle::before {
     content: "";
     display: inline-block;
-    margin-left: 26px;
+    margin-left: 8px;
     margin-right: 15px;
     width: 12px;
     height: 12px;
@@ -72,7 +75,7 @@ const { images, title, date } = Astro.props;
     content: "";
     display: block;
     position: absolute;
-    left: 25px;
+    left: 8px;
     top: 20px;
     width: 1px;
     height: calc(100% - 40px);

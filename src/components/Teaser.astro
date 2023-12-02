@@ -8,27 +8,7 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<!-- <div class="post my-20 mx-4">
-  <a href={`${post.data.link}`}>
-    <h2 class="mt-2">{post.data.title}</h2>
-  </a>
-  <p>{post.data.description}</p>
-</div>
-
-<style>
-  .post {
-    border-radius: 8px;
-    background: var(--color-bg-1);
-    padding: 20px 40px;
-    border: 1px solid var(--color-fg-1);
-  }
-  .date {
-    opacity: 0.5;
-    font-weight: 400;
-  }
-</style> -->
-
-<div class="py-10 my-20 rounded-md">
+<div class="px-2 my-10 rounded-md">
   <a class="block py-2" href={`/${post.slug}`}>
     <h2 class="pb-2 text-3xl font-normal">{post.data.title}</h2>
   </a>

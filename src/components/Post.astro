@@ -9,7 +9,7 @@ interface Props {
 }
 
 function getPostType(post: CollectionEntry<'post'>) {
-  if(post.data.images?.length || 0 > 1) {
+  if((post.data.images?.length || 0) > 1) {
     return 'images';
   }
   if(post.data.tags?.includes('project')) {
@@ -21,8 +21,8 @@ function getPostType(post: CollectionEntry<'post'>) {
 const { post } = Astro.props;
 const type = getPostType(post);
 ---
-<div data-slug={post.slug}>
-  {type === 'images' && <Images title={post.data.title} date={post.data.date} images={post.data.images} /> }
+<div data-slug={post.slug} class="pb-20">
+  {type === 'images' && <Images title={post.data.description} date={post.data.date} images={post.data.images} /> }
   {type === "teaser" && <Teaser post={post} />}
   {type === "project" && <Project post={post} />}
 </div>

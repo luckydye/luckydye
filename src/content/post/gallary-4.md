@@ -1,5 +1,6 @@
 ---
 title: Paris, France
+description: Paris, France
 date: 2023-07-01
 images:
   [

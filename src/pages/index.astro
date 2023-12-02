@@ -29,10 +29,14 @@ const posts = await getCollection("post");
   </div>
 
   <div slot="main" class="container">
-    {posts.map((post) => <Post post={post} />)}
+    {posts.sort((a, b) => {
+      const va = a.data.date ? new Date(a.data.date).valueOf() : 0;
+      const vb = b.data.date ? new Date(b.data.date).valueOf() : 0;
+      return vb - va;
+    }).map((post) => <Post post={post} />)}
   </div>
 
-  <div slot="main" class="container">
+  <div slot="main" class="container pt-40">
     <SectionLink link="github">More projects on my GitHub</SectionLink>
   </div>
 </Page>

@@ -1,19 +1,17 @@
 ---
 import type { ContentEntryType } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-import Page from "../layouts/Page.astro";
+import Page from "../layouts/default.astro";
 
 export interface Props {
-  post: ContentEntryType["post"];
+  post: CollectionEntry<'post'>;
 }
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("post");
   return allPosts.map((post) => {
     const slug = post.slug;
-    console.log(slug);
-
     return {
       params: { slug },
       props: { post },
@@ -31,7 +29,7 @@ const { Content } = await post.render();
   <title slot="head">{postData?.title} - luckydye</title>
   <meta slot="head" name="description" content={postData?.description} />
 
-  <div class="container-tiny my-40 text-lg font-normal">
+  <div class="container my-40 text-lg font-normal">
     <h1 class="my-2 mb-5 text-4xl">{postData?.title}</h1>
 
     <div class="flex gap-2 items-center mb-10 text-sm text-zinc-400">

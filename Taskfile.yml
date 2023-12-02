@@ -6,6 +6,7 @@ dotenv: [".env"]
 
 tasks:
   setup:
+    run: once
     desc: Install dependencies
     dir: "{{.TASKFILE_DIR}}"
     sources:
@@ -15,21 +16,15 @@ tasks:
       - "**/package.json"
     cmds:
       - rtx install 2> /dev/null || true
-      - pnpm install
+      - bun install
 
   dev:
     desc: Start the development server
     deps: [setup]
     cmds:
-      - npx astro dev
+      - bun x astro dev
 
   build:
     desc: Build the project
     cmds:
-      - npx astro build
-
-  cms:
-    desc: Start the CMS
-    dir: ./apps/cms
-    cmds:
-      - docker-compose -f docker-compose.local.yml up
+      - bun x astro build

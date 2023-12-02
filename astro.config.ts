@@ -7,12 +7,11 @@ export default defineConfig({
   output: "hybrid",
   adapter: vercel({
     analytics: true,
-    // imageService: true,
   }),
   integrations: [
     solid(),
     tailwind({
-      config: { applyBaseStyles: false },
+      applyBaseStyles: false
     }),
   ],
   build: {

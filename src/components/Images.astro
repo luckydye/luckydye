@@ -1,5 +1,12 @@
 ---
 import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+export type Props = {
+  title: string;
+  date?: Date;
+  images: CollectionEntry<'post'>["data"]["images"];
+};
 
 const { images, title, date } = Astro.props;
 ---
@@ -7,10 +14,10 @@ const { images, title, date } = Astro.props;
 <div class="images">
   <a-track overflowscroll class="pl-6 pr-6 pt-6">
     {
-      images.map((image: string) => {
+      images?.map((image) => {
         return (
           <div class="flex-none first:pl-6 last:pr-6">
-            <Image class="slide-image mr-2" src={image} height={500} alt={image} />
+            <img class="slide-image mr-2" {...image} alt={image.src} />
           </div>
         );
       })

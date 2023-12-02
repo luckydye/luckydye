@@ -68,15 +68,9 @@ p {
   text-decoration: none;
 }
 
-::selection {
-  background: var(--color-fg-0);
-}
-
 .rive canvas {
   display: block;
 }
-
-
 
 .content  h1 {
   font-size: 2rem;

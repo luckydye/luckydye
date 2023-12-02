@@ -3,7 +3,7 @@ export const prerender = true;
 
 import { getCollection } from "astro:content";
 
-import Page from "../layouts/Page.astro";
+import Page from "../layouts/default.astro";
 import Intro from "../components/Intro.astro";
 import Project from "../components/Project.astro";
 import Images from "../components/Images.astro";
@@ -11,8 +11,7 @@ import SectionLink from "../components/SectionLink.astro";
 import Post from "../components/Post.astro";
 import Teaser from "../components/Teaser.astro";
 
-const projects = await getCollection("project");
-const gallaries = (await getCollection("gallary")).reverse();
+const posts = await getCollection("post");
 ---
 
 <Page>
@@ -25,32 +24,20 @@ const gallaries = (await getCollection("gallary")).reverse();
     </div>
   </div>
 
-  <div class="container-small">
+  <div class="container">
     <!-- These projects should be sorted into the timeline below -->
     <script>
       import "@atrium-ui/mono/track";
     </script>
 
-    <a-track overflowscroll>
-      {
-        projects.reverse().map((project) => {
-          return (
-            <div class="project flex-none px-4 first:pl-6 last:pr-6">
-              <Project {...project.data} />
-            </div>
-          );
-        })
-      }
-    </a-track>
-
-    <div class="container-tiny px-6 mt-8 mb-20 md:mb-20">
+    <div class="container px-6 mt-8 mb-20 md:mb-20">
       <p>Here are some of my many personal projects I developed and implemented.</p>
       <br />
       <SectionLink link="github">More projects on my GitHub</SectionLink>
     </div>
   </div>
 
-  <div class="container-small flex justify-center pb-10">
+  <div class="container flex justify-center pb-10">
     <svg width="50" height="10" viewBox="0 0 50 10" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="5" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
       <circle cx="25" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
@@ -58,34 +45,27 @@ const gallaries = (await getCollection("gallary")).reverse();
     </svg>
   </div>
 
- <!-- 
-  <div class="container">
-    <Post id="vite-tailwind" />
-    <Post id="tools" />
-  </div>
--->
-
   <div class="container">
     {
-      gallaries.slice(0, 2).map((gallary) => {
-        return <Images {...gallary.data} />;
+      posts.slice(0, 2).map((gallary) => {
+        return <Images title={gallary.data.title} date={gallary.data.date} images={gallary.data.images} />;
       })
     }
   </div>
 
-  <!-- <div class="container-small">
+  <!-- <div class="container">
     <Teaser id="teaser-1" />
   </div> -->
 
   <div class="container">
     {
-      gallaries.slice(2).map((gallary) => {
-        return <Images {...gallary.data} />;
+      posts.slice(2).map((gallary) => {
+        return <Images images={gallary.data.images} />;
       })
     }
   </div>
 
-  <div class="container-tiny mt-16 mb-40">
+  <div class="container mt-16 mb-40">
     <SectionLink link="instagram">More photos on my Instagram</SectionLink>
   </div>
 </Page>

@@ -1,3 +1,2 @@
 [tools]
-node = "19"
-pnpm = "latest"
+bun = "1.0.15"

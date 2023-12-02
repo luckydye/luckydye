@@ -32,7 +32,7 @@ const { images, title, date } = Astro.props;
   <div class="circle pt-5">
     <div class="title">
       <span>{title}</span>
-      {date && <span class="date">{date}</span>}
+      {date && <span class="date">{date.toUTCString().split(" ").slice(2, 4).join(" ")}</span>}
     </div>
   </div>
 </div>

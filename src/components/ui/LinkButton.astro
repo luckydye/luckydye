@@ -1,0 +1,13 @@
+---
+import { getCollection, getDataEntryById } from "astro:content";
+
+interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+---
+
+<a target="_blank" href={url} class="transition-all active:bg-inherit px-4 py-2 rounded-md bg-zinc-800 hover:bg-zinc-700 border border-zinc-700">
+  <slot />
+</a>

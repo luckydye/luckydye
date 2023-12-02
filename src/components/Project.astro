@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import ExternalLinkIcon from "../assets/external-link.svg";
+import LinkButton from "./ui/LinkButton.astro";
 
 interface Props {
   post: CollectionEntry<'post'>;
@@ -10,36 +11,49 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<a href={post.data.link} target="_blank" class="block my-10">
-  <div class="card">
-    <div class="background">
-      {post.data.images?.[0] ?
-        <img
-          loading="eager"
-          class="background-image"
-          src={post.data.images[0].src}
-          width={269}
-          height={269}
-          alt={post.data.title}
-        />
-        : null}
+<div class="card">
+  <div class="background">
+    {post.data.images?.[0] ?
+      <img
+        loading="eager"
+        class="background-image"
+        src={post.data.images[0].src}
+        width={300}
+        height={200}
+        alt={post.data.title}
+      />
+      : null}
+  </div>
+  <div class="caption py-10 pr-4">
+    <h2 class="headline-accent">{post.data.title}</h2>
+
+    <div class="flex gap-2 py-2 items-center opacity-80">
+      {post.data.tags?.map(tag => {
+        return <div class="text-sm rounded-md bg-zinc-800 inline-block px-2 py-1 capitalize">{tag}</div>;
+      })}
     </div>
-    <div class="caption py-10 pr-4">
-      <h2 class="headline-accent">{post.data.title}</h2>
-      <hr />
-      <div class="description">{post.data.description}</div>
+
+    <div class="description pt-2">{post.data.description}</div>
+
+    <br/>
+
+    <div class="flex gap-2">
+      {post.data.url ? <LinkButton url={post.data.url}>Open in browser</LinkButton> : null}
+      {post.data.links ? post.data.links.map(link => {
+        if(link.match("github.com")) return <LinkButton url={link}>Source</LinkButton>
+      }) : null}
     </div>
   </div>
-</a>
+</div>
 
 <style>
   .card {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
     overflow: hidden;
     border: 1px solid var(--color-bg-1);
     border-radius: 8px;
-    background: var(--color-bg-1);
     position: relative;
     width: 100%;
   }
@@ -52,12 +66,13 @@ const { post } = Astro.props;
     z-index: 100;
   }
   .description {
-    min-height: 100px;
+    max-width: 600px;
+    opacity: 0.8;
   }
   .background-image {
     transition: transform 0.33s ease;
+    padding: 30px;
     display: block;
-    object-fit: cover;
     height: 100%;
   }
   .background::after {
@@ -71,9 +86,9 @@ const { post } = Astro.props;
     left: 0;
     background: linear-gradient(
       -25deg,
-      rgba(30, 30, 32, 1) 10%,
-      rgba(30, 30, 32, 0.7694),
-      rgba(30, 30, 32, 0)
+      rgba(20, 20, 22, 1) 10%,
+      rgba(20, 20, 22, 0.9),
+      rgba(20, 20, 22, 0)
     );
   }
   h2 {

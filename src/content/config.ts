@@ -19,7 +19,7 @@ const postCollection = defineCollection({
       tags: z.string().array().optional(),
       date: z.date().optional(),
       url: z.string().optional(),
-      links: z.string().optional(),
+      links: z.string().array().optional(),
       images: z.array(image()).optional(),
     }),
 });

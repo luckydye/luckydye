@@ -29,7 +29,7 @@ const { Content } = await post.render();
   <title slot="head">{postData?.title} - luckydye</title>
   <meta slot="head" name="description" content={postData?.description} />
 
-  <div class="container my-40 text-lg font-normal">
+  <div slot="main" class="container my-40 text-lg font-normal">
     <h1 class="my-2 mb-5 text-4xl">{postData?.title}</h1>
 
     <div class="flex gap-2 items-center mb-10 text-sm text-zinc-400">

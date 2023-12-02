@@ -4,3 +4,4 @@ dist
 .npmrc
 .task
 .vercel
+.DS_Store

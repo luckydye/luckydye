@@ -8,16 +8,30 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<div class="px-2 my-10 rounded-md">
-  <a class="block py-2" href={`/${post.slug}`}>
-    <h2 class="pb-2 text-3xl font-normal">{post.data.title}</h2>
-  </a>
-  <div class="flex gap-2 items-center">
-    <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">Post</div>
-    <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
-  </div>
+<div class="px-2 grid grid-cols-[auto_1fr] gap-10">
+  {post.data.images?.[0] ?
+    <div>
+      <img
+        loading="eager"
+        class="background-image"
+        src={post.data.images[0].src}
+        width={380}
+        height={380}
+        alt={post.data.title}
+      />
+    </div>
+  : null}
   <div class="py-2">
-    <p>{post.data.description}</p>
+    <a class="block py-2" href={`/${post.slug}`}>
+      <h2 class="pb-2 text-3xl font-normal">{post.data.title}</h2>
+    </a>
+    <div class="flex gap-2 items-center">
+      <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">Post</div>
+      <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
+    </div>
+    <div class="py-2">
+      <p>{post.data.description}</p>
+    </div>
   </div>
 </div>
 

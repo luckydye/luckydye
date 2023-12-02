@@ -11,6 +11,10 @@ export type Props = {
 const { images, title, date } = Astro.props;
 ---
 
+<script>
+  import "@atrium-ui/mono/track";
+</script>
+
 <div class="images">
   <a-track overflowscroll class="pl-6 pr-6 pt-6">
     {

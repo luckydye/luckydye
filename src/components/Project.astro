@@ -1,29 +1,29 @@
 ---
 import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
 import ExternalLinkIcon from "../assets/external-link.svg";
 
 interface Props {
-  title: string;
-  description: string;
-  link: string;
-  image: any;
+  post: CollectionEntry<'post'>;
 }
 
-const { title, description, link, image } = Astro.props;
+const { post } = Astro.props;
 ---
 
-<a href={link} target="_blank">
+<a href={post.data.link} target="_blank">
   <div class="card">
-    <div class="background">
-      <Image
-        loading="eager"
-        class="background-image"
-        src={image}
-        width={269}
-        height={269 * 1.5}
-        alt={title}
-      />
-    </div>
+    {post.data.images?.[0] ?
+      <div class="background">
+        <Image
+          loading="eager"
+          class="background-image"
+          src={post.data.images[0]}
+          width={269}
+          height={269 * 1.5}
+          alt={post.data.title}
+        />
+      </div>
+    : null}
     <div class="caption">
       <div class="link-indicator">
         Open
@@ -35,9 +35,9 @@ const { title, description, link, image } = Astro.props;
           alt="external link"
         />
       </div>
-      <h2 class="headline-accent">{title}</h2>
+      <h2 class="headline-accent">{post.data.title}</h2>
       <hr />
-      <div class="description">{description}</div>
+      <div class="description">{post.data.description}</div>
     </div>
   </div>
 </a>

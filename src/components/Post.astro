@@ -1,32 +1,28 @@
 ---
-import { getEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
+import Images from "./Images.astro";
+import Teaser from "./Teaser.astro";
+import Project from "./Project.astro";
 
 interface Props {
-  id: string;
+  post: CollectionEntry<'post'>;
 }
 
-const { id } = Astro.props;
-
-const postEntry = await getEntry("post", id);
-const post = postEntry?.data;
----
-
-<div class="py-10 my-20 px-8 rounded-md">
-  <a class="block py-2" href={`/${postEntry?.slug}`}>
-    <h2 class="pb-2 text-3xl font-normal">{post?.title}</h2>
-  </a>
-  <div class="flex gap-2 items-center">
-    <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">Post</div>
-    <div class="opacity-75">{post?.date.toLocaleDateString()}</div>
-  </div>
-  <div class="py-2">
-    <p>{post?.description}</p>
-  </div>
-</div>
-
-<style>
-  .date {
-    opacity: 0.5;
-    font-weight: 400;
+function getPostType(post: CollectionEntry<'post'>) {
+  if(post.data.images?.length || 0 > 1) {
+    return 'images';
   }
-</style>
+  if(post.data.tags?.includes('project')) {
+    return 'project';
+  }
+  return "teaser";
+}
+
+const { post } = Astro.props;
+const type = getPostType(post);
+---
+<div data-slug={post.slug}>
+  {type === 'images' && <Images title={post.data.title} date={post.data.date} images={post.data.images} /> }
+  {type === "teaser" && <Teaser post={post} />}
+  {type === "project" && <Project post={post} />}
+</div>

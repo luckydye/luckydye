@@ -1,21 +1,18 @@
 ---
-import { getEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 
 interface Props {
-  id: string;
+  post: CollectionEntry<'post'>;
 }
 
-const { id } = Astro.props;
-
-const teaserEntry = await getEntry("teaser", id);
-const teaser = teaserEntry?.data;
+const { post } = Astro.props;
 ---
 
-<div class="post my-20 mx-4">
-  <a href={`${teaser?.link}`}>
-    <h2 class="mt-2">{teaser?.title}</h2>
+<!-- <div class="post my-20 mx-4">
+  <a href={`${post.data.link}`}>
+    <h2 class="mt-2">{post.data.title}</h2>
   </a>
-  <p>{teaser?.description}</p>
+  <p>{post.data.description}</p>
 </div>
 
 <style>
@@ -25,6 +22,26 @@ const teaser = teaserEntry?.data;
     padding: 20px 40px;
     border: 1px solid var(--color-fg-1);
   }
+  .date {
+    opacity: 0.5;
+    font-weight: 400;
+  }
+</style> -->
+
+<div class="py-10 my-20 rounded-md">
+  <a class="block py-2" href={`/${post.slug}`}>
+    <h2 class="pb-2 text-3xl font-normal">{post.data.title}</h2>
+  </a>
+  <div class="flex gap-2 items-center">
+    <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">Post</div>
+    <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
+  </div>
+  <div class="py-2">
+    <p>{post.data.description}</p>
+  </div>
+</div>
+
+<style>
   .date {
     opacity: 0.5;
     font-weight: 400;

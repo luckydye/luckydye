@@ -16,15 +16,15 @@ tasks:
       - "**/package.json"
     cmds:
       - rtx install 2> /dev/null || true
-      - bun install
+      - pnpm install
 
   dev:
     desc: Start the development server
     deps: [setup]
     cmds:
-      - bun x astro dev
+      - npx astro dev
 
   build:
     desc: Build the project
     cmds:
-      - bun x astro build
+      - npx astro build

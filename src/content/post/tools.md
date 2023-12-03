@@ -11,16 +11,15 @@ tags: [Bash, Task, Anytype, RTX]
 This is not mentioned often enough in my opinion.
 Take the time and make aliases and scripts for tasks you do many times a week.
 Those couple of seconds you waste, during typing the same commands over and over again, stack up fast.
-
 And just in general you should probably learn some bash and GNU tools.
 
 ## Taskfile
 
 [https://taskfile.dev/usage/](https://taskfile.dev/usage/)
 
-Managing NPM scripts can get a little crazy in a complex enough project. Pnpm helped a little with recursive scripts, but I think there is a better way:
+Managing NPM scripts can get a little crazy in a complex enough project. Pnpm helped a little with recursive scripts, but I think there is a better way: A Taskfile
 
-A Taskfile
+It is written in go and can be installed in a single binary. It's a great tool to standardize scripts even projects.
 
 ### Some Highlights:
 
@@ -30,8 +29,6 @@ A Taskfile
 - Parallel execution
 - Preconditions
 - Prevent unnecessary work by fingerprinting
-
-It is written in go and can be installed with a single binary. It's a great tool to standardize scripts even across projects.
 
 ### Example:
 
@@ -65,14 +62,10 @@ tasks:
 
 [https://github.com/jdx/rtx](https://github.com/jdx/rtx)
 
-(not the raytracing thing)
-
 A _Polyglot runtime manager_. You can basically think of it as a package manager,
 that can install multiple versions of tools at the same time.
 
-For example you can install node 16 for one project, node 20 for another, and it will automatically use the correct one for the project.
-
-The specific versions are pinned in a .rtx.toml file in your project directory.
+For example you can install node 16 for one project, node 20 for another, and it will automatically use the correct one for the project. The specific versions are pinned in a .rtx.toml file in your project directory.
 That also has the advantage of having a place to look for what versions were used for the project.
 
 ```toml

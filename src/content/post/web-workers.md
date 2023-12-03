@@ -1,9 +1,9 @@
 ---
 title: Use Web Workers in less than 10 minutes
-description: Fast track to using workers using Vite
+description: Fast track to using workers using Vite.
 date: 2023-09-04
 author: Tim Havlicek
-tags: [web, javascript, workers]
+tags: [javascript, web-workers, vite]
 ---
 
 In theory, web workers are a great idea to keep the main thread of your web application free for user interaction. In practice, they are a pain to set up and use.
@@ -16,7 +16,7 @@ To be fair, if you would not build/transpile your js, that would not be a proble
 ## So how do we create a worker with Vite?
 
 A worker needs a url pointing to a js file. This part is taken care of by Vite.
-When importing a file we can tell Vite to import it as a worker with a `?worker` parameter in the url.
+When importing a file we can tell Vite to import it as a worker with a `?worker` parameter in the import path.
 This will return a function that we can use to create a new worker instance.
 
 ```js

@@ -25,8 +25,16 @@ const { post } = Astro.props;
     <a class="block py-2" href={`/${post.slug}`} style="text-decoration: none;">
       <h2 class="pb-2 text-3xl font-normal">{post.data.title}</h2>
     </a>
-    <div class="flex gap-2 items-center">
-      <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">Post</div>
+    <div class="flex flex-wrap gap-2 items-center">
+
+      {
+        post.data.tags
+          ? post.data.tags.map((tag) => {
+              return <div class="capitalize rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{tag}</div>;
+            })
+          : null
+      }
+
       <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
     </div>
     <div class="py-2 text-lg">

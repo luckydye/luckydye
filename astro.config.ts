@@ -5,6 +5,7 @@ import vercel from "@astrojs/vercel/serverless";
 
 export default defineConfig({
   output: "hybrid",
+  site: "https://luckydye.dev",
   adapter: vercel({
     analytics: true,
   }),

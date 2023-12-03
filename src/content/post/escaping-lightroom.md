@@ -4,7 +4,7 @@ description: A new era of photo editing in a decentralized world
 date: 2023-12-02
 author: Tim Havlicek
 images: ["./images/escaping-lightroom-2.png"]
-tags: [photography, software]
+tags: [photography, Solid.JS, Rust, Tauri]
 ---
 
 ![Escaping Lightroom](./images/escaping-lightroom.png)

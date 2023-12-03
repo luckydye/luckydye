@@ -2,55 +2,25 @@
 export const prerender = true;
 
 import { getCollection } from "astro:content";
-
-import Page from "../layouts/Page.astro";
 import Intro from "../components/Intro.astro";
-import Project from "../components/Project.astro";
-import Images from "../components/Images.astro";
-import SectionLink from "../components/SectionLink.astro";
 import Post from "../components/Post.astro";
-import Teaser from "../components/Teaser.astro";
+import SectionLink from "../components/SectionLink.astro";
+import Page from "../layouts/default.astro";
 
-const projects = await getCollection("project");
-const gallaries = (await getCollection("gallary")).reverse();
+const posts = await getCollection("post");
 ---
 
-<Page>
-  <title slot="head">luckydye</title>
-  <meta slot="head" name="description" content="My homepage." />
-
-  <div class="container">
+<Page meta={{
+  title: "luckydye",
+  description: "My homepage.",
+}}>
+  <div slot="main" class="container">
     <div class="py-10 md:py-20 pb-16 md:pb-32">
       <Intro />
     </div>
   </div>
 
-  <div class="container-small">
-    <!-- These projects should be sorted into the timeline below -->
-    <script>
-      import "@atrium-ui/mono/track";
-    </script>
-
-    <a-track overflowscroll>
-      {
-        projects.reverse().map((project) => {
-          return (
-            <div class="project flex-none px-4 first:pl-6 last:pr-6">
-              <Project {...project.data} />
-            </div>
-          );
-        })
-      }
-    </a-track>
-
-    <div class="container-tiny px-6 mt-8 mb-20 md:mb-20">
-      <p>Here are some of my many personal projects I developed and implemented.</p>
-      <br />
-      <SectionLink link="github">More projects on my GitHub</SectionLink>
-    </div>
-  </div>
-
-  <div class="container-small flex justify-center pb-10">
+  <div slot="main" class="container flex justify-center pb-20">
     <svg width="50" height="10" viewBox="0 0 50 10" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="5" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
       <circle cx="25" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
@@ -58,41 +28,15 @@ const gallaries = (await getCollection("gallary")).reverse();
     </svg>
   </div>
 
- <!-- 
-  <div class="container">
-    <Post id="vite-tailwind" />
-    <Post id="tools" />
-  </div>
--->
-
-  <div class="container">
-    {
-      gallaries.slice(0, 2).map((gallary) => {
-        return <Images {...gallary.data} />;
-      })
-    }
+  <div slot="main" class="container">
+    {posts.sort((a, b) => {
+      const va = a.data.date ? new Date(a.data.date).valueOf() : 0;
+      const vb = b.data.date ? new Date(b.data.date).valueOf() : 0;
+      return vb - va;
+    }).map((post) => <Post post={post} />)}
   </div>
 
-  <!-- <div class="container-small">
-    <Teaser id="teaser-1" />
-  </div> -->
-
-  <div class="container">
-    {
-      gallaries.slice(2).map((gallary) => {
-        return <Images {...gallary.data} />;
-      })
-    }
-  </div>
-
-  <div class="container-tiny mt-16 mb-40">
-    <SectionLink link="instagram">More photos on my Instagram</SectionLink>
+  <div slot="main" class="container pt-40">
+    <SectionLink link="github">More projects on my GitHub</SectionLink>
   </div>
 </Page>
-
-<style>
-  a-track {
-    display: flex;
-    max-width: 100%;
-  }
-</style>

@@ -1,0 +1,61 @@
+---
+import "../global.css";
+
+import { ViewTransitions } from "astro:transitions";
+
+import Link from "../components/Link.astro";
+
+export type Props = {
+  meta: {
+    title: string;
+    description?: string;
+    /**
+     * Absolute path from the site root.
+     */
+    image?: string;
+  };
+}
+
+const props = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <ViewTransitions />
+
+    <title>{props.meta?.title}</title>
+
+    {props.meta?.description ? <meta name="description" content={props.meta?.description} /> : null}
+
+    <meta property="og:title" content={props.meta?.title}>
+    <meta property="og:description" content={props.meta?.description}>
+
+    {props.meta?.image ? <meta property="og:image" content={Astro.site + props.meta.image}> : null}
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+
+    <slot name="head" />
+  </head>
+
+  <body>
+    <main>
+      <slot name="main" />
+    </main>
+
+    <footer class="pb-40">
+      <div class="container pt-10 pb-20">
+        <h2 class="mb-4">Connect</h2>
+        <div class="mb-1">
+          <Link link="twitter">@timh4v</Link>
+        </div>
+        <div class="mb-1">
+          <Link link="mail">tim.h4vlicek@gmail.com</Link>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

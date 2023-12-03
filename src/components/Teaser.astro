@@ -1,30 +1,49 @@
 ---
-import { getEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 
 interface Props {
-  id: string;
+  post: CollectionEntry<'post'>;
 }
 
-const { id } = Astro.props;
-
-const teaserEntry = await getEntry("teaser", id);
-const teaser = teaserEntry?.data;
+const { post } = Astro.props;
 ---
 
-<div class="post my-20 mx-4">
-  <a href={`${teaser?.link}`}>
-    <h2 class="mt-2">{teaser?.title}</h2>
-  </a>
-  <p>{teaser?.description}</p>
+<div class="px-2 grid grid-cols-[1fr] md:grid-cols-[auto_1fr] gap-10">
+  {post.data.images?.[0] ?
+    <div>
+      <img
+        loading="eager"
+        class="background-image"
+        src={post.data.images[0].src}
+        width={380}
+        height={380}
+        alt={post.data.title}
+      />
+    </div>
+  : null}
+  <div class="py-2">
+    <a class="block py-2" href={`/${post.slug}`} style="text-decoration: none;">
+      <h2 class="pb-2 text-3xl font-normal">{post.data.title}</h2>
+    </a>
+    <div class="flex flex-wrap gap-2 items-center">
+
+      {
+        post.data.tags
+          ? post.data.tags.map((tag) => {
+              return <div class="capitalize rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{tag}</div>;
+            })
+          : null
+      }
+
+      <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
+    </div>
+    <div class="py-2 text-lg">
+      <p>{post.data.description}</p>
+    </div>
+  </div>
 </div>
 
 <style>
-  .post {
-    border-radius: 8px;
-    background: var(--color-bg-1);
-    padding: 20px 40px;
-    border: 1px solid var(--color-fg-1);
-  }
   .date {
     opacity: 0.5;
     font-weight: 400;

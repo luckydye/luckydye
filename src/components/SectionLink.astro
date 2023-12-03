@@ -5,7 +5,7 @@ import arrowRight from "../assets/arrow-right.svg";
 
 interface Props {
   link: string;
-  align: string;
+  align?: string;
 }
 
 const { link, align } = Astro.props;
@@ -15,7 +15,7 @@ const linkEntry = (await getCollection("link")).find(
 );
 ---
 
-<a href={linkEntry?.data.link} target={linkEntry?.data.target}>
+<a href={linkEntry?.data.link} target={linkEntry?.data.target || "_blank"}>
   <div class="link" data-align={align}>
     <slot />
     <div class="arrow">

@@ -5,14 +5,14 @@ import vercel from "@astrojs/vercel/serverless";
 
 export default defineConfig({
   output: "hybrid",
+  site: "https://luckydye.dev",
   adapter: vercel({
     analytics: true,
-    // imageService: true,
   }),
   integrations: [
     solid(),
     tailwind({
-      config: { applyBaseStyles: false },
+      applyBaseStyles: false
     }),
   ],
   build: {

@@ -6,6 +6,7 @@ dotenv: [".env"]
 
 tasks:
   setup:
+    run: once
     desc: Install dependencies
     dir: "{{.TASKFILE_DIR}}"
     sources:
@@ -27,9 +28,3 @@ tasks:
     desc: Build the project
     cmds:
       - npx astro build
-
-  cms:
-    desc: Start the CMS
-    dir: ./apps/cms
-    cmds:
-      - docker-compose -f docker-compose.local.yml up

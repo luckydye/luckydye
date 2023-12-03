@@ -1,19 +1,17 @@
 ---
 import type { ContentEntryType } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-import Page from "../layouts/Page.astro";
+import Page from "../layouts/default.astro";
 
 export interface Props {
-  post: ContentEntryType["post"];
+  post: CollectionEntry<'post'>;
 }
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("post");
   return allPosts.map((post) => {
     const slug = post.slug;
-    console.log(slug);
-
     return {
       params: { slug },
       props: { post },
@@ -27,18 +25,18 @@ const postData = post?.data;
 const { Content } = await post.render();
 ---
 
-<Page>
-  <title slot="head">{postData?.title} - luckydye</title>
-  <meta slot="head" name="description" content={postData?.description} />
-
-  <div class="container-tiny my-40 text-lg font-normal">
+<Page meta={{
+  title: `${postData?.title} - luckydye`,
+  description: postData?.description,
+}}>
+  <div slot="main" class="container my-40 text-lg font-normal">
     <h1 class="my-2 mb-5 text-4xl">{postData?.title}</h1>
 
     <div class="flex gap-2 items-center mb-10 text-sm text-zinc-400">
       {
         postData.tags
           ? postData.tags.map((tag) => {
-              return <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">{tag}</div>;
+              return <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">{tag}</div>;
             })
           : null
       }
@@ -49,7 +47,7 @@ const { Content } = await post.render();
         by <a class="underline" href="/">{postData.author}</a>
       </div>
       <div>
-        {postData?.date.toLocaleDateString()}
+        {postData.date?.toLocaleDateString()}
       </div>
     </div>
 

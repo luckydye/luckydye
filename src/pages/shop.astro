@@ -8,10 +8,10 @@ import * as cms from "../cms.js";
 // const examples = await cms.getProducts();
 ---
 
-<Page>
-  <title slot="head">luckydye</title>
-  <meta slot="head" name="description" content="My homepage." />
-
+<Page meta={{
+  title: "luckydye",
+  description: "My homepage."
+}}>
   <div class="container mt-10">
     <SectionLink align="left" link="home">To my homepage</SectionLink>
 

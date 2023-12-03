@@ -6,6 +6,8 @@ author: Tim Havlicek
 tags: [photography, software]
 ---
 
+// Written version of the Rive Academy.
+
 Usually, when crating designs for the web. The work always gets done twice.
 Once the designer creates a design, that went through many iterations and revisions, then the developer has to recreate it in code.
 Once chiselled out in code, making big changes to the design comes with a lot of work.

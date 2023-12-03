@@ -10,10 +10,10 @@ import Page from "../layouts/default.astro";
 const posts = await getCollection("post");
 ---
 
-<Page>
-  <title slot="head">luckydye</title>
-  <meta slot="head" name="description" content="My homepage." />
-
+<Page meta={{
+  title: "luckydye",
+  description: "My homepage.",
+}}>
   <div slot="main" class="container">
     <div class="py-10 md:py-20 pb-16 md:pb-32">
       <Intro />

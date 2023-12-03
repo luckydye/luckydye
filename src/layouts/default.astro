@@ -4,6 +4,19 @@ import "../global.css";
 import { ViewTransitions } from "astro:transitions";
 
 import Link from "../components/Link.astro";
+
+export type Props = {
+  meta: {
+    title: string;
+    description?: string;
+    /**
+     * Absolute path from the site root.
+     */
+    image?: string;
+  };
+}
+
+const props = Astro.props;
 ---
 
 <html lang="en">
@@ -11,11 +24,20 @@ import Link from "../components/Link.astro";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <slot name="head" />
+    <ViewTransitions />
+
+    <title>{props.meta?.title}</title>
+
+    {props.meta?.description ? <meta name="description" content={props.meta?.description} /> : null}
+
+    <meta property="og:title" content={props.meta?.title}>
+    <meta property="og:description" content={props.meta?.description}>
+
+    {props.meta?.image ? <meta property="og:image" content={Astro.site + props.meta.image}> : null}
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 
-    <ViewTransitions />
+    <slot name="head" />
   </head>
 
   <body>

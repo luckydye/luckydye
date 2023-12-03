@@ -6,8 +6,7 @@ author: Tim Havlicek
 tags: [Audio, Linear Timecode]
 ---
 
-This wont be a tutorial, just a quick overview about Linear Timecode and how I implemented it in Javascript.
-
+This won't be a tutorial, just a quick overview about Linear Timecode and how I implemented it in Javascript.
 For a working example, you can take a look at my original code here:
 https://github.com/luckydye/linear-timecode
 

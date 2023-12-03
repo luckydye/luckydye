@@ -14,7 +14,7 @@
 }
 
 footer, main {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -23,6 +23,7 @@ code {
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 3px;
+  font-size: inherit;
 }
 
 body {

@@ -59,7 +59,6 @@ h2, .headline-subline {
 h3, .headline-accent {
   font-size: 1.8rem;
   font-weight: 300;
-  color: var(--color-accent);
   margin: 0;
 }
 
@@ -83,12 +82,14 @@ p {
   margin-bottom: 1.5rem;
 }
 .content  h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  color: var(--color-accent);
   font-weight: bold;
   margin-top: 4rem;
   margin-bottom: 1.5rem;
 }
 .content  h3 {
+  font-size: 1.5rem;
   font-weight: bold;
   margin-top: 2rem;
   margin-bottom: 1rem;

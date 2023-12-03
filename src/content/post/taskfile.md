@@ -11,6 +11,20 @@ I've been using [Taskfiles](https://taskfile.dev) for a while now, and I've foun
 Keeping a consistent interface for running scripts across projects.
 Keeping the mental overhead of remembering how to start up a project locally as low as possible.
 
+
+From notes
+
+Its hard when there are different scripts and commands to run on every project. 
+But at the same time, there are always better tools coming to the market.
+Taskfiles serve as a interface towards the developer.
+Behind those tasks, the tools actually used and run, can change independently from what command the developer actually types in.
+
+Npm scripts are not an alternative. They are too restrictive.
+
+Behind the scenes, tasks can run npm scripts, turbo pipelines, vite builds etc.
+
+
+
 ## How I use Taskfiles
 
 I settled on a couple standard tasks I define in every project with this dependency hierarchy:

@@ -15,7 +15,7 @@ const linkEntry = (await getCollection("link")).find(
 );
 ---
 
-<a href={linkEntry?.data.link} target={linkEntry?.data.target}>
+<a href={linkEntry?.data.link} target={linkEntry?.data.target || "_blank"}>
   <div class="link" data-align={align}>
     <slot />
     <div class="arrow">

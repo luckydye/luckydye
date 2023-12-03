@@ -21,7 +21,7 @@ function getPostType(post: CollectionEntry<'post'>) {
 const { post } = Astro.props;
 const type = getPostType(post);
 ---
-<div data-slug={post.slug} class="pb-32">
+<div data-slug={post.slug} class="pb-20">
   {type === 'images' && <Images title={post.data.description} date={post.data.date} images={post.data.images} /> }
   {type === "teaser" && <Teaser post={post} />}
   {type === "project" && <Project post={post} />}

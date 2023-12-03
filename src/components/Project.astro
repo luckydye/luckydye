@@ -11,7 +11,7 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<div class="card">
+<div class="card grid md:grid-cols-[auto_1fr] grid-cols-[1fr]">
   <div class="background">
     {post.data.images?.[0] ?
       <img
@@ -24,7 +24,7 @@ const { post } = Astro.props;
       />
       : null}
   </div>
-  <div class="caption py-10 pr-4">
+  <div class="caption py-10 px-4">
     <h2 class="headline-accent">{post.data.title}</h2>
 
     <div class="flex gap-2 py-2 items-center opacity-80">
@@ -48,8 +48,6 @@ const { post } = Astro.props;
 
 <style>
   .card {
-    display: grid;
-    grid-template-columns: auto 1fr;
     gap: 3rem;
     overflow: hidden;
     border: 1px solid var(--color-bg-1);

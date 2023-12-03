@@ -7,7 +7,7 @@ images: ["./images/escaping-lightroom-2.png"]
 tags: [photography, software]
 ---
 
-![Escaping Lightroom](./images/escaping-lightroom-2.png)
+![Escaping Lightroom](./images/escaping-lightroom.png)
 
 <br/>
 

@@ -8,7 +8,7 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<div class="px-2 grid grid-cols-[auto_1fr] gap-10">
+<div class="px-2 grid grid-cols-[1fr] md:grid-cols-[auto_1fr] gap-10">
   {post.data.images?.[0] ?
     <div>
       <img
@@ -29,7 +29,7 @@ const { post } = Astro.props;
       <div class="rounded-md bg-zinc-800 inline-block px-2 py-1">Post</div>
       <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
     </div>
-    <div class="py-2">
+    <div class="py-2 text-lg">
       <p>{post.data.description}</p>
     </div>
   </div>

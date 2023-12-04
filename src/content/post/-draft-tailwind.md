@@ -1,7 +1,7 @@
 ---
-title: Why you probably should use tailwind
-description: Maintainable Styling
-date: 2023-09-30
+title: I didn't like Tailwind at first
+description: Maintainable styling with tailwind
+date: 2023-12-24
 author: Tim Havlicek
 tags: [Tailwind]
 ---

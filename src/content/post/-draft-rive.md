@@ -1,9 +1,9 @@
 ---
 title: Why you should use Rive.
 description: A bridge between designers and developers.
-date: 2023-12-02
+date: 2024-01-01
 author: Tim Havlicek
-tags: [photography, software]
+tags: [rive]
 ---
 
 // Written version of the Rive Academy.

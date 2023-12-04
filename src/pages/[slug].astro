@@ -12,10 +12,13 @@ export async function getStaticPaths() {
   const allPosts = await getCollection("post");
   return allPosts.map((post) => {
     const slug = post.slug;
+    const isDraft = slug.includes("-draft-");
     return {
       params: { slug },
-      props: { post },
+      props: { post, isDraft },
     };
+  }).filter((post) => {
+    return import.meta.env.DEV || !post.props.isDraft;
   });
 }
 

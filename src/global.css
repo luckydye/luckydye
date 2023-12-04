@@ -26,6 +26,12 @@ code {
   font-size: 0.9em;
 }
 
+blockquote {
+  margin: 10px 0 40px 0;
+  padding: 10px 30px;
+  background: #28282a;
+}
+
 body {
   margin: 0;
   font-family: "Lato", Arial, Helvetica, sans-serif;

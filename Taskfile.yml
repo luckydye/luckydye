@@ -28,3 +28,8 @@ tasks:
     desc: Build the project
     cmds:
       - npx astro build
+
+  fix:
+    cmds:
+      - npx biome format --write .
+      - npx biome lint --skip-errors --apply-unsafe .

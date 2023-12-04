@@ -46,9 +46,10 @@ const { Content } = await post.render();
     </div>
 
     <div class="flex justify-between text-base opacity-50 pb-10">
-      <div>
+      {postData.author ? <div>
         by <a class="underline" href="/">{postData.author}</a>
-      </div>
+      </div> : null}
+
       <div>
         {postData.date?.toLocaleDateString()}
       </div>
@@ -57,5 +58,14 @@ const { Content } = await post.render();
     <div class="content">
       <Content />
     </div>
+
+    {postData.links ? <div class="pt-20">
+      <h2>Links</h2>
+      {postData.links.map((link) => {
+        return <div>
+          <a target="_blank" href={link}>{link}</a>
+        </div>
+      })}
+    </div> : null}
   </div>
 </Page>

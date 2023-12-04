@@ -1,32 +1,28 @@
 ---
-title: An interface for running scripts
-description: Taskfiles serve as a great interface for running project scripts across projects and teams.
+title: A better way to manage scripts in your projects.
+description: Using Taskfiles to provide a streamlined interface for running scripts across projects and teams.
 date: 2023-12-01
 author: Tim Havlicek
 tags: [Taskfile, Scripts, CI]
+links: [https://taskfile.dev/usage/, https://taskfile.dev/styleguide/, https://github.com/jdx/rtx]
 ---
 
-I've been using [Taskfiles](https://taskfile.dev) for a while now, and I've found them to be a great way to manage running any kind of scripts in my projects.
+> "Task is a task runner / build tool that aims to be simpler and easier to use than, for example, GNU Make."
 
-Keeping a consistent interface for running scripts across projects.
-Keeping the mental overhead of remembering how to start up a project locally as low as possible.
+I've been using [Taskfiles](https://taskfile.dev) for some time now, and I've found them to be a great way to manage running any kind of scripts in my projects for a couple reasons:
 
-From notes
+- Keeping a consistent interface for running scripts across projects.
+- Tools within tasks can be changed independently, allowing flexibility without modifying the interface to run them.
+- Built-in running multiple continuous tasks in parallel.
+- Possibility to define dependencies between tasks.
+- Language ecosystem independent.
+- .env file support.
 
-Its hard when there are different scripts and commands to run on every project.
-But at the same time, there are always better tools coming to the market.
-Taskfiles serve as a interface towards the developer.
-Behind those tasks, the tools actually used and run, can change independently from what command the developer actually types in.
-
-Npm scripts are not an alternative. They are too restrictive.
-
-Behind the scenes, tasks can run npm scripts, turbo pipelines, vite builds etc.
-
-For more detailed usage and examples, check out the [Taskfile Usage](https://taskfile.dev/usage/) and the [Styleguide](https://taskfile.dev/styleguide/).
+In the past, I have used between two and three different npm packages to do the same job.
 
 ## How I use Taskfiles
 
-I settled on a couple standard tasks I define in every project with this dependency hierarchy:
+I settled on a couple standard tasks I define in almost every project with this dependency hierarchy:
 
 - `task setup` - setup project, installing dependencies etc.
   - `task dev` - starts the project in development mode
@@ -35,7 +31,7 @@ I settled on a couple standard tasks I define in every project with this depende
   - `task lint` - runs the linter
   - `task fix` - formats the code and fixes linting errors
 
-The "dev" task has a dependency on "setup", meaning, when I run the "dev" task, it will first run the "setup" task automagically. This means, I can clone any project of mine and expect that with a single command, `task dev`, it will install and start the project.
+The `dev` task has a dependency on `setup`, meaning, when I run the `dev`, it will install all dependencies automagically without running `setup` explicitly. This means, I can clone any project of mine and expect that with a single command, `task dev`, it will install and start the project.
 
 Here an example of a full basic Taskfile I would use:
 
@@ -46,9 +42,9 @@ dotenv: [".env"]
 
 tasks:
   setup:
-    run: once
+    run: once # only run once, even if it is a dependency of multiple tasks
     desc: Setup dependencies
-    sources:
+    sources: # only run if any of these files have changed
       - .rtx.toml
       - package.json
       - pnpm-lock.yaml
@@ -60,7 +56,7 @@ tasks:
 
   dev:
     desc: Start the development server
-    deps: [setup]
+    deps: [setup] # run setup before running this task
     cmds:
       - npx vite --host --port 3000 app
 
@@ -87,7 +83,7 @@ tasks:
       - npx biome lint --log-level=error --log-kind=compact --max-diagnostics=200 .
 ```
 
-No matter if the project is using plain npm, pnpm, vite or webpack. I can always run the same commands.
+The `sources` field is used to determine if the task needs to be run again. If any of the files listed in `sources` has changed since the last time the task was run, it will run again. Otherwise, it will be skipped.
 
 Another useful trick for running parallel tasks is to use the `--parallel` flag in a new task.
 It also helps for tasks that don't need to be run individually, to omit the "desc" field. That way it wont be shown in the list of `task -l`.
@@ -112,10 +108,23 @@ With _rtx_, even installing the tools needed to run the project can be automated
 
 [Install it!](https://github.com/jdx/rtx)
 
+## Environment variables
+
+You can tell task to load environment variables from a file with the `dotenv` option in the root.
+
+```yaml
+dotenv: [".env"]
+```
+
+This standardizes how environment variables are loaded across projects and CI.
+No need to install some npm package to load environment variables from a file.
+
+_For deployments using docker, the variables should be defined by the docker-compose.yml._
+
 ## Run tasks in CI
 
 This also makes writing CI configurations a lot simpler. I can basically only run one task per job.
-And I can partially test CI jobs locally by just running the same task as the CI job.
+And I can partially test CI jobs, like linting, locally by just running the same task as the CI job.
 
 Example Gitlab CI job configuration:
 
@@ -132,16 +141,7 @@ test:
     - main
 ```
 
-## Environment variables
-
-You can tell task to load environment variables from a file with the `dotenv` option in the root.
-
-```yaml
-dotenv: [".env"]
-```
-
-This standardizes how environment variables are loaded across projects and CI.
-No need to install some npm package to load environment variables from a file.
+Instruction for using task in CI: [Install Script](https://taskfile.dev/installation/#install-script)
 
 ## Task Variables
 
@@ -197,5 +197,21 @@ tasks:
 Run like this:
 
 ```bash
-$ task test:packages PACKAGE_SCOPE=packages
+$ task test PACKAGE_SCOPE=packages
 ```
+
+## Monorepos
+
+Taskfiles also have great potential for monorepos with included Taskfiles.
+
+```yaml
+includes:
+  docs:
+    taskfile: ./docs/Taskfile.yml
+    dir: ./docs # defines where to run the tasks from
+    optional: true # ignores it, if the taskfile is not found
+    aliases: [d]
+# $ task d:build
+```
+
+But because of some bugs surrounding directory paths of included tasks, I could not explore this much further yet.

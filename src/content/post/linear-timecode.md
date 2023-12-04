@@ -26,12 +26,6 @@ I used [this](https://elteesee.pehrhovey.net/) wonderful website to generate a L
 The above image is the waveform of our LTC audio file.
 It has a sample rate of 44.1kHz (1000 x 44.1 cycles per second).
 Each sample contains 24 bits, and we send 44100 samples every second.
-That means we can transmit a total of 1058400 bits, or 132.3 kB per second. Which would fit over 1653 frames each second.
-
-Now that is quite unrealistic, because of noise and other possible factors that will produce a non perfect signal,
-though luckily we don't event need that many.
-
-## Web Audio API
 
 We can use the Web Audio API to read the audio signal from the file. Or in this case, from some audio input.
 

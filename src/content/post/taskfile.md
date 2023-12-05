@@ -86,7 +86,7 @@ tasks:
 The `sources` field is used to determine if the task needs to be run again. If any of the files listed in `sources` has changed since the last time the task was run, it will run again. Otherwise, it will be skipped.
 
 Another useful trick for running parallel tasks is to use the `--parallel` flag in a new task.
-It also helps for tasks that don't need to be run individually, to omit the "desc" field. That way it wont be shown in the list of `task -l`.
+It also helps for tasks that don't need to be run individually, to omit the "desc" field. That way it won't be shown in the list of `task -l`.
 
 ```yaml
 tasks:
@@ -116,7 +116,7 @@ You can tell task to load environment variables from a file with the `dotenv` op
 dotenv: [".env"]
 ```
 
-This standardizes how environment variables are loaded across projects and CI.
+This standardises how environment variables are loaded across projects and CI.
 No need to install some npm package to load environment variables from a file.
 
 _For deployments using docker, the variables should be defined by the docker-compose.yml._

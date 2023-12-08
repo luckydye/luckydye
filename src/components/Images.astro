@@ -23,7 +23,7 @@ const { images, title, date } = Astro.props;
         const height = 420;
         return (
           <div class="flex-none first:pl-6 last:pr-6">
-            <img class="slide-image mr-2" src={image.src} height={height} width={height * ar} alt={image.src} />
+            <img decoding="async" loading="lazy" class="slide-image mr-2" src={image.src} height={height} width={height * ar} alt={image.src} />
           </div>
         );
       })

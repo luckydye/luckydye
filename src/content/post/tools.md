@@ -1,7 +1,7 @@
 ---
 title: "Development tools I use daily"
 description: "My every day carry of software."
-date: 2023-09-17
+date: 2023-09-04
 author: Tim Havlicek
 tags: [Bash, Task, Anytype, RTX]
 ---

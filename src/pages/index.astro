@@ -7,7 +7,9 @@ import Post from "../components/Post.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Page from "../layouts/default.astro";
 
-const posts = await getCollection("post");
+const posts = await getCollection("post").then((posts) => {
+  return posts.filter((post) => !post.slug.includes("-draft-"));
+});
 ---
 
 <Page meta={{

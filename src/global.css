@@ -23,7 +23,13 @@ code {
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 3px;
-  font-size: inherit;
+  font-size: 0.9em;
+}
+
+blockquote {
+  margin: 10px 0 40px 0;
+  padding: 10px 30px;
+  background: #28282a;
 }
 
 body {

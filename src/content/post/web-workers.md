@@ -1,6 +1,6 @@
 ---
 title: Use Web Workers in less than 10 minutes
-description: Fast track to using workers using Vite.
+description: Fast track to using workers using Vite and Comlink.
 date: 2023-09-04
 author: Tim Havlicek
 tags: [javascript, web-workers, vite]

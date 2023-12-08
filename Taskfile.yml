@@ -19,7 +19,7 @@ tasks:
       - pnpm install
 
   dev:
-    desc: Start the development server
+    desc: Dev
     deps: [setup]
     cmds:
       - npx astro dev
@@ -28,3 +28,8 @@ tasks:
     desc: Build the project
     cmds:
       - npx astro build
+
+  fix:
+    cmds:
+      - npx biome format --write .
+      - npx biome lint --skip-errors --apply-unsafe .

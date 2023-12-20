@@ -14,7 +14,7 @@ export type Props = {
      */
     image?: string;
   };
-}
+};
 
 const props = Astro.props;
 ---
@@ -28,14 +28,29 @@ const props = Astro.props;
 
     <title>{props.meta?.title}</title>
 
-    {props.meta?.description ? <meta name="description" content={props.meta?.description} /> : null}
+    {
+      props.meta?.description ? (
+        <meta name="description" content={props.meta?.description} />
+      ) : null
+    }
 
-    <meta property="og:title" content={props.meta?.title}>
-    <meta property="og:description" content={props.meta?.description}>
+    <meta property="og:title" content={props.meta?.title} />
+    <meta property="og:description" content={props.meta?.description} />
 
-    {props.meta?.image ? <meta property="og:image" content={Astro.site + props.meta.image}> : null}
+    {
+      props.meta?.image ? (
+        <meta property="og:image" content={Astro.site + props.meta.image} />
+      ) : null
+    }
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <slot name="head" />
   </head>
@@ -56,6 +71,5 @@ const props = Astro.props;
         </div>
       </div>
     </footer>
-
   </body>
 </html>

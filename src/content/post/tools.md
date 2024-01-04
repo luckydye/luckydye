@@ -89,8 +89,6 @@ If you ever spent time uninstalling and installing different python versions, th
 In the past I have used many different note taking apps.
 From Apple Notes to Notion and Obsidian, but anytype has been the best experience so far.
 
-![Anytype Graph View](./images/anytype-graph.png)
-
 I use it to manage my work tasks, progress of personal projects and any random notes im taking, even on the go with the mobile app. Everything is peer-to-peer synced across devices seamlessly with a local-first principle. And it's open source!
 
 Anytype is still young, but even now it is already a great tool with even greater features on the roadmap.

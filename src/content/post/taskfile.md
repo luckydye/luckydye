@@ -125,7 +125,7 @@ Additionally, env vars can be defined directly in the task:
 tasks:
   dev:
     env:
-      NODE_ENV=developemnt
+      NODE_ENV=development
     cmds:
       - node scripts/dev.js
 ```

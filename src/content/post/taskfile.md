@@ -16,7 +16,7 @@ I've been using [Taskfiles](https://taskfile.dev) for some time now, and I've fo
 - Built-in running multiple continuous tasks in parallel.
 - Possibility to define dependencies between tasks.
 - Language ecosystem independent.
-- .env file support.
+- Easy env variables handling
 
 In the past, I have used between two and three different npm packages to do the same job.
 
@@ -103,10 +103,10 @@ tasks:
 
 ## Installing tooling
 
-I already mentioned _rtx_ in another post: [Development tools I use daily](/tools).
-With _rtx_, even installing the tools needed to run the project can be automated within the setup task.
+I already mentioned _mise (formerly rtx)_ in another post: [Development tools I use daily](/tools).
+With _mise_, even installing the tools needed to run the project can be automated within the setup task.
 
-[Install it!](https://github.com/jdx/rtx)
+[Install it!](https://github.com/jdx/mise)
 
 ## Environment variables
 
@@ -116,10 +116,24 @@ You can tell task to load environment variables from a file with the `dotenv` op
 dotenv: [".env"]
 ```
 
-This standardises how environment variables are loaded across projects and CI.
+This standardises how environment variables are loaded across projects and enviroments.
 No need to install some npm package to load environment variables from a file.
 
-_For deployments using docker, the variables should be defined by the docker-compose.yml._
+Additionally, env vars can be defined directly in the task:
+
+```yaml
+tasks:
+  dev:
+    env:
+      NODE_ENV=developemnt
+    cmds:
+      - node scripts/dev.js
+```
+
+Like this, instead of having multiple .env files for development / staging / prod. We can define those variables directly with the task that is run.
+They can also be defined for all tasks, at the root level of the taskfile.
+
+_For deployments using docker, the production variables should be defined by the docker-compose.yml._
 
 ## Run tasks in CI
 

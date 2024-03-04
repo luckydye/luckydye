@@ -8,7 +8,6 @@
     "@astrojs/sitemap": "^3.0.3",
     "@astrojs/solid-js": "^3.0.2",
     "@astrojs/tailwind": "^5.0.2",
-    "@astrojs/vercel": "^5.2.0",
     "@atrium-ui/mono": "0.2.0-5",
     "@biomejs/biome": "^1.4.1",
     "@rive-app/canvas": "^2.4.0",

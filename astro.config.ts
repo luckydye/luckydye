@@ -1,18 +1,15 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import solid from '@astrojs/solid-js';
-import vercel from '@astrojs/vercel/serverless';
 import prefetch from '@astrojs/prefetch';
 
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	output: 'hybrid',
+	output: 'static',
+	outDir: 'dist',
 	site: 'https://luckydye.dev',
-	adapter: vercel({
-		analytics: true,
-	}),
 	integrations: [
 		solid(),
 		tailwind({

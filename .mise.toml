@@ -1,0 +1,36 @@
+[tools]
+task = "3.31"
+bun = "1.0.30"
+
+[tasks.setup]
+description = "Install dependencies"
+sources = [
+  ".mise.toml",
+  "package.json",
+  "bun.lockb",
+]
+outputs = [
+  "node_modules"
+]
+run = [
+  "bun install"
+]
+
+[tasks.dev]
+description = "Dev"
+depends = ["setup"]
+run = [
+  "bun x astro dev"
+]
+
+[tasks.build]
+description = "Build the project"
+depends = ["setup"]
+run = [
+  "bun x astro build"
+]
+
+[tasks.fix]
+run = [
+  "bun x biome check --apply .",
+]

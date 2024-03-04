@@ -1,8 +1,0 @@
-{
-	"rewrites": [
-		{
-			"source": "/setup",
-			"destination": "https://raw.githubusercontent.com/luckydye/configs/main/install"
-		}
-	]
-}

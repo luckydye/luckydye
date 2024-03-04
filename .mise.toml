@@ -1,5 +1,4 @@
 [tools]
-task = "3.31"
 bun = "1.0.30"
 
 [tasks.setup]

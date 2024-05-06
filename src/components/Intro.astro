@@ -3,15 +3,19 @@ import Rive from "./ui/Rive.jsx";
 ---
 
 <div class="container grid">
+    <script>
+      import "@atrium-ui/elements/animation";
+    </script>
+
   <div class="logo">
-    <Rive width={200} height={400} src="/logo.riv" client:only />
+    <a-animation width={200} height={400} src="/logo.riv" />
   </div>
 
   <div class="caption my-6 md:mr-20">
     <h1 class="text-4xl mb-4">Hi, I'm Tim.</h1>
     <p class="opacity-50">Software Development | Computer Graphics | Photography</p>
     <p class="mt-5">
-      I have over 6 years of experience building and maintaining production software. 
+      I have over 6 years of experience building and maintaining production software.
       I enjoy designing User-Interfaces and Tools to make complex or impossible
       tasks easy and intuitive.
     </p>

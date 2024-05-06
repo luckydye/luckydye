@@ -1,19 +1,19 @@
 ---
-import { type CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import Images from "./Images.astro";
 import Teaser from "./Teaser.astro";
 import Project from "./Project.astro";
 
 interface Props {
-  post: CollectionEntry<'post'>;
+  post: CollectionEntry<"post">;
 }
 
-function getPostType(post: CollectionEntry<'post'>) {
-  if((post.data.images?.length || 0) > 1) {
-    return 'images';
+function getPostType(post: CollectionEntry<"post">) {
+  if ((post.data.images?.length || 0) > 1) {
+    return "images";
   }
-  if(post.data.tags?.includes('project')) {
-    return 'project';
+  if (post.data.tags?.includes("project")) {
+    return "project";
   }
   return "teaser";
 }

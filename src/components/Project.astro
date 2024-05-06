@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import ExternalLinkIcon from "../assets/external-link.svg";
-import LinkButton from "./ui/LinkButton.astro";
+import LinkButton from "./LinkButton.astro";
 
 interface Props {
-  post: CollectionEntry<'post'>;
+  post: CollectionEntry<"post">;
 }
 
 const { post } = Astro.props;

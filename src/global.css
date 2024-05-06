@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --color-bg-0: #101111;
@@ -9,6 +7,11 @@
   --color-fg-1: #28282a;
   --color-accent: #eb9124;
   --color-text: #f9f6f4;
+}
+
+.container {
+    padding: 0 1rem;
+    margin: 0 auto;
 }
 
 footer,

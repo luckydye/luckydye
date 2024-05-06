@@ -5,21 +5,23 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import Page from "../layouts/default.astro";
 
 export interface Props {
-  post: CollectionEntry<'post'>;
+  post: CollectionEntry<"post">;
 }
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("post");
-  return allPosts.map((post) => {
-    const slug = post.slug;
-    const isDraft = slug.includes("-draft-");
-    return {
-      params: { slug },
-      props: { post, isDraft },
-    };
-  }).filter((post) => {
-    return import.meta.env.DEV || !post.props.isDraft;
-  });
+  return allPosts
+    .map((post) => {
+      const slug = post.slug;
+      const isDraft = slug.includes("-draft-");
+      return {
+        params: { slug },
+        props: { post, isDraft },
+      };
+    })
+    .filter((post) => {
+      return import.meta.env.DEV || !post.props.isDraft;
+    });
 }
 
 const { post } = Astro.props;

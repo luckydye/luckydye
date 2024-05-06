@@ -1,16 +1,8 @@
 [tools]
-bun = "1.0.30"
+bun = "1.1"
 
 [tasks.setup]
 description = "Install dependencies"
-sources = [
-  ".mise.toml",
-  "package.json",
-  "bun.lockb",
-]
-outputs = [
-  "node_modules"
-]
 run = [
   "bun install"
 ]

@@ -10,9 +10,7 @@ interface Props {
 
 const { link, align } = Astro.props;
 
-const linkEntry = (await getCollection("link")).find(
-  (entry) => entry.id === link
-);
+const linkEntry = (await getCollection("link")).find((entry) => entry.id === link);
 ---
 
 <a href={linkEntry?.data.link} target={linkEntry?.data.target || "_blank"}>

@@ -1,5 +1,5 @@
 ---
-title: Astro in brief
+title: Portfolio | luckydye
 description: Find out what makes Astro awesome!
 ---
 
@@ -13,29 +13,32 @@ I have over 6 years of experience building and maintaining production software. 
 
 #### Languages
 
-- German -- native language
-- English -- fluently
-- Korean -- basics
+- German -- _native_
+- English -- _fluent_
+- Korean -- _basics_
+- TypeScript -- _proficient_
+- Rust -- _fluent_
+- Go -- _basics_
 
 #### Skills
 
-- Full-Stack Software Development, creating Web Applications, tools, games and APIs.
 - UI and UX design.
+- Full-Stack Software Development, creating Web Applications, tools, games and APIs.
 - Video- and Photography, Audio and Video Editing, VFX, Video production and Camera operation.
 
 ## Featured Projects
 
-- Atrium UI -- Web Component Library
+- Atrium UI -- A Web-Component library which contains all the knowledge I collected over the years on how to build UI for the web.
 - Green Trails -- Platform for bike trails
 - rad+ visio -- Visulisations of bike routes
 - e2e dashboard -- Sumuarize test results in a simple dashboard
 - SZA -- Website
-- LEA
-- Zeit statt Zeug
+- LEA -- Website
+- Zeit statt Zeug -- Website
 
-## OSS Contributions
+## Open Source Contributions
 
-- spacedrive
-- dnglab
-- zed
-- biome-zed
+- **spacedrive** -- ⭐ 29k -- Spacedrive is an open source cross-platform file explorer, powered by a virtual distributed filesystem.
+- **dnglab** -- ⭐ 251 -- Camera RAW to DNG file format converter.
+- **zed** -- Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. -- ⭐ 33k
+- **biome-zed** -- ⭐ 43 -- Official Biome extension for zed.

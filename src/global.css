@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+@theme {
   --color-bg-0: #101111;
   --color-bg-1: #1e1e20;
   --color-fg-0: #4e5b5c;
@@ -10,14 +10,7 @@
 }
 
 .container {
-    padding: 0 1rem;
-    margin: 0 auto;
-}
-
-footer,
-main {
-  max-width: 1000px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 code {
@@ -36,7 +29,7 @@ blockquote {
 
 body {
   margin: 0;
-  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-family: "Lato", arial, helvetica, sans-serif;
   background: var(--color-bg-0);
   color: var(--color-text);
   margin: auto;

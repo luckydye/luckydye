@@ -15,18 +15,18 @@ const { images, title, date } = Astro.props;
   import "@atrium-ui/elements/track";
 </script>
 
-<div class="images">
-  <a-track overflowscroll class="pt-6">
+<div class="images relative">
+  <a-track overflowscroll class="pt-6 overflow-visible">
     {
       images?.map((image) => {
         const ar = image.width / image.height;
-        const height = 420;
+        const height = 520;
         return (
           <div class="flex-none first:pl-6 last:pr-6">
             <img
               decoding="async"
               loading="lazy"
-              class="slide-image mr-2"
+              class="overflow-hidden block mr-2"
               src={image.src}
               height={height}
               width={height * ar}
@@ -37,12 +37,15 @@ const { images, title, date } = Astro.props;
       })
     }
   </a-track>
+
+  <div class="overlay pointer-events-none absolute top-0 left-0 w-full h-full" />
+
   <div class="circle pt-5">
-    <div class="title">
+    <div class="title inline-flex justify-between w-[calc(100%-180px)]">
       <span>{title}</span>
       {
         date && (
-          <span class="date">
+          <span class="opacity-50">
             {date.toUTCString().split(" ").slice(2, 4).join(" ")}
           </span>
         )
@@ -52,24 +55,8 @@ const { images, title, date } = Astro.props;
 </div>
 
 <style>
-  a-track {
-    overflow: visible;
-  }
+  .overlay {
 
-  .images {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .title {
-    display: inline-flex;
-    justify-content: space-between;
-    width: calc(100% - 180px);
-    opacity: 0.7;
-  }
-
-  .date {
-    opacity: 0.5;
   }
 
   .circle::before {
@@ -93,18 +80,5 @@ const { images, title, date } = Astro.props;
     width: 1px;
     height: calc(100% - 40px);
     background: var(--color-fg-1);
-  }
-
-  .slide-image {
-    display: block;
-    overflow: hidden;
-    border: none;
-  }
-
-  @media screen and (max-width: 767px) {
-    .slide-image {
-      height: 240px;
-      width: auto;
-    }
   }
 </style>

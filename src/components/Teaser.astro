@@ -8,7 +8,7 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<div class="px-2 grid grid-cols-[1fr] md:grid-cols-[auto_1fr] gap-10">
+<div class="teaser relative pl-10 px-2 grid grid-cols-[1fr] md:grid-cols-[auto_1fr] gap-10">
   {post.data.images?.[0] ?
     <div>
       <img
@@ -30,22 +30,28 @@ const { post } = Astro.props;
       {
         post.data.tags
           ? post.data.tags.map((tag) => {
-              return <div class="capitalize rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{tag}</div>;
+              return <div class="capitalize text-sm rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{tag}</div>;
             })
           : null
       }
 
       <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
     </div>
-    <div class="py-2 text-lg">
+    <div class="text-lg">
       <p>{post.data.description}</p>
     </div>
   </div>
 </div>
 
 <style>
-  .date {
-    opacity: 0.5;
-    font-weight: 400;
+  .teaser::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 8px;
+    top: 0px;
+    width: 1px;
+    height: 100%;
+    background: var(--color-fg-1);
   }
 </style>

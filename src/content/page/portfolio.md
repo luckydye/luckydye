@@ -41,4 +41,4 @@ I have over 6 years of experience building and maintaining production software. 
 - **spacedrive** -- ⭐ 29k -- Spacedrive is an open source cross-platform file explorer, powered by a virtual distributed filesystem.
 - **dnglab** -- ⭐ 251 -- Camera RAW to DNG file format converter.
 - **zed** -- Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. -- ⭐ 33k
-- **biome-zed** -- ⭐ 43 -- Official Biome extension for zed.
+- **biome-zed** -- ⭐ 41 -- Official Biome extension for zed.

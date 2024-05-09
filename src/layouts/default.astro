@@ -1,5 +1,5 @@
 ---
-import "../global.css";
+import "../style/main.css";
 
 import { ViewTransitions } from "astro:transitions";
 
@@ -60,9 +60,9 @@ const props = Astro.props;
       <slot name="main" />
     </main>
 
-    <footer class="pb-40 max-w-[1100px] mx-auto px-4">
+    <footer class="pb-40 pt-20 max-w-[1100px] mx-auto px-4">
       <div class="container pt-10 pb-20">
-        <h2 class="mb-4">Connect</h2>
+        <h2 class="mb-4 text-2xl">Connect</h2>
         <div class="mb-1">
           <Link link="twitter">@timh4v</Link>
         </div>

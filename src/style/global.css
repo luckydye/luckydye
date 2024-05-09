@@ -1,30 +1,5 @@
-@import "tailwindcss";
-
-@theme {
-  --color-bg-0: #101111;
-  --color-bg-1: #1e1e20;
-  --color-fg-0: #4e5b5c;
-  --color-fg-1: #28282a;
-  --color-accent: #eb9124;
-  --color-text: #f9f6f4;
-}
-
 .container {
   margin: 0 auto;
-}
-
-code {
-  color: var(--color-accent);
-  margin-left: 6px;
-  margin-right: 6px;
-  border-radius: 3px;
-  font-size: 0.9em;
-}
-
-blockquote {
-  margin: 10px 0 40px 0;
-  padding: 10px 30px;
-  background: #28282a;
 }
 
 body {
@@ -37,6 +12,12 @@ body {
   box-sizing: border-box;
 }
 
+blockquote {
+  margin: 10px 0 40px 0;
+  padding: 10px 30px;
+  background: #28282a;
+}
+
 hr {
   opacity: 0.2;
   margin: 15px 0 20px 0;
@@ -44,7 +25,6 @@ hr {
   border-top: none;
 }
 
-h1,
 .headline {
   font-size: 2.2rem;
   line-height: 2.8rem;
@@ -52,7 +32,6 @@ h1,
   margin: 15px 0 0 0;
 }
 
-h2,
 .headline-subline {
   font-size: 1.8rem;
   line-height: 1.33;
@@ -60,7 +39,6 @@ h2,
   margin: 0;
 }
 
-h3,
 .headline-accent {
   font-size: 1.8rem;
   font-weight: 300;

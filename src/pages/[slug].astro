@@ -1,0 +1,74 @@
+---
+import type { ContentEntryType } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import Page from "../layouts/default.astro";
+import Headline from "../components/Headline.astro";
+
+export interface Props {
+  post: CollectionEntry<"post">;
+}
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("post");
+  return allPosts
+    .map((post) => {
+      const slug = post.slug;
+      const isDraft = slug.includes("-draft-");
+      return {
+        params: { slug },
+        props: { post, isDraft },
+      };
+    })
+    .filter((post) => {
+      return import.meta.env.DEV || !post.props.isDraft;
+    });
+}
+
+const { post } = Astro.props;
+
+const postData = post?.data;
+const { Content } = await post.render();
+---
+
+<Page meta={{
+  title: `${postData?.title} - luckydye`,
+  description: postData?.description,
+}}>
+  <div slot="main" class="container my-40 text-lg font-normal">
+    <Headline>{postData?.title}</Headline>
+
+    <div class="flex gap-2 items-center mb-10 text-sm text-zinc-400">
+      {
+        postData.tags
+          ? postData.tags.map((tag) => {
+              return <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">{tag}</div>;
+            })
+          : null
+      }
+    </div>
+
+    <div class="flex justify-between text-base opacity-50 pb-10">
+      {postData.author ? <div>
+        by <a class="underline" href="/">{postData.author}</a>
+      </div> : null}
+
+      <div>
+        {postData.date?.toLocaleDateString()}
+      </div>
+    </div>
+
+    <div class="content">
+      <Content />
+    </div>
+
+    {postData.links ? <div class="pt-20">
+      <h2>Links</h2>
+      {postData.links.map((link) => {
+        return <div>
+          <a target="_blank" href={link}>{link}</a>
+        </div>
+      })}
+    </div> : null}
+  </div>
+</Page>

@@ -4,6 +4,7 @@ export const prerender = true;
 import { getCollection } from "astro:content";
 import Intro from "../components/Intro.astro";
 import Post from "../components/Post.astro";
+import Seperator from "../components/Seperator.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Page from "../layouts/default.astro";
 
@@ -22,13 +23,7 @@ const posts = await getCollection("post").then((posts) => {
     </div>
   </div>
 
-  <div slot="main" class="container flex justify-center pb-20">
-    <svg width="50" height="10" viewBox="0 0 50 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="5" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
-      <circle cx="25" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
-      <circle cx="45" cy="5" r="4.5" stroke="var(--color-fg-1)"></circle>
-    </svg>
-  </div>
+  <Seperator slot="main" />
 
   <div slot="main" class="container">
     {posts.sort((a, b) => {

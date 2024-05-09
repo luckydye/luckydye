@@ -2,12 +2,12 @@
 export const prerender = true;
 
 import { getCollection } from "astro:content";
-import Intro from "../components/Intro.astro";
 import Post from "../components/Post.astro";
 import Seperator from "../components/Seperator.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Page from "../layouts/default.astro";
 import { byDate } from "../utils.ts";
+import Stage from "../components/Stage.astro";
 
 const posts = await getCollection("post").then((posts) => {
   return posts.filter((post) => !post.slug.includes("-draft-"));
@@ -19,9 +19,7 @@ const posts = await getCollection("post").then((posts) => {
   description: "luckydye",
 }}>
   <div slot="main" class="container">
-    <div class="py-10 md:py-20 pb-16 md:pb-32">
-      <Intro />
-    </div>
+    <Stage />
   </div>
 
   <Seperator slot="main" />

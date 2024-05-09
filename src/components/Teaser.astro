@@ -23,7 +23,7 @@ const { post } = Astro.props;
   : null}
   <div class="py-2">
     <a class="block py-2" href={`/${post.slug}`} style="text-decoration: none;">
-      <h2 class="pb-2 text-3xl font-normal">{post.data.title}</h2>
+      <h2 class="pb-2 text-3xl font-normal hover:underline">{post.data.title}</h2>
     </a>
     <div class="flex flex-wrap gap-2 items-center">
 
@@ -35,7 +35,7 @@ const { post } = Astro.props;
           : null
       }
 
-      <div class="opacity-75">{post.data.date?.toLocaleDateString()}</div>
+      <div class="text-base opacity-75">{post.data.date?.toLocaleDateString()}</div>
     </div>
     <div class="text-lg">
       <p>{post.data.description}</p>

@@ -20,10 +20,8 @@ const { Content } = await entry.render();
   title: entry.data.title,
   description: entry.data.description,
 }}>
-  <Headline slot="main">Portfolio</Headline>
-
-  <div slot="main" class="content">
-    <Content  />
+  <div slot="main" class="content max-w-[800px]">
+    <Content />
   </div>
 
   <Headline slot="main">Recent Posts</Headline>

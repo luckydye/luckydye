@@ -1,5 +1,5 @@
 ---
-import { getCollection, getDataEntryById } from "astro:content";
+import { getCollection } from "astro:content";
 
 import arrowRight from "../assets/arrow-right.svg";
 
@@ -13,8 +13,8 @@ const { link, align } = Astro.props;
 const linkEntry = (await getCollection("link")).find((entry) => entry.id === link);
 ---
 
-<a href={linkEntry?.data.link} target={linkEntry?.data.target || "_blank"}>
-  <div class="link" data-align={align}>
+<a href={linkEntry?.data.link} target={linkEntry?.data.target}>
+  <div class="link text-right py-4" data-align={align}>
     <slot />
     <div class="arrow">
       <img width="20px" height="20px" src={arrowRight.src} alt="arrow right" />
@@ -23,9 +23,6 @@ const linkEntry = (await getCollection("link")).find((entry) => entry.id === lin
 </a>
 
 <style>
-  .link {
-    text-align: right;
-  }
   .link:hover .arrow {
     transform: translateX(2px);
   }

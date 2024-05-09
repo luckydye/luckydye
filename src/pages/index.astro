@@ -7,6 +7,7 @@ import Post from "../components/Post.astro";
 import Seperator from "../components/Seperator.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Page from "../layouts/default.astro";
+import { byDate } from "../utils.ts";
 
 const posts = await getCollection("post").then((posts) => {
   return posts.filter((post) => !post.slug.includes("-draft-"));
@@ -15,7 +16,7 @@ const posts = await getCollection("post").then((posts) => {
 
 <Page meta={{
   title: "luckydye",
-  description: "My homepage.",
+  description: "luckydye",
 }}>
   <div slot="main" class="container">
     <div class="py-10 md:py-20 pb-16 md:pb-32">
@@ -26,11 +27,9 @@ const posts = await getCollection("post").then((posts) => {
   <Seperator slot="main" />
 
   <div slot="main" class="container">
-    {posts.sort((a, b) => {
-      const va = a.data.date ? new Date(a.data.date).valueOf() : 0;
-      const vb = b.data.date ? new Date(b.data.date).valueOf() : 0;
-      return vb - va;
-    }).map((post) => <Post post={post} />)}
+    {posts
+      .sort(byDate)
+      .map((post) => <div class="pb-[100px]"><Post post={post} /></div>)}
   </div>
 
   <div slot="main" class="container pt-40">

@@ -2,8 +2,8 @@
 import type { ContentEntryType } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
-import Page from "../layouts/default.astro";
-import Headline from "../components/Headline.astro";
+import Page from "../../layouts/default.astro";
+import Headline from "../../components/Headline.astro";
 
 export interface Props {
   post: CollectionEntry<"post">;

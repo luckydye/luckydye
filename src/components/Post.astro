@@ -3,26 +3,17 @@ import type { CollectionEntry } from "astro:content";
 import Images from "./Images.astro";
 import Teaser from "./Teaser.astro";
 import Project from "./Project.astro";
+import { getPostType } from "../utils.ts";
 
 interface Props {
   post: CollectionEntry<"post">;
 }
 
-function getPostType(post: CollectionEntry<"post">) {
-  if ((post.data.images?.length || 0) > 1) {
-    return "images";
-  }
-  if (post.data.tags?.includes("project")) {
-    return "project";
-  }
-  return "teaser";
-}
-
-const { post } = Astro.props;
-const type = getPostType(post);
+const props = Astro.props;
+const type = getPostType(props.post);
 ---
-<div data-slug={post.slug} class="pb-[100px]">
-  {type === 'images' && <Images title={post.data.description} date={post.data.date} images={post.data.images} /> }
-  {type === "teaser" && <Teaser post={post} />}
-  {type === "project" && <Project post={post} />}
+<div data-slug={props.post.slug}>
+  {type === 'images' && <Images title={props.post.data.description} date={props.post.data.date} images={props.post.data.images} /> }
+  {type === "teaser" && <Teaser post={props.post} />}
+  {type === "project" && <Project post={props.post} />}
 </div>

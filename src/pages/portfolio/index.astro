@@ -1,0 +1,52 @@
+---
+export const prerender = true;
+
+import Post from "../../components/Post.astro";
+import Headline from "../../components/Headline.astro";
+import Page from "../../layouts/default.astro";
+import { getCollection, getEntry } from "astro:content";
+import { getPostType, byDate } from "../../utils.ts";
+import SectionLink from "../../components/SectionLink.astro";
+
+const posts = await getCollection("post").then((posts) => {
+  return posts.filter((post) => !post.slug.includes("-draft-"));
+});
+
+const entry = await getEntry("page", "portfolio");
+const { Content } = await entry.render();
+---
+
+<Page meta={{
+  title: entry.data.title,
+  description: entry.data.description,
+}}>
+  <Headline slot="main">Portfolio</Headline>
+
+  <div slot="main" class="content">
+    <Content  />
+  </div>
+
+  <Headline slot="main">Recent Posts</Headline>
+
+  <div slot="main" class="container pt-12">
+    {posts
+      .filter(p => getPostType(p) === "teaser")
+      .sort(byDate)
+      .slice(0, 3)
+      .map((post) => <div class="pt-4"><Post post={post} /></div>)}
+
+    <SectionLink link="home">View all</SectionLink>
+  </div>
+
+  <Headline slot="main">Personal Projects</Headline>
+
+  <div slot="main" class="container pt-12">
+    {posts
+      .filter(p => getPostType(p) === "project")
+      .sort(byDate)
+      .slice(0, 3)
+      .map((post) => <div class="pt-4"><Post post={post} /></div>)}
+
+    <SectionLink link="home">View all</SectionLink>
+  </div>
+</Page>

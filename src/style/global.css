@@ -15,7 +15,7 @@ body {
 blockquote {
   margin: 10px 0 40px 0;
   padding: 10px 30px;
-  background: #28282a;
+  background: var(--color-fg-1);
 }
 
 hr {

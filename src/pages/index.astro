@@ -10,27 +10,34 @@ import { byDate } from "../utils.ts";
 import Stage from "../components/Stage.astro";
 
 const posts = await getCollection("post").then((posts) => {
-  return posts.filter((post) => !post.slug.includes("-draft-"));
+    return posts.filter((post) => !post.slug.includes("-draft-"));
 });
 ---
 
-<Page meta={{
-  title: "luckydye",
-  description: "luckydye",
-}}>
-  <div slot="main" class="container">
-    <Stage />
-  </div>
+<Page
+    meta={{
+        title: "luckydye",
+        description: "luckydye",
+    }}
+>
+    <div slot="main" class="container">
+        <section>
+            <Stage />
+        </section>
+        <div class="pb-40"></div>
+    </div>
 
-  <Seperator slot="main" />
+    <div slot="main" class="container">
+        {
+            posts.sort(byDate).map((post) => (
+                <div class="pb-[100px]">
+                    <Post post={post} />
+                </div>
+            ))
+        }
+    </div>
 
-  <div slot="main" class="container">
-    {posts
-      .sort(byDate)
-      .map((post) => <div class="pb-[100px]"><Post post={post} /></div>)}
-  </div>
-
-  <div slot="main" class="container pt-40">
-    <SectionLink link="github">More projects on my GitHub</SectionLink>
-  </div>
+    <div slot="main" class="container pt-40">
+        <SectionLink link="github">More projects on my GitHub</SectionLink>
+    </div>
 </Page>

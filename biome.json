@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.6.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.7.0/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -11,7 +11,8 @@
   "linter": {
     "rules": {
       "style": {
-        "noDefaultExport": "warn"
+        "noDefaultExport": "warn",
+        "useExponentiationOperator": "warn"
       },
       "complexity": {
         "noStaticOnlyClass": "warn",
@@ -29,15 +30,8 @@
         "useSortedClasses": {
           "level": "warn",
           "options": {
-            "attributes": [
-              "classList"
-            ],
-            "functions": [
-              "clsx",
-              "cva",
-              "twMerge",
-              "tw"
-            ]
+            "attributes": ["classList"],
+            "functions": ["clsx", "cva", "twMerge", "tw"]
           }
         }
       }
@@ -62,11 +56,18 @@
   },
   "css": {
     "formatter": {
-      "lineWidth": 80,
-      "quoteStyle": "double"
+      "enabled": true,
+      "lineWidth": 90,
+      "quoteStyle": "double",
+      "indentStyle": "space",
+      "indentWidth": 2
     }
   },
   "json": {
+    "parser": {
+      "allowComments": true,
+      "allowTrailingCommas": true
+    },
     "formatter": {
       "trailingCommas": "none",
       "lineWidth": 30

@@ -17,7 +17,7 @@ I have over 6 years of experience building and maintaining production software. 
 - Full-Stack Software Development, creating Web Applications, tools, games and APIs.
 - Video- and Photography, Audio and Video Editing, VFX, Video production and Camera operation.
 
-## Featured Projects
+## Featured Work
 
 ### Atrium UI
 A Web-Component library which contains all the knowledge I collected over the years on how to build UI for the web.

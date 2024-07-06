@@ -30,8 +30,15 @@
         "useSortedClasses": {
           "level": "warn",
           "options": {
-            "attributes": ["classList"],
-            "functions": ["clsx", "cva", "twMerge", "tw"]
+            "attributes": [
+              "classList"
+            ],
+            "functions": [
+              "clsx",
+              "cva",
+              "twMerge",
+              "tw"
+            ]
           }
         }
       }
@@ -49,7 +56,7 @@
     "formatter": {
       "quoteStyle": "double",
       "semicolons": "always",
-      "trailingComma": "all",
+      "trailingCommas": "all",
       "quoteProperties": "asNeeded",
       "jsxQuoteStyle": "double"
     }

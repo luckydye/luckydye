@@ -11,5 +11,8 @@ export function getPostType(post: CollectionEntry<"post">) {
 }
 
 export function byDate(a: CollectionEntry<"post">, b: CollectionEntry<"post">) {
-  return (b.data.date ? new Date(b.data.date).valueOf() : 0) - (a.data.date ? new Date(a.data.date).valueOf() : 0);
-};
+  return (
+    (b.data.date ? new Date(b.data.date).valueOf() : 0) -
+    (a.data.date ? new Date(a.data.date).valueOf() : 0)
+  );
+}

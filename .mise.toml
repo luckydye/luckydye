@@ -23,5 +23,5 @@ run = [
 
 [tasks.fix]
 run = [
-  "bun x biome check --apply .",
+  "bun x biome check --unsafe --write .",
 ]

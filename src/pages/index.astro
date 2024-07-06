@@ -10,7 +10,7 @@ import { byDate } from "../utils.ts";
 import Stage from "../components/Stage.astro";
 
 const posts = await getCollection("post").then((posts) => {
-    return posts.filter((post) => !post.slug.includes("-draft-"));
+  return posts.filter((post) => !post.slug.includes("-draft-"));
 });
 ---
 

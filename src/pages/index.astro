@@ -8,6 +8,7 @@ import SectionLink from "../components/SectionLink.astro";
 import Page from "../layouts/default.astro";
 import { byDate } from "../utils.ts";
 import Stage from "../components/Stage.astro";
+import Headline from "../../components/Headline.astro";
 
 const posts = await getCollection("post").then((posts) => {
   return posts.filter((post) => !post.slug.includes("-draft-"));
@@ -25,7 +26,7 @@ const posts = await getCollection("post").then((posts) => {
             <Stage />
         </section>
         <div class="pb-40"></div>
-        <h2>Work</h2>
+        <Headline>Work</Headline>
         <div class="pb-40"></div>
     </div>
 

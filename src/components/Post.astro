@@ -12,7 +12,7 @@ interface Props {
 const props = Astro.props;
 const type = getPostType(props.post);
 ---
-<div data-slug={props.post.slug}>
+<div data-slug={props.post.id}>
   {type === 'images' && <Images title={props.post.data.description} date={props.post.data.date} images={props.post.data.images} /> }
   {type === "teaser" && <Teaser post={props.post} />}
   {type === "project" && <Project post={props.post} />}

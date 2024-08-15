@@ -4,11 +4,10 @@ import prefetch from "@astrojs/prefetch";
 import tailwind from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
-// https://astro.build/config
-// biome-ignore lint/style/noDefaultExport: <explanation>
 export default defineConfig({
   output: "static",
   site: "https://luckydye.dev",
+  experimental: { contentLayer: true },
   integrations: [
     solid(),
     prefetch(),

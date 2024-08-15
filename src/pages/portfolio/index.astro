@@ -1,19 +1,17 @@
 ---
-export const prerender = true;
-
 import Post from "../../components/Post.astro";
 import Headline from "../../components/Headline.astro";
 import Page from "../../layouts/default.astro";
-import { getCollection, getEntry } from "astro:content";
+import { render, getCollection, getEntry } from "astro:content";
 import { getPostType, byDate } from "../../utils.ts";
 import SectionLink from "../../components/SectionLink.astro";
 
 const posts = await getCollection("post").then((posts) => {
-  return posts.filter((post) => !post.slug.includes("-draft-"));
+  return posts.filter((post) => !post.id.includes("-draft-"));
 });
 
 const entry = await getEntry("page", "portfolio");
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Page meta={{

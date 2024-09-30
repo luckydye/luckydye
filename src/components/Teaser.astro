@@ -26,18 +26,16 @@ const { post } = Astro.props;
       <h2 class="pb-2 text-3xl font-normal hover:underline">{post.data.title}</h2>
     </a>
     <div class="flex flex-wrap gap-2 items-center">
-
       {
-        post.data.tags
-        ? post.data.tags.map((tag) => {
-              return <div class="capitalize text-sm rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{tag.id}</div>;
+        post.data.topics
+        ? post.data.topics.map((topic) => {
+              return <div class="capitalize text-sm rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{topic}</div>;
             })
           : null
       }
-
       <div class="text-base opacity-75">{post.data.date?.toLocaleDateString()}</div>
     </div>
-    <div class="text-lg">
+    <div class="text-lg pt-2">
       <p>{post.data.description}</p>
     </div>
   </div>

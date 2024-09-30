@@ -30,10 +30,10 @@ const { post } = Astro.props;
 
         <div class="flex gap-2 py-2 items-center opacity-80">
             {
-                post.data.tags?.map((tag) => {
+                post.data.topics?.map((topic) => {
                     return (
                         <div class="text-sm rounded-md bg-zinc-800 inline-block px-2 py-1 capitalize">
-                            {tag.id}
+                            {topic}
                         </div>
                     );
                 })

@@ -3,7 +3,7 @@ title: Decoding time from an audio signal
 description: Javascript implementation of a Linear Timecode reader.
 date: 2023-05-13
 author: Tim Havlicek
-tags: [LTC, Web Audio API, Javascript]
+topics: [LTC, Web Audio API, Javascript]
 ---
 
 This won't be a tutorial, just a quick overview about Linear Timecode and how I implemented it in Javascript.

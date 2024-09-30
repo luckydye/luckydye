@@ -9,4 +9,5 @@ images:
     "./photos/paris-2023/F1G6xg2WAAY0tAd.jpeg",
     "./photos/paris-2023/F1G6w_mXoAIGsuV.jpeg",
   ]
+tags: [gallary]
 ---

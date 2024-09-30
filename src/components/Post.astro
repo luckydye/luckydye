@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Images from "./Images.astro";
-import Teaser from "./Teaser.astro";
-import Project from "./Project.astro";
 import { getPostType } from "../utils.ts";
+import Images from "./Images.astro";
+import Project from "./Project.astro";
+import Teaser from "./Teaser.astro";
 
 interface Props {
   post: CollectionEntry<"post">;

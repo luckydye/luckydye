@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import LinkButton from "./LinkButton.astro";
 import { Icon } from "./Icon";
+import LinkButton from "./LinkButton.astro";
 
 interface Props {
   post: CollectionEntry<"post">;
@@ -33,7 +33,7 @@ const { post } = Astro.props;
                 post.data.tags?.map((tag) => {
                     return (
                         <div class="text-sm rounded-md bg-zinc-800 inline-block px-2 py-1 capitalize">
-                            {tag}
+                            {tag.id}
                         </div>
                     );
                 })

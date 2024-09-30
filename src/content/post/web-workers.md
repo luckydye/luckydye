@@ -3,7 +3,7 @@ title: Use Web Workers in less than 10 minutes
 description: Fast track to using workers using Vite and Comlink.
 date: 2023-09-17
 author: Tim Havlicek
-tags: [javascript, web-workers, vite]
+topics: [javascript, web-workers, vite]
 ---
 
 In theory, web workers are a great idea to keep the main thread of your web application free for user interaction. In practice, they are a pain to set up and use.

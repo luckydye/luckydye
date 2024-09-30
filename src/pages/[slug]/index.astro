@@ -1,8 +1,8 @@
 ---
-import { render, getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 
-import Page from "../../layouts/default.astro";
 import Headline from "../../components/Headline.astro";
+import Page from "../../layouts/default.astro";
 
 export interface Props {
   post: CollectionEntry<"post">;
@@ -40,8 +40,8 @@ const { Content } = await render(post);
     <div class="flex gap-2 items-center mb-10 text-sm text-zinc-400">
       {
         postData.tags
-          ? postData.tags.map((tag) => {
-              return <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">{tag}</div>;
+        ? postData.tags.map((tag) => {
+              return <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">{tag.id}</div>;
             })
           : null
       }

@@ -15,8 +15,8 @@ const { post } = Astro.props;
         loading="eager"
         class="background-image"
         src={post.data.images[0].src}
-        width={380}
-        height={380}
+        width={280}
+        height={280}
         alt={post.data.title}
       />
     </div>
@@ -29,8 +29,8 @@ const { post } = Astro.props;
 
       {
         post.data.tags
-          ? post.data.tags.map((tag) => {
-              return <div class="capitalize text-sm rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{tag}</div>;
+        ? post.data.tags.map((tag) => {
+              return <div class="capitalize text-sm rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">{tag.id}</div>;
             })
           : null
       }

@@ -1,29 +1,29 @@
-import { z, defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
+import { defineCollection, reference, z } from "astro:content";
 
 export const collections = {
   link: defineCollection({
-    loader: glob({
-      pattern: "**/*.json",
-      base: "./data/link",
-    }),
+    type: "data",
     schema: z.object({
       title: z.string(),
       link: z.string(),
       target: z.string().optional(),
     }),
   }),
-  post: defineCollection({
-    loader: glob({
-      pattern: "**/*.md",
-      base: "./data/post",
+  tag: defineCollection({
+    type: "data",
+    schema: z.object({
+      id: z.string(),
+      title: z.string(),
     }),
+  }),
+  post: defineCollection({
     schema: ({ image }) =>
       z.object({
         title: z.string(),
         description: z.string().optional(),
         author: z.string().optional(),
-        tags: z.string().array().optional(),
+        tags: z.array(reference("tags")).optional(),
+        topics: z.string().array().optional(),
         date: z.date().optional(),
         url: z.string().optional(),
         links: z.string().array().optional(),
@@ -31,10 +31,6 @@ export const collections = {
       }),
   }),
   page: defineCollection({
-    loader: glob({
-      pattern: "**/*.md",
-      base: "./data/page",
-    }),
     schema: ({ image }) =>
       z.object({
         title: z.string(),

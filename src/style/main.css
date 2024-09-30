@@ -1,11 +1,12 @@
-@import "./global.css";
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-    --color-bg-0: hsl(180 2% 6% / 1);
-    --color-bg-1: hsl(240 3% 15% / 1);
-    --color-fg-0: #4e5b5c;
-    --color-fg-1: hsl(240 3% 20% / 1);
-    --color-accent: #eb9124;
-    --color-text: #f9f6f4;
+:root {
+  --color-bg-0: hsl(180 2% 6% / 1);
+  --color-bg-1: hsl(240 3% 15% / 1);
+  --color-fg-0: #4e5b5c;
+  --color-fg-1: hsl(240 3% 20% / 1);
+  --color-accent: #eb9124;
+  --color-text: #f9f6f4;
 }

@@ -9,4 +9,5 @@ images:
     "./photos/_MGC2567.jpg",
     "./photos/_MGC2631-2.jpg",
   ]
+tags: [gallary]
 ---

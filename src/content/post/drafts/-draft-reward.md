@@ -3,7 +3,7 @@ title: "Master your brain's reward system."
 description: "Be productive without burning out."
 date: 2023-10-01
 author: Tim Havlicek
-tags: [Burnout]
+topics: [Burnout]
 ---
 
 There are people that work, and then there are people that live.

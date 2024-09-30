@@ -31,7 +31,7 @@ export const collections = {
       }),
   }),
   page: defineCollection({
-    schema: ({ image }) =>
+    schema: () =>
       z.object({
         title: z.string(),
         description: z.string().optional(),

@@ -1,10 +1,10 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
-import Headline from "../../components/Headline.astro";
-import Post from "../../components/Post.astro";
-import SectionLink from "../../components/SectionLink.astro";
-import Page from "../../layouts/default.astro";
-import { byDate, getPostType } from "../../utils.ts";
+import Headline from "../components/Headline.astro";
+import Post from "../components/Post.astro";
+import SectionLink from "../components/SectionLink.astro";
+import Page from "../layouts/default.astro";
+import { byDate, getPostType } from "../utils";
 
 const posts = await getCollection("post").then((posts) => {
   return posts.filter((post) => !post.id.includes("-draft-"));

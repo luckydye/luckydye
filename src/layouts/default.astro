@@ -1,6 +1,9 @@
 ---
 import "../style/global.css";
 import "../style/main.css";
+import "../style/images.css";
+import "../style/teaser.css";
+import "../style/project.css";
 
 import Link from "../components/Link.astro";
 
@@ -40,6 +43,10 @@ const props = Astro.props;
     }
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+
+    <script>
+      import "@atrium-ui/elements/track";
+    </script>
 
     <slot name="head" />
   </head>

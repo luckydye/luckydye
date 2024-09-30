@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import { FilteredPosts } from "../components/FilteredPosts";
 import Headline from "../components/Headline.astro";
-import Post from "../components/Post.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Stage from "../components/Stage.astro";
 import { Tabs } from "../components/TagTabs";
@@ -35,13 +35,7 @@ const posts = await getCollection("post").then((posts) => {
     </div>
 
     <div slot="main" class="container">
-        {
-            posts.sort(byDate).map((post) => (
-                <div class="pb-[100px]">
-                    <Post post={post} />
-                </div>
-            ))
-        }
+      <FilteredPosts posts={posts} tag="dataviz" />
     </div>
 
     <div slot="main" class="container pt-40">

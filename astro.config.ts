@@ -11,6 +11,7 @@ export default defineConfig({
     solid(),
     tailwind(),
     sitemap(),
+    // @ts-ignore
     svgSprite({ dir: ["src/assets/icons/*.svg"] }),
   ],
 });

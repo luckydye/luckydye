@@ -1,5 +1,4 @@
 .card {
-  gap: 3rem;
   overflow: hidden;
   border: 1px solid var(--color-bg-1);
   border-radius: 8px;
@@ -21,7 +20,7 @@
 .background-image {
   object-fit: contain;
   transition: transform 0.33s ease;
-  padding: 30px;
+  padding: 1.5rem;
   display: block;
   height: 100%;
 }

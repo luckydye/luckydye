@@ -46,14 +46,14 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
                   return (
                     <LinkButton url={link}>
                       <span>Source</span>
-                      <svg-icon class="pl-2" icon="arrow-right" />
+                      <svg-icon class="ml-2" name="arrow-right" />
                     </LinkButton>
                   );
 
                 return (
                   <LinkButton url={link}>
                     <span>Website</span>
-                    <svg-icon class="pl-2" icon="arrow-right" />
+                    <svg-icon class="ml-2" name="arrow-right" />
                   </LinkButton>
                 );
               })

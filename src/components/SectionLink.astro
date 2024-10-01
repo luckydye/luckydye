@@ -1,8 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 
-import arrowRight from "../assets/icons/arrow-right.svg";
-
 interface Props {
   link: string;
   align?: string;
@@ -16,9 +14,7 @@ const linkEntry = (await getCollection("link")).find((entry) => entry.id === lin
 <a href={linkEntry?.data.link} target={linkEntry?.data.target}>
   <div class="link text-right py-4" data-align={align}>
     <slot />
-    <div class="arrow">
-      <img width="20px" height="20px" src={arrowRight.src} alt="arrow right" />
-    </div>
+    <svg-icon class="arrow" name="arrow-right" alt="arrow right" />
   </div>
 </a>
 

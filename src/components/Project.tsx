@@ -1,5 +1,4 @@
 import type { CollectionEntry } from "astro:content";
-import { Icon } from "./Icon";
 import { LinkButton } from "./LinkButton";
 
 export function Project(props: { post: CollectionEntry<"post"> }) {
@@ -47,14 +46,14 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
                   return (
                     <LinkButton url={link}>
                       <span>Source</span>
-                      <Icon class="pl-2" name="arrow-right" />
+                      <svg-icon class="pl-2" icon="arrow-right" />
                     </LinkButton>
                   );
 
                 return (
                   <LinkButton url={link}>
-                    <span>Docs</span>
-                    <Icon class="pl-2" name="arrow-right" />
+                    <span>Website</span>
+                    <svg-icon class="pl-2" icon="arrow-right" />
                   </LinkButton>
                 );
               })

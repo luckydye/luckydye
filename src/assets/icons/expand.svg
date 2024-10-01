@@ -1,0 +1,10 @@
+<svg viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>expand</title>
+  <path
+    d="M15 49L83 117L151 49"
+    stroke="currentColor"
+    stroke-width="12"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

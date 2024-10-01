@@ -3,7 +3,10 @@ import Introduction from "./Introduction.astro";
 ---
 
 <script>
-  import "@sv/elements/animation";
+  import riveWASMResource from "@rive-app/canvas-advanced-lite/rive.wasm?url";
+  import { AnimationElement } from "@sv/elements/animation";
+  console.log(riveWASMResource);
+  AnimationElement.riveWasm = riveWASMResource;
 </script>
 
 <div class="pt-16 pb-6">

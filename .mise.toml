@@ -1,5 +1,6 @@
 [tools]
 bun = "1.1"
+node = "20"
 
 [tasks.setup]
 description = "Install dependencies"

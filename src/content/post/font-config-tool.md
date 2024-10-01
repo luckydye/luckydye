@@ -5,5 +5,5 @@ url: https://luckydye.github.io/font-config-tool/configurator/
 images: [./images/font-config.svg]
 date: 2022-11-24
 links: [https://github.com/luckydye/font-config-tool]
-tags: [project]
+tags: [project, tools]
 ---

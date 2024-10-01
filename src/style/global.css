@@ -145,3 +145,8 @@ body::before {
   background: linear-gradient(0deg, transparent 69%, hsl(201deg 100% 69% / 9%));
   z-index: -1;
 }
+
+/* pre-hydration fixes */
+a-select:not(:defined) > div:not([slot="trigger"]) {
+  display: none;
+}

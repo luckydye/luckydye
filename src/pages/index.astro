@@ -1,14 +1,18 @@
 ---
 import { getCollection } from "astro:content";
+import { FilteredPosts } from "../components/FilteredPosts";
 import Headline from "../components/Headline.astro";
 import { Post } from "../components/Post";
 import SectionLink from "../components/SectionLink.astro";
 import Stage from "../components/Stage.astro";
 import { Tabs } from "../components/TagTabs";
 import Page from "../layouts/default.astro";
-import { byDate } from "../utils";
 
-const tags = await getCollection("tags").then((tags) => tags.map((tag) => tag.data));
+const excludeTags = ["gallary", "project", "post"];
+
+const tags = await getCollection("tags")
+  .then((tags) => tags.map((tag) => tag.data))
+  .then((tags) => tags.filter((tag) => !excludeTags.includes(tag.id)));
 
 const posts = await getCollection("post").then((posts) => {
   return posts.filter((post) => !post.id.includes("-draft-"));
@@ -16,32 +20,24 @@ const posts = await getCollection("post").then((posts) => {
 ---
 
 <Page
-    meta={{
-        title: "luckydye",
-        description: "luckydye",
-    }}
+  meta={{
+    title: "luckydye",
+    description: "luckydye",
+  }}
 >
-    <div slot="main" class="container">
-        <section>
-            <Stage />
-        </section>
-        <div class="pb-20"></div>
-        <Headline>Work</Headline>
-        <div class="pb-20"></div>
-        <div class="pb-20"></div>
-    </div>
+  <div slot="main" class="container">
+    <section>
+      <Stage />
+    </section>
+    <div class="pb-20"></div>
+    <Headline>Work</Headline>
+  </div>
 
-    <div slot="main" class="container">
-        {
-            posts.sort(byDate).map((post) => (
-                <div class="pb-[100px]">
-                    <Post post={post} />
-                </div>
-            ))
-        }
-    </div>
+  <div slot="main" class="container">
+    <FilteredPosts client:load posts={posts} tags={tags} />
+  </div>
 
-    <div slot="main" class="container pt-40">
-        <SectionLink link="github">More projects on my GitHub</SectionLink>
-    </div>
+  <div slot="main" class="container pt-40">
+    <SectionLink link="github">More projects on my GitHub</SectionLink>
+  </div>
 </Page>

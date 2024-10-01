@@ -4,5 +4,5 @@ description: Tokyo (working title) is a Work in Progress professional Photo Edit
 images: ["./images/escaping-lightroom-2.webp"]
 date: 2023-12-24
 links: [https://github.com/luckydye/tokyo]
-tags: [project]
+tags: [project, tools, photography]
 ---

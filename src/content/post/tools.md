@@ -4,6 +4,7 @@ description: "My every day carry of software."
 date: 2023-09-04
 author: Tim Havlicek
 topics: [Bash, Task, Anytype, RTX]
+tags: [tools]
 ---
 
 ## Bash (aliases, binds and scripts)

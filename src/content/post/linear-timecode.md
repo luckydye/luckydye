@@ -4,6 +4,7 @@ description: Javascript implementation of a Linear Timecode reader.
 date: 2023-05-13
 author: Tim Havlicek
 topics: [LTC, Web Audio API, Javascript]
+tags: [webdev, tools]
 ---
 
 This won't be a tutorial, just a quick overview about Linear Timecode and how I implemented it in Javascript.

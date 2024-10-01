@@ -4,5 +4,5 @@ description: A simple corss-platform tool to access local or remote keepass data
 images: ["./images/key.png"]
 date: 2024-03-25
 links: [https://github.com/luckydye/key]
-tags: [project]
+tags: [project, tools]
 ---

@@ -15,7 +15,9 @@ export default {
       copy: ["Lato", "sans-serif"],
       headline: ["Quicksand", "serif"],
     },
-    colors: colors,
-    backgroundColor: colors,
+    extend: {
+      colors: colors,
+      backgroundColor: colors,
+    },
   },
 };

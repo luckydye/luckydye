@@ -25,7 +25,7 @@ export function Teaser(props: { post: CollectionEntry<"post"> }) {
           {props.post.data.topics
             ? props.post.data.topics.map((topic) => {
                 return (
-                  <div class="capitalize text-sm rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">
+                  <div class="font-headline font-bold capitalize text-sm rounded-md bg-zinc-800 opacity-70 inline-block px-2 py-1">
                     {topic}
                   </div>
                 );

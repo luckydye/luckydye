@@ -17,7 +17,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
         ) : null}
       </div>
       <div class="caption py-10 px-4">
-        <h2 class="headline-accent">{props.post.data.title}</h2>
+        <h2 class="font-headline headline-accent">{props.post.data.title}</h2>
 
         <div class="flex gap-2 py-2 items-center opacity-80">
           {props.post.data.topics?.map((topic) => {

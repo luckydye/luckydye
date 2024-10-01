@@ -11,9 +11,11 @@ const colors = {
 export default {
   content: ["./src/**/*.{astro,html,md,mdx,ts,tsx}"],
   theme: {
-    extend: {
-      colors: colors,
-      backgroundColor: colors,
+    fontFamily: {
+      copy: ["Lato", "sans-serif"],
+      headline: ["Quicksand", "serif"],
     },
+    colors: colors,
+    backgroundColor: colors,
   },
 };

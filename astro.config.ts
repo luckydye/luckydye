@@ -7,8 +7,10 @@ import svgSprite from "svg-sprites/vite";
 export default defineConfig({
   output: "static",
   site: "https://luckydye.dev",
-  integrations: [solid(), tailwind(), sitemap()],
-  vite: {
-    plugins: [svgSprite({ dir: ["src/assets/icons/*.svg"] })],
-  },
+  integrations: [
+    solid(),
+    tailwind(),
+    sitemap(),
+    svgSprite({ dir: ["src/assets/icons/*.svg"] }),
+  ],
 });

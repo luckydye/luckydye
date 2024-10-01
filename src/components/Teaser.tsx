@@ -17,7 +17,7 @@ export function Teaser(props: { post: CollectionEntry<"post"> }) {
       ) : null}
       <div class="py-2">
         <a class="block py-2" href={`/${props.post.id}`} style="text-decoration: none;">
-          <h2 class="pb-2 text-3xl font-normal hover:underline">
+          <h2 class="font-headline pb-2 text-3xl font-normal hover:underline">
             {props.post.data.title}
           </h2>
         </a>

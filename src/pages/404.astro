@@ -1,0 +1,20 @@
+---
+import Headline from "../components/Headline.astro";
+import SectionLink from "../components/SectionLink.astro";
+import Page from "../layouts/default.astro";
+---
+
+<Page
+  meta={{
+    title: "luckydye",
+    description: "luckydye",
+  }}
+>
+  <div slot="main" class="container">
+    <Headline>Page not found</Headline>
+  </div>
+
+  <div slot="main" class="container pt-40">
+    <SectionLink link="home">Back to home</SectionLink>
+  </div>
+</Page>

@@ -8,10 +8,49 @@
     software. I enjoy designing User-Interfaces and Tools to make complex or
     impossible tasks easy and intuitive.
   </p>
+
+  <ul class="pt-6 flex flex-wrap gap-6">
+    <li><a class="text-link" target="_blank" href="https://github.com/luckydye">Github</a></li>
+    <li><a class="text-link" target="_blank" href="https://x.com/timh4v">Twitter</a></li>
+  </ul>
 </div>
 
 <style>
   .caption {
     max-width: 600px;
+  }
+
+  /* Links */
+
+  :root {
+    --icon-external: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.7708 0.143868C11.956 0.332952 11.9529 0.636414 11.7639 0.82167L5.75013 6.71365C5.56105 6.89891 5.25759 6.89581 5.07233 6.70672C4.88707 6.51764 4.89018 6.21418 5.07926 6.02892L11.093 0.136937C11.2821 -0.0483187 11.5855 -0.0452158 11.7708 0.143868Z' fill='black'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.79593 0.479304C5.79593 0.214592 6.01052 1.69848e-07 6.27523 1.69848e-07H12V5.52817C12 5.79289 11.7854 6.00748 11.5207 6.00748C11.256 6.00748 11.0414 5.79289 11.0414 5.52817V0.958607H6.27523C6.01052 0.958607 5.79593 0.744016 5.79593 0.479304Z' fill='black'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 1.43791H3.67466C3.93937 1.43791 4.15396 1.6525 4.15396 1.91721C4.15396 2.18193 3.93937 2.39652 3.67466 2.39652H0.958607V11.024H9.58607V8.38781C9.58607 8.1231 9.80066 7.90851 10.0654 7.90851C10.3301 7.90851 10.5447 8.1231 10.5447 8.38781V11.9826H0V1.43791Z' fill='black'/%3E%3C/svg%3E%0A");
+  }
+
+  a.text-link[href] {
+    @apply no-underline text-zinc-400;
+  }
+
+  a.text-link[href]:hover {
+    @apply underline text-white;
+  }
+
+  a.text-link[href*="https://"] {
+    @apply relative pr-[1.2em];
+  }
+
+  a.text-link[href*="https://"]:after {
+    content: "";
+    background: currentColor;
+    mask-position: center;
+    mask-image: var(--icon-external);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    width: 1.125em;
+    height: 1.125em;
+    font-size: 0.65em;
+    position: absolute;
+    text-decoration: none;
+    right: 0;
+    bottom: 0.4em;
   }
 </style>

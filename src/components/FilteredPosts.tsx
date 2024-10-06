@@ -30,7 +30,7 @@ export function FilteredPosts(props: {
 
   return (
     <div>
-      <div class="relative z-50 pb-40">
+      <div class="relative z-50 pb-20">
         <Combobox
           values={filter()}
           options={props.tags.map((t) => ({

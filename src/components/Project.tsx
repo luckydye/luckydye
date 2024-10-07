@@ -4,14 +4,13 @@ import { LinkButton } from "./LinkButton";
 export function Project(props: { post: CollectionEntry<"post"> }) {
   return (
     <div class="card grid md:grid-cols-[auto_1fr] grid-cols-[1fr]">
-      <div class="background">
+      <div class="background flex items-center justify-center p-8">
         {props.post.data.images?.[0] ? (
           <img
             loading="eager"
-            class="background-image "
+            class="background-image"
             src={props.post.data.images[0].src}
             width={300}
-            height={300}
             alt={props.post.data.title}
           />
         ) : null}

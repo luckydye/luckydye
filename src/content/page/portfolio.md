@@ -22,19 +22,19 @@ I have over 6 years of experience building and maintaining production software. 
 ### Atrium UI
 A Web-Component library which contains all the knowledge I collected over the years on how to build UI for the web.
 
-### Green Trails 
+### Green Trails
 Platform for bike trails
 
-### Rad+ Visio 
+### Visio
 Customizable Visualizations of Gigabytes of internal data from routes of bikes across the country in the browser.
 
-### Testing Dashboard 
+### Testing Dashboard
 Sumuarize test results in a simple dashboard for multiple projects.
 
-### SZA 
+### SZA
 Company Website
 
-### LEA 
+### LEA
 Campaign Website
 
 ### Zeit statt Zeug

@@ -17,11 +17,10 @@
   max-width: 600px;
 }
 .background-image {
-  object-fit: contain;
   transition: transform 0.33s ease;
-  padding: 1.5rem;
   display: block;
-  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
 }
 .background::after {
   pointer-events: none;

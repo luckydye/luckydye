@@ -8,16 +8,16 @@ export function Images(props: {
 }) {
   return (
     <div class="images relative">
-      <a-track overflowscroll class="pt-6 overflow-visible">
+      <a-track snap overflowscroll class="pt-6 overflow-hidden px-6">
         {props.images?.map((image) => {
           const ar = image.width / image.height;
           const height = 520;
           return (
-            <div class="flex-none first:pl-6 last:pr-6">
+            <div class="flex-none flex items-center pr-2">
               <img
                 decoding="async"
                 loading="lazy"
-                class="overflow-hidden block mr-2"
+                class="overflow-hidden block max-w-[80vw]"
                 src={image.src}
                 height={height}
                 width={height * ar}

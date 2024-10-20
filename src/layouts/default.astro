@@ -75,5 +75,9 @@ import "../components/SvgIcon.js";
         </div>
       </div>
     </footer>
+
+    <script is:inline>
+      fetch("https://analytics.luckydye.de/", { method: "POST", body: `event_pageview,host=${location.host},path=${location.pathname} load=${performance.now()} ${Date.now() * 1000 * 1000}` })
+    </script>
   </body>
 </html>

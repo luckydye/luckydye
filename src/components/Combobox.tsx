@@ -69,7 +69,7 @@ export function Combobox(props: {
     >
       <div slot="trigger" class="w-full">
         <Input
-          placeholder="Filter tags"
+          placeholder="Filter topics..."
           type="search"
           autocomplete="search"
           class="flex flex-wrap gap-1 p-2"
@@ -126,7 +126,7 @@ export function Combobox(props: {
         {availableOptions().length > 0 ? (
           availableOptions()
         ) : (
-          <p class="px-2 opacity-50">No options found</p>
+          <p class="px-2 opacity-50">No results</p>
         )}
       </div>
     </a-select>

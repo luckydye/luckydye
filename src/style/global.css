@@ -27,20 +27,6 @@ hr {
   border-top: none;
 }
 
-.headline {
-  font-size: 2.2rem;
-  line-height: 2.8rem;
-  font-weight: 300;
-  margin: 15px 0 0 0;
-}
-
-.headline-subline {
-  font-size: 1.8rem;
-  line-height: 1.33;
-  font-weight: 400;
-  margin: 0;
-}
-
 .headline-accent {
   font-size: 1.8rem;
   font-weight: 300;
@@ -55,10 +41,6 @@ p {
 [href] {
   color: inherit;
   text-decoration: underline;
-}
-
-.rive canvas {
-  display: block;
 }
 
 .content h1 {
@@ -159,4 +141,8 @@ svg-icon {
   margin-bottom: 0.075em;
   vertical-align: text-bottom;
   box-sizing: content-box;
+}
+
+.font-headline {
+  letter-spacing: 0.05em;
 }

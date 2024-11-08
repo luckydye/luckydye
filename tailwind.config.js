@@ -13,7 +13,7 @@ export default {
   theme: {
     fontFamily: {
       copy: ["Lato", "sans-serif"],
-      headline: ["Quicksand", "serif"],
+      headline: ["Domine", "serif"],
     },
     extend: {
       colors: colors,

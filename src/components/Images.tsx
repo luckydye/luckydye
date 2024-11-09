@@ -8,7 +8,7 @@ export function Images(props: {
 }) {
   return (
     <div class="images relative">
-      <a-track snap overflowscroll class="pt-6 overflow-hidden px-6">
+      <a-track overflowscroll class="pt-6 overflow-hidden px-6">
         {props.images?.map((image) => {
           const ar = image.width / image.height;
           const height = 520;

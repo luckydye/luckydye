@@ -5,6 +5,7 @@
   "devDependencies": {
     "@astrojs/solid-js": "5.0.4",
     "@atrium-ui/elements": "^1.15.0",
+    "@biomejs/biome": "^1.9.4",
     "@fontsource/domine": "^5.1.0",
     "@fontsource/lato": "^5.1.0",
     "@fontsource/quicksand": "^5.1.0",
@@ -16,7 +17,6 @@
     "solid-js": "^1.9.3",
     "svg-sprites": "^0.4.14",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss": "^4.0.0",
-    "@biomejs/biome": "^1.9.4"
+    "tailwindcss": "^4.0.0"
   }
 }

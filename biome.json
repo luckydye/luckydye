@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": [
-    "@sv/codestyle/biome"
+    "@atrium-ui/codestyle/biome"
   ]
 }

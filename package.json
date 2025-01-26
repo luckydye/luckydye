@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@atrium-ui/codestyle": "^1.2.0",
     "@astrojs/solid-js": "5.0.4",
     "@atrium-ui/elements": "^1.15.0",
     "@biomejs/biome": "^1.9.4",

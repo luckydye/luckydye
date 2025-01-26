@@ -8,14 +8,13 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-  integrations: [
-    // @ts-ignore
-    svgSprite({ dir: ["src/assets/icons/*.svg"] }),
-    solid(),
-  ],
+  integrations: [solid()],
   vite: {
     plugins: [
       //
+      svgSprite({
+        dir: ["src/assets/icons/*.svg"],
+      }),
       tailwind(),
     ],
   },

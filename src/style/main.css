@@ -13,6 +13,6 @@
   --color-accent: #eb9124;
   --color-text: #f9f6f4;
 
-  --font-copy: "Lato, sand-serif";
-  --font-headline: "Domine, serif";
+  --font-copy: "Lato", "sans-serif";
+  --font-headline: "Domine", "serif";
 }

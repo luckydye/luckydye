@@ -2,25 +2,21 @@
   "name": "luckydye",
   "private": true,
   "type": "module",
-  "dependencies": {
-    "@astrojs/sitemap": "3.2.1",
+  "devDependencies": {
     "@astrojs/solid-js": "5.0.4",
-    "@astrojs/tailwind": "5.1.5",
     "@atrium-ui/elements": "^1.15.0",
     "@fontsource/domine": "^5.1.0",
     "@fontsource/lato": "^5.1.0",
     "@fontsource/quicksand": "^5.1.0",
     "@rive-app/canvas-advanced-lite": "2.7.8",
-    "@sv/elements": "1.15.0",
+    "@tailwindcss/vite": "^4.0.0",
     "astro": "5.1.9",
     "pinch-zoom-element": "^1.1.1",
     "sharp": "^0.33.5",
     "solid-js": "^1.9.3",
     "svg-sprites": "^0.4.14",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss": "^3.4.14"
-  },
-  "devDependencies": {
+    "tailwindcss": "^4.0.0",
     "@biomejs/biome": "^1.9.4"
   }
 }

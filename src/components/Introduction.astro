@@ -27,11 +27,13 @@
   }
 
   a.text-link[href] {
-    @apply no-underline text-zinc-400;
+    color: var(--color-zinc-400);
+    @apply no-underline;
   }
 
   a.text-link[href]:hover {
-    @apply underline text-white;
+    color: white;
+    @apply underline;
   }
 
   a.text-link[href*="https://"] {

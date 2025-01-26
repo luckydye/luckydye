@@ -1,17 +1,22 @@
-import sitemap from "@astrojs/sitemap";
 import solid from "@astrojs/solid-js";
-import tailwind from "@astrojs/tailwind";
+import tailwind from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import svgSprite from "svg-sprites/vite";
 
 export default defineConfig({
   output: "static",
-  site: "https://luckydye.dev",
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [
-    solid(),
-    tailwind(),
-    sitemap(),
     // @ts-ignore
     svgSprite({ dir: ["src/assets/icons/*.svg"] }),
+    solid(),
   ],
+  vite: {
+    plugins: [
+      //
+      tailwind(),
+    ],
+  },
 });

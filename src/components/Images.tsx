@@ -1,4 +1,4 @@
-import "@sv/elements/track";
+import "@atrium-ui/elements/track";
 import type { CollectionEntry } from "astro:content";
 
 export function Images(props: {

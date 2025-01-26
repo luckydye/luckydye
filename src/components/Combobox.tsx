@@ -1,6 +1,6 @@
-import "@sv/elements/select";
-import "@sv/elements/expandable";
-import type { OptionElement, Select } from "@sv/elements/select";
+import "@atrium-ui/elements/select";
+import "@atrium-ui/elements/expandable";
+import type { OptionElement, Select } from "@atrium-ui/elements/select";
 import { type ParentProps, createEffect, createMemo, createSignal } from "solid-js";
 import { twMerge } from "tailwind-merge";
 import { Input } from "./Input";

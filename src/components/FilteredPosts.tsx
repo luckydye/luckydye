@@ -31,7 +31,7 @@ export function FilteredPosts(props: {
   return (
     <div>
       <div class="relative z-50 flex flex-wrap items-center gap-12 pt-12 pb-20">
-        <h2 class="my-2 font-headline text-5xl leading-tight">Work</h2>
+        <h2 class="my-2 font-headline text-3xl leading-tight">Work</h2>
 
         <div class="min-w-[320px] flex-1">
           <Combobox

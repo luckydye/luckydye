@@ -3,7 +3,7 @@ import { LinkButton } from "./LinkButton";
 
 export function Project(props: { post: CollectionEntry<"post"> }) {
   return (
-    <div class="card grid md:grid-cols-[auto_1fr] grid-cols-[1fr]">
+    <div class="card grid grid-cols-[1fr] md:grid-cols-[auto_1fr]">
       <div class="background flex items-center justify-center p-8">
         {props.post.data.images?.[0] ? (
           <img
@@ -15,13 +15,13 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
           />
         ) : null}
       </div>
-      <div class="caption py-10 px-4">
-        <h2 class="font-headline headline-accent">{props.post.data.title}</h2>
+      <div class="caption px-4 py-10">
+        <h2 class="headline-accent font-headline">{props.post.data.title}</h2>
 
-        <div class="flex gap-2 py-2 items-center opacity-80">
+        <div class="flex items-center gap-2 py-2 opacity-80">
           {props.post.data.topics?.map((topic) => {
             return (
-              <div class="text-sm rounded-md bg-zinc-800 inline-block px-2 py-1 capitalize">
+              <div class="inline-block rounded-md bg-zinc-800 px-2 py-1 text-sm capitalize">
                 {topic}
               </div>
             );

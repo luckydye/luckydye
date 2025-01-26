@@ -84,7 +84,7 @@ export function Combobox(props: {
             <div
               key={option}
               class={twMerge(
-                "mr-1 flex flex-wrap items-center gap-1 rounded bg-zinc-50 py-1 pr-1 pl-2 font-bold text-left text-sm",
+                "mr-1 flex flex-wrap items-center gap-1 rounded bg-zinc-50 py-1 pr-1 pl-2 text-left font-bold text-sm",
                 "dark:bg-zinc-800",
               )}
             >

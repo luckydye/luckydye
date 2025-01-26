@@ -90,7 +90,7 @@ export function Input(props: InputProps & ParentProps) {
             readonly={props.readonly}
             required={props.required || undefined}
             placeholder={props.placeholder}
-            class="m-0 flex-1 border-none bg-transparent px-1 py-0 outline-none leading-7"
+            class="m-0 flex-1 border-none bg-transparent px-1 py-0 leading-7 outline-none"
             onChange={props.onChange}
             onKeyDown={props.onKeydown}
             onKeyUp={props.onKeyup}

@@ -8,16 +8,16 @@ export function Images(props: {
 }) {
   return (
     <div class="images relative">
-      <a-track overflowscroll class="pt-6 px-6">
+      <a-track overflowscroll class="overflow-visible px-6 pt-6">
         {props.images?.map((image) => {
           const ar = image.width / image.height;
           const height = 520;
           return (
-            <div class="flex-none flex items-center pr-2">
+            <div class="flex flex-none items-center pr-2">
               <img
                 decoding="async"
                 loading="lazy"
-                class="overflow-hidden block max-w-[80vw]"
+                class="block max-w-[80vw] overflow-hidden"
                 src={image.src}
                 height={height}
                 width={height * ar}
@@ -28,10 +28,10 @@ export function Images(props: {
         })}
       </a-track>
 
-      <div class="overlay pointer-events-none absolute top-0 left-0 w-full h-full" />
+      <div class="overlay pointer-events-none absolute top-0 left-0 h-full w-full" />
 
       <div class="circle pt-5">
-        <div class="title inline-flex justify-between w-[calc(100%-180px)]">
+        <div class="title inline-flex w-[calc(100%-180px)] justify-between">
           <span>{props.title}</span>
           {props.date && (
             <span class="opacity-50">

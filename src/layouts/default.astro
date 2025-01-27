@@ -49,14 +49,6 @@ import "../components/SvgIcon.js";
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 
-    <script is:inline>
-      window.addEventListener("load", () => fetch("https://analytics.luckydye.de/", {
-        method: "POST",
-        mode: "no-cors",
-        body: `event_pageview,host=${location.host},path=${location.pathname} load=${performance.now()} ${Date.now() * 1000 * 1000}`
-      }))
-    </script>
-
     <slot name="head" />
   </head>
 

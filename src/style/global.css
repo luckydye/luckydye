@@ -134,6 +134,7 @@ a-select:not(:defined) > div:not([slot="trigger"]) {
   display: none;
 }
 
+.svg-icon,
 svg-icon {
   display: inline-block;
   width: 1em;

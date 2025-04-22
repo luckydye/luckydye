@@ -21,7 +21,10 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
         <div class="flex items-center gap-2 py-2 opacity-80">
           {props.post.data.topics?.map((topic) => {
             return (
-              <div class="inline-block rounded-md bg-zinc-800 px-2 py-1 text-sm capitalize">
+              <div
+                key={topic}
+                class="inline-block rounded-md bg-zinc-800 px-2 py-1 text-sm capitalize"
+              >
                 {topic}
               </div>
             );
@@ -37,25 +40,58 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
 
         <div class="flex gap-2">
           {props.post.data.url ? (
-            <LinkButton url={props.post.data.url}>Open in browser</LinkButton>
+            <a
+              target="_blank"
+              href={props.post.data.url}
+              class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit"
+              rel="noreferrer"
+              style="text-decoration: none;"
+            >
+              <span>Open in browser</span>
+              <svg
+                class="ml-2 svg-icon"
+                viewBox="0 0 9 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>arrow-right</title>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.191712 15.81C-0.063904 15.5567 -0.063904 15.146 0.191712 14.8927L7.14706 8L0.191712 1.10731C-0.0639038 0.853999 -0.0639038 0.443298 0.191712 0.189984C0.447328 -0.063329 0.861763 -0.063329 1.11738 0.189984L8.53556 7.54134C8.79118 7.79465 8.79118 8.20535 8.53556 8.45866L1.11738 15.81C0.861763 16.0633 0.447328 16.0633 0.191712 15.81Z"
+                  fill="white"
+                />
+              </svg>
+            </a>
           ) : null}
-          {props.post.data.links
-            ? props.post.data.links.map((link) => {
-                if (link.match("github.com"))
-                  return (
-                    <LinkButton url={link}>
-                      <span>Source</span>
-                      <svg-icon class="ml-2" name="arrow-right" />
-                    </LinkButton>
-                  );
 
-                return (
-                  <LinkButton url={link}>
-                    <span>Website</span>
-                    <svg-icon class="ml-2" name="arrow-right" />
-                  </LinkButton>
-                );
-              })
+          {props.post.data.links
+            ? props.post.data.links.map((link) => (
+                <a
+                  key={link}
+                  target="_blank"
+                  href={link}
+                  class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit"
+                  rel="noreferrer"
+                  style="text-decoration: none;"
+                >
+                  <span>{link.match("github.com") ? "Source" : "Website"}</span>
+                  <svg
+                    class="ml-2 svg-icon"
+                    viewBox="0 0 9 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>arrow-right</title>
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M0.191712 15.81C-0.063904 15.5567 -0.063904 15.146 0.191712 14.8927L7.14706 8L0.191712 1.10731C-0.0639038 0.853999 -0.0639038 0.443298 0.191712 0.189984C0.447328 -0.063329 0.861763 -0.063329 1.11738 0.189984L8.53556 7.54134C8.79118 7.79465 8.79118 8.20535 8.53556 8.45866L1.11738 15.81C0.861763 16.0633 0.447328 16.0633 0.191712 15.81Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+              ))
             : null}
         </div>
       </div>

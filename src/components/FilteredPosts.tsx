@@ -11,12 +11,12 @@ export function FilteredPosts(props: {
     title: string;
   }[];
 }) {
-  const [filter, setFilter] = createSignal(props.tags.map((t) => t.id));
+  const [filter, setFilter] = createSignal([]);
 
   const posts = createMemo(() => {
     return props.posts
       .filter((post) =>
-        post.data.tags?.find((t) => {
+        filter().length === 0 || post.data.tags?.find((t) => {
           return filter()?.includes(t.id);
         }),
       )

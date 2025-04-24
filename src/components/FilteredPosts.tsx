@@ -34,7 +34,7 @@ export function FilteredPosts(props: {
         <h2 class="my-2 font-headline text-3xl leading-tight">Work</h2>
 
         <form
-          class="flex min-w-[320px] flex-1 gap-4"
+          class="flex min-w-[320px] flex-1 gap-4 flex-wrap"
           onChange={(ev) => {
             const data = new FormData(ev.currentTarget);
             setFilter(
@@ -48,7 +48,7 @@ export function FilteredPosts(props: {
                 key={t.id}
                 name={t.id}
                 value={filter().includes(t.id)}
-                class="group rounded-full focus-within:ring-2 cursor-pointer"
+                class="group rounded-full focus-within:ring-2 cursor-pointer whitespace-nowrap"
               >
                 <span class="block text-white text-[1.125rem] leading-[1.75rem] rounded-full bg-zinc-800 px-5 py-2 group-hover:bg-zinc-700 group-[&[value='true']]:bg-zinc-600 group-hover:group-[&[value='true']]:bg-zinc-500 group-active:scale-[0.985]">
                   {t.title}

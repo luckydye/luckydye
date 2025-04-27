@@ -1,7 +1,7 @@
 ---
 title: Using Tailwind CSS Inside Web-Components
 description: Learn how to use Tailwind CSS effectively within Web Components and the Shadow DOM without unnecessary duplication.
-date: 2025-04-30
+date: 2025-04-27
 author: Tim Havlicek
 topics: [tailwind, webdev, tools, vite, javascript]
 tags: [webdev]

@@ -47,14 +47,14 @@ const { Content } = await render(post);
       }
     </div>
 
-    <div class="flex justify-between text-base opacity-50 pb-10">
+    <div class="flex justify-start text-base opacity-50 pb-10 gap-6">
+      <time>
+        {postData.date?.toLocaleDateString()}
+      </time>
+
       {postData.author ? <div>
         by <a class="underline" href="/">{postData.author}</a>
       </div> : null}
-
-      <div>
-        {postData.date?.toLocaleDateString()}
-      </div>
     </div>
 
     <div class="content">

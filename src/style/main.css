@@ -17,4 +17,8 @@
 
   --font-copy: "Lato", "sans-serif";
   --font-headline: "Domine", "serif";
+
+  --breakpoint-*: initial;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1100px;
 }

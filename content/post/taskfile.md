@@ -1,5 +1,5 @@
 ---
-title: A better way to manage scripts in your projects.
+title: A better way to manage scripts in your projects
 description: Using Taskfiles to provide a streamlined interface for running scripts across projects and teams.
 date: 2023-12-01
 author: Tim Havlicek

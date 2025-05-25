@@ -5,3 +5,4 @@ dist
 .task
 .vercel
 .DS_Store
+**/*.mp4

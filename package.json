@@ -8,7 +8,7 @@
     "@astrojs/solid-js": "5.0.8",
     "@biomejs/biome": "^1.9.4",
     "@fontsource/domine": "^5.1.0",
-    "@fontsource/lato": "^5.1.0",
+    "@fontsource/roboto": "^5.1.0",
     "@fontsource/quicksand": "^5.1.0",
     "@tailwindcss/vite": "^4.0.0",
     "@rive-app/canvas-advanced": "^2.23.3",

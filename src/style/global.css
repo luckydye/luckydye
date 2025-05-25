@@ -98,7 +98,7 @@ p code {
 }
 
 section {
-  position: relative;
+  /* position: relative; */
 }
 
 section::after {

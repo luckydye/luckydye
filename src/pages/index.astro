@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import { FilteredPosts } from "../components/FilteredPosts";
-import Headline from "../components/Headline.astro";
 import SectionLink from "../components/SectionLink.astro";
 import Stage from "../components/Stage.astro";
 import Page from "../layouts/default.astro";
@@ -23,7 +22,7 @@ const posts = await getCollection("post").then((posts) => {
     description: "luckydye",
   }}
 >
-  <div slot="main" class="container">
+  <div slot="main">
     <section>
       <Stage />
     </section>

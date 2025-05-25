@@ -8,15 +8,41 @@ import Introduction from "./Introduction.astro";
 
 <div class="pt-16 pb-6">
     <div class="container grid">
-        <div class="logo">
-            <a-animation width={200} height={400} src="/logo.riv"></a-animation>
-        </div>
+      <div class="stage-background absolute inset-0">
+        <video src="/portfolio.mp4" width="1280" height="720" class="w-full h-full" muted autoplay playsinline loop />
+      </div>
 
-        <Introduction />
+      <div class="logo">
+          <a-animation width={200} height={400} src="/logo.riv"></a-animation>
+      </div>
+
+      <Introduction />
     </div>
 </div>
 
 <style>
+    .stage-background {
+      z-index: -1;
+      height: 750px;
+      width: 100vw;
+    }
+
+    .stage-background::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(0180deg,#0F0F0F 2%, #0f0f0f00,#0F0F0F 100%);
+    }
+
+    .stage-background video {
+      object-fit: cover;
+      object-position: center;
+      opacity: 50%;
+      filter: brightness(0.75);
+    }
+
     .container {
         grid-template-columns: 300px auto;
         align-items: center;

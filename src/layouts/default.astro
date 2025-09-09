@@ -21,7 +21,7 @@ const props = Astro.props;
 ---
 
 <script>
-import "../components/SvgIcon.js";
+  import "../components/SvgIcon.js";
 </script>
 
 <html lang="en">
@@ -29,7 +29,7 @@ import "../components/SvgIcon.js";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="theme-color" content="#1e1e20">
+    <meta name="theme-color" content="#1e1e20" />
 
     <title>{props.meta?.title}</title>
 
@@ -54,7 +54,7 @@ import "../components/SvgIcon.js";
   </head>
 
   <body>
-    <div class="hidden" set:html={await svg()}></div>
+    <div class="hidden" set:html={await svg()} />
 
     <main class="overflow-hidden max-w-[1250px] mx-auto px-8">
       <slot name="main" />
@@ -64,7 +64,7 @@ import "../components/SvgIcon.js";
       <div class="container pt-10 pb-20">
         <h2 class="font-headline mb-4 text-2xl">Connect</h2>
         <div class="mb-1">
-          <Link link="twitter">@timh4v</Link>
+          <Link link="twitter">@tih4v</Link>
         </div>
         <div class="mb-1">
           <Link link="mail">tim.h4vlicek@gmail.com</Link>

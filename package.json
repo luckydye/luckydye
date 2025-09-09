@@ -3,20 +3,20 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@atrium-ui/codestyle": "^1.2.0",
-    "@atrium-ui/elements": "^2.7.0",
+    "@atrium-ui/codestyle": "^1.4.0",
+    "@atrium-ui/elements": "^2.8.0",
     "@astrojs/solid-js": "5.0.8",
     "@biomejs/biome": "^1.9.4",
-    "@fontsource/domine": "^5.1.0",
-    "@fontsource/roboto": "^5.1.0",
-    "@fontsource/quicksand": "^5.1.0",
-    "@tailwindcss/vite": "^4.0.0",
-    "@rive-app/canvas-advanced": "^2.23.3",
+    "@fontsource/domine": "^5.2.6",
+    "@fontsource/roboto": "^5.2.6",
+    "@fontsource/quicksand": "^5.2.8",
+    "@tailwindcss/vite": "^4.1.12",
+    "@rive-app/canvas-advanced": "^2.31.2",
     "astro": "5.7.4",
     "sharp": "^0.33.5",
-    "solid-js": "^1.9.3",
+    "solid-js": "^1.9.9",
     "svg-sprites": "^0.4.14",
-    "tailwind-merge": "^2.5.4",
-    "tailwindcss": "^4.0.0"
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^4.1.12"
   }
 }

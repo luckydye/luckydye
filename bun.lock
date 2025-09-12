@@ -6,12 +6,10 @@
       "devDependencies": {
         "@astrojs/solid-js": "5.0.8",
         "@atrium-ui/codestyle": "^1.4.0",
-        "@atrium-ui/elements": "^2.8.0",
         "@biomejs/biome": "^1.9.4",
-        "@fontsource/domine": "^5.2.6",
-        "@fontsource/quicksand": "^5.2.8",
-        "@fontsource/roboto": "^5.2.6",
+        "@fontsource/geist": "^5.2.6",
         "@rive-app/canvas-advanced": "^2.31.2",
+        "@sv/elements": "^2.13.0",
         "@tailwindcss/vite": "^4.1.12",
         "astro": "5.7.4",
         "sharp": "^0.33.5",
@@ -38,10 +36,6 @@
     "@astrojs/telemetry": ["@astrojs/telemetry@3.2.0", "", { "dependencies": { "ci-info": "^4.1.0", "debug": "^4.3.7", "dlv": "^1.1.3", "dset": "^3.1.4", "is-docker": "^3.0.0", "is-wsl": "^3.1.0", "which-pm-runs": "^1.1.0" } }, "sha512-wxhSKRfKugLwLlr4OFfcqovk+LIFtKwLyGPqMsv+9/ibqqnW3Gv7tBhtKEb0gAyUAC4G9BTVQeQahqnQAhd6IQ=="],
 
     "@atrium-ui/codestyle": ["@atrium-ui/codestyle@1.4.0", "", { "dependencies": { "@commitlint/cli": "^19.5.0", "@commitlint/types": "^19.5.0", "@total-typescript/ts-reset": "^0.5.1", "conventional-changelog-conventionalcommits": "^8.0.0" }, "bin": { "codestyle": "bin/cli.js" } }, "sha512-jIitonL0heJ/w1NfxTRqqMR8CbNFQvjL34GpvPr0eYNk1m/aSfpAsyMcSXgf8DKB+7rutiIugIXG0IEjre+Q2w=="],
-
-    "@atrium-ui/elements": ["@atrium-ui/elements@2.8.0", "", { "dependencies": { "lit": "^3.1.3" }, "peerDependencies": { "@atrium-ui/scroll-lock": "^1.0.1", "@floating-ui/dom": "^1.6.7", "@rive-app/canvas-advanced-lite": "^2.23.3", "chart.js": "^4.4.3" } }, "sha512-w0Udkt6KUu3QpeBBaRDP1tFhcIlcSQ4b3ldy/DNU8pC/v5KhUcqb9NV/Ec4EPZMCHSDdKrZ5a21duOiKa5QQlQ=="],
-
-    "@atrium-ui/scroll-lock": ["@atrium-ui/scroll-lock@1.1.0", "", {}, "sha512-NyzFDeJouUVY/HNNSn5JzOMtFUn9Mnn0zt5EauOEo31N6o7srzVLN4zULn5VNnHUh06LDmhvoVTPvU0H7ODa4A=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.27.1", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.27.1", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg=="],
 
@@ -195,11 +189,7 @@
 
     "@floating-ui/utils": ["@floating-ui/utils@0.2.10", "", {}, "sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ=="],
 
-    "@fontsource/domine": ["@fontsource/domine@5.2.6", "", {}, "sha512-bdmZS5qE9LnyuMaWfj9y7GRnVmWMhwV92bGiI0QbydmQ6EFhJo9f8p1/zowPz7Q+ehaRnKRwfhhxwimktAm3eg=="],
-
-    "@fontsource/quicksand": ["@fontsource/quicksand@5.2.8", "", {}, "sha512-YRgnt2eQfNrk5OWqYJZmFoi6B6sioRIbjKJj3/l5CnezeE0TzD8XL35Q4fRNfHLpOzLi/ckNvTZySBHVVP1G6w=="],
-
-    "@fontsource/roboto": ["@fontsource/roboto@5.2.6", "", {}, "sha512-hzarG7yAhMoP418smNgfY4fO7UmuUEm5JUtbxCoCcFHT0hOJB+d/qAEyoNjz7YkPU5OjM2LM8rJnW8hfm0JLaA=="],
+    "@fontsource/geist": ["@fontsource/geist@5.2.6", "", {}, "sha512-HKRFUn4fApQr9iGaVLUWG5vs+QYFqhKa5X7AFpT6Gey0Kx0ibvpFceMbMDDdlzzqPiGkvCuvYRUN55rvqXgibg=="],
 
     "@img/sharp-darwin-arm64": ["@img/sharp-darwin-arm64@0.33.5", "", { "optionalDependencies": { "@img/sharp-libvips-darwin-arm64": "1.0.4" }, "os": "darwin", "cpu": "arm64" }, "sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ=="],
 
@@ -350,6 +340,10 @@
     "@shikijs/types": ["@shikijs/types@3.12.0", "", { "dependencies": { "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4" } }, "sha512-jsFzm8hCeTINC3OCmTZdhR9DOl/foJWplH2Px0bTi4m8z59fnsueLsweX82oGcjRQ7mfQAluQYKGoH2VzsWY4A=="],
 
     "@shikijs/vscode-textmate": ["@shikijs/vscode-textmate@10.0.2", "", {}, "sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg=="],
+
+    "@sv/elements": ["@sv/elements@2.13.1", "https://gitlab.s-v.de/api/v4/projects/1560/packages/npm/@sv/elements/-/@sv/elements-2.13.1.tgz", { "dependencies": { "lit": "^3.1.3" }, "peerDependencies": { "@floating-ui/dom": "^1.6.7", "@rive-app/canvas-advanced-lite": "^2.23.3", "@sv/scroll-lock": "^1.0.1", "chart.js": "^4.4.3" } }, "sha1-w7J5T0lyUaufTJoTIUhF7WTMIBw="],
+
+    "@sv/scroll-lock": ["@sv/scroll-lock@1.1.1", "https://gitlab.s-v.de/api/v4/projects/1560/packages/npm/@sv/scroll-lock/-/@sv/scroll-lock-1.1.1.tgz", {}, "sha1-6QbzAx4zOtLya2y6f7sSveoB6T0="],
 
     "@swc/helpers": ["@swc/helpers@0.5.17", "", { "dependencies": { "tslib": "^2.8.0" } }, "sha512-5IKx/Y13RsYd+sauPb2x+U/xZikHjolzfuDgTAl/Tdf3Q8rslRvC19NKDLgAJQ6wsqADk10ntlv08nPFw/gO/A=="],
 

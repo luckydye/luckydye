@@ -3,8 +3,8 @@ import { LinkButton } from "./LinkButton";
 
 export function Project(props: { post: CollectionEntry<"post"> }) {
   return (
-    <div class="card grid grid-cols-[1fr] md:grid-cols-[auto_1fr]">
-      <div class="background flex items-center justify-center p-8">
+    <div class="relative grid grid-cols-[1fr] gap-8 md:grid-cols-[auto_1fr]">
+      <div class="background flex items-center justify-center">
         {props.post.data.images?.[0] ? (
           <img
             loading="eager"
@@ -15,15 +15,15 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
           />
         ) : null}
       </div>
-      <div class="caption px-4 py-10">
-        <h2 class="headline-accent font-headline">{props.post.data.title}</h2>
+      <div class="caption absolute inset-0 px-4">
+        <h2 class="headline-accent">{props.post.data.title}</h2>
 
         <div class="flex items-center gap-2 py-2 opacity-80">
           {props.post.data.topics?.map((topic) => {
             return (
               <div
                 key={topic}
-                class="inline-block rounded-md bg-zinc-800 px-2 py-1 text-sm capitalize"
+                class="inline-block rounded-md px-2 py-1 text-sm capitalize"
               >
                 {topic}
               </div>
@@ -49,7 +49,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
             >
               <span>Open in browser</span>
               <svg
-                class="ml-2 svg-icon"
+                class="svg-icon ml-2"
                 viewBox="0 0 9 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
                 >
                   <span>{link.match("github.com") ? "Source" : "Website"}</span>
                   <svg
-                    class="ml-2 svg-icon"
+                    class="svg-icon ml-2"
                     viewBox="0 0 9 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"

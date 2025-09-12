@@ -1,3 +1,3 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
-/// <reference types="@atrium-ui/elements" />
+/// <reference types="@sv/elements" />

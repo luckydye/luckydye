@@ -1,4 +1,4 @@
-import "@atrium-ui/elements/track";
+import "@sv/elements/track";
 import type { CollectionEntry } from "astro:content";
 
 export function Images(props: {
@@ -8,12 +8,12 @@ export function Images(props: {
 }) {
   return (
     <div class="images relative">
-      <a-track overflowscroll class="overflow-visible px-6 pt-6">
-        {props.images?.map((image) => {
+      <a-track snap class="overflow-visible px-6 pt-6">
+        {props.images?.map((image, i) => {
           const ar = image.width / image.height;
           const height = 520;
           return (
-            <div class="flex flex-none items-center pr-2">
+            <div key={i} class="flex flex-none items-center pr-10">
               <img
                 decoding="async"
                 loading="lazy"

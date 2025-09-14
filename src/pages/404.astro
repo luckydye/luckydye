@@ -10,11 +10,13 @@ import Page from "../layouts/default.astro";
     description: "luckydye",
   }}
 >
-  <div slot="main" class="container">
-    <Headline>Page not found</Headline>
-  </div>
+  <main slot="main" class="overflow-hidden mx-auto px-8 max-w-[1200px]">
+    <div class="container">
+      <Headline>Page not found</Headline>
+    </div>
 
-  <div slot="main" class="container pt-40">
-    <SectionLink link="home">Back to home</SectionLink>
-  </div>
+    <div class="container pt-40">
+      <SectionLink link="home">Back to home</SectionLink>
+    </div>
+  </main>
 </Page>

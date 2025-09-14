@@ -22,18 +22,20 @@ const posts = await getCollection("post").then((posts) => {
     description: "luckydye",
   }}
 >
-  <div slot="main">
-    <section>
-      <Stage />
-    </section>
-    <div class="pb-20"></div>
-  </div>
+  <main slot="main" class="overflow-hidden mx-auto px-8">
+    <div>
+      <section>
+        <Stage />
+      </section>
+      <div class="pb-20"></div>
+    </div>
 
-  <div slot="main" class="container">
-    <FilteredPosts client:load posts={posts} tags={tags} />
-  </div>
+    <div class="container">
+      <FilteredPosts client:load posts={posts} tags={tags} />
+    </div>
 
-  <div slot="main" class="container pt-40">
-    <SectionLink link="github">More projects on GitHub</SectionLink>
-  </div>
+    <div class="container pt-40">
+      <SectionLink link="github">More projects on GitHub</SectionLink>
+    </div>
+  </main>
 </Page>

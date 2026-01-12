@@ -42,7 +42,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
             <a
               target="_blank"
               href={props.post.data.url}
-              class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit"
+              class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit whitespace-nowrap"
               rel="noreferrer"
               style="text-decoration: none;"
             >
@@ -70,7 +70,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
                   key={link}
                   target="_blank"
                   href={link}
-                  class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit"
+                  class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit whitespace-nowrap"
                   rel="noreferrer"
                   style="text-decoration: none;"
                 >

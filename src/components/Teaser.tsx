@@ -17,9 +17,9 @@ export function Teaser(props: { post: CollectionEntry<"post"> }) {
           />
         </div>
       ) : null}
-      <div class="py-2">
-        <a class="block py-2" href={`/${props.post.id}`} style="text-decoration: none;">
-          <h2 class="pb-2 text-3xl hover:underline">{props.post.data.title}</h2>
+      <div>
+        <a class="block pb-4" href={`/${props.post.id}`} style="text-decoration: none;">
+          <h2 class="text-3xl hover:underline">{props.post.data.title}</h2>
         </a>
         <div class="flex flex-wrap items-center gap-4">
           <div class="text-base opacity-75">

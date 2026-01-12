@@ -7,7 +7,6 @@
 
 @import "./global.css";
 @import "./images.css";
-@import "./teaser.css";
 @import "./project.css";
 
 @theme {
@@ -21,6 +20,7 @@
   --font-sans: "Geist", sans-serif;
 
   --breakpoint-\*: initial;
+  --breakpoint-sm: 690px;
   --breakpoint-md: 1200px;
   --breakpoint-lg: 1600px;
 }

@@ -4,7 +4,7 @@ const MAX_TOPICS = 3;
 
 export function Teaser(props: { post: CollectionEntry<"post"> }) {
   return (
-    <article class="teaser relative grid grid-cols-[1fr] gap-10 px-2 pl-10 md:grid-cols-[auto_1fr]">
+    <article class="teaser relative grid grid-cols-[1fr] gap-10 md:grid-cols-[auto_1fr]">
       {props.post.data.images?.[0] ? (
         <div>
           <img

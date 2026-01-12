@@ -57,7 +57,7 @@ export function FilteredPosts(props: {
         </form>
       </div>
 
-      <div class="grid grid-cols-8 gap-10">
+      <div class="grid grid-cols-8 gap-y-10 sm:gap-x-20">
         {posts().length > 0 ? posts() : <p>No posts found</p>}
       </div>
     </div>

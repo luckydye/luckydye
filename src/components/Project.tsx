@@ -3,19 +3,18 @@ import { LinkButton } from "./LinkButton";
 
 export function Project(props: { post: CollectionEntry<"post"> }) {
   return (
-    <div class="relative grid grid-cols-[1fr] gap-8 md:grid-cols-[auto_1fr]">
-      <div class="background flex items-center justify-center">
+    <div class="relative grid grid-cols-[1fr] gap-8 sm:grid-cols-[auto_1fr]">
+      <div class="background flex items-start justify-start">
         {props.post.data.images?.[0] ? (
           <img
             loading="eager"
-            class="background-image"
             src={props.post.data.images[0].src}
-            width={300}
+            width={250}
             alt={props.post.data.title}
           />
         ) : null}
       </div>
-      <div class="caption absolute inset-0 px-4">
+      <div class="caption absolute inset-0">
         <h2 class="headline-accent">{props.post.data.title}</h2>
 
         <div class="flex items-center gap-2 py-2 opacity-80">

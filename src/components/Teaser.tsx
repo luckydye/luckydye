@@ -11,8 +11,8 @@ export function Teaser(props: { post: CollectionEntry<"post"> }) {
             loading="eager"
             class="background-image"
             src={props.post.data.images[0].src}
-            width={280}
-            height={280}
+            width={220}
+            height={220}
             alt={props.post.data.title}
           />
         </div>

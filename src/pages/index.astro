@@ -22,7 +22,7 @@ const posts = await getCollection("post").then((posts) => {
     description: "luckydye",
   }}
 >
-  <main slot="main" class="overflow-hidden mx-auto px-8">
+  <main slot="main" class="overflow-hidden mx-auto">
     <div>
       <section>
         <Stage />
@@ -30,9 +30,7 @@ const posts = await getCollection("post").then((posts) => {
       <div class="pb-20"></div>
     </div>
 
-    <div class="container">
-      <FilteredPosts client:load posts={posts} tags={tags} />
-    </div>
+    <FilteredPosts client:load posts={posts} tags={tags} />
 
     <div class="container pt-40">
       <SectionLink link="github">More projects on GitHub</SectionLink>

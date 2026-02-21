@@ -9,7 +9,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
           <img
             loading="eager"
             src={props.post.data.images[0].src}
-            width={250}
+            width={220}
             alt={props.post.data.title}
           />
         ) : null}

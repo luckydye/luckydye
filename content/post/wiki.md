@@ -1,5 +1,5 @@
 ---
-title: Wiki
+title: Vektor
 description: Proof-of-concept enterprise grade project documentation tool with plugin system and full-text search based on SQLite.
 images: ["./wiki/wiki.png"]
 date: 2025-12-23

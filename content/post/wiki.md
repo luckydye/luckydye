@@ -1,14 +1,12 @@
 ---
 title: Vektor
-description: Proof-of-concept enterprise grade project documentation tool with plugin system and full-text search based on SQLite.
+description: Proof-of-concept Self-Hosted Wiki Built for Teams
 images: ["./wiki/wiki.png"]
 date: 2025-12-23
-links: [https://github.com/luckydye/wiki]
-topics: [Astro, SQLite, Vue]
+links: [https://github.com/luckydye/vektor]
+topics: [Astro, Turso]
 tags: [webdev]
 ---
-
-# Vektor — A Self-Hosted Wiki Built for Teams
 
 Vektor is a self-hosted documentation platform I've been building as an alternative to tools like Notion or Confluence. The core idea: keep it minimal, keep it fast, and make it extensible.
 
@@ -37,8 +35,6 @@ Documents are organized into **Spaces** — isolated workspaces with their own m
 ## Extensions
 
 One of the more unusual features is the extension system. Extensions are packaged bundles that add new functionality to a space — custom views, editor commands, sidebar panels, or entirely new interfaces like a Kanban board or calendar.
-
-![Extension command palette with rainbow text command](./wiki/extensions.png)
 
 The CLI makes it straightforward to scaffold, package, and deploy them:
 

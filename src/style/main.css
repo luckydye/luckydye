@@ -2,9 +2,6 @@
 @import "tailwindcss/theme";
 @import "tailwindcss/utilities";
 
-@import "@fontsource/geist/500";
-@import "@fontsource/geist/300";
-
 @import "./global.css";
 @import "./images.css";
 @import "./project.css";
@@ -16,8 +13,6 @@
   --color-fg-1: hsl(240 3% 20% / 1);
   --color-accent: #eb9124;
   --color-text: #f9f6f4;
-
-  --font-sans: "Geist", sans-serif;
 
   --breakpoint-\*: initial;
   --breakpoint-sm: 690px;

@@ -2,12 +2,16 @@
   "name": "luckydye",
   "private": true,
   "type": "module",
+  "scripts": {
+    "setup": "bun install",
+    "dev": "bun x astro dev",
+    "build": "bun x astro build",
+    "fix": "bun x biome check --unsafe --write ."
+  },
   "devDependencies": {
-    "@atrium-ui/codestyle": "^1.4.0",
     "@sv/elements": "^2.13.0",
     "@astrojs/solid-js": "5.0.8",
     "@biomejs/biome": "^1.9.4",
-    "@fontsource/geist": "^5.2.6",
     "@tailwindcss/vite": "^4.1.12",
     "@rive-app/canvas-advanced": "^2.31.2",
     "astro": "5.7.4",

@@ -92,3 +92,4 @@ Several features are aimed squarely at teams that need more than a personal note
 **Encrypted secrets** — Workflow inputs and extension credentials are stored encrypted at rest, configured via a server-side encryption key.
 
 **OpenTelemetry observability** — Traces, metrics, and logs ship over OTLP to whatever backend you run (Grafana, Jaeger, Datadog, etc.). Sampling and export intervals are configurable without code changes.
+

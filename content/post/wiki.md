@@ -1,7 +1,7 @@
 ---
 title: Vektor
 description: Proof-of-concept Self-Hosted Wiki Built for Teams
-images: ["./wiki/wiki.png"]
+images: ["wiki/featured.png"]
 date: 2025-12-23
 links: [https://github.com/luckydye/vektor]
 topics: [Astro, Turso]

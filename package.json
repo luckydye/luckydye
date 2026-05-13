@@ -6,7 +6,8 @@
     "setup": "bun install",
     "dev": "bun x astro dev",
     "build": "bun x astro build",
-    "fix": "bun x biome check --unsafe --write ."
+    "fix": "bun x biome check --unsafe --write .",
+    "prepare": "git lfs pull || true"
   },
   "devDependencies": {
     "@sv/elements": "^2.13.0",

@@ -3,33 +3,25 @@ import { LinkButton } from "./LinkButton";
 
 export function Project(props: { post: CollectionEntry<"post"> }) {
   return (
-    <div class="relative grid grid-cols-[1fr] gap-8 sm:grid-cols-[auto_1fr]">
-      <div class="background flex items-start justify-start">
-        {props.post.data.images?.[0] ? (
-          <img
-            loading="eager"
-            src={props.post.data.images[0].src}
-            width={220}
-            alt={props.post.data.title}
-          />
-        ) : null}
-      </div>
+    <div class="relative">
       <div class="caption absolute inset-0">
-        <h2 class="headline-accent">{props.post.data.title}</h2>
-
-        <div class="flex items-center gap-2 py-2 opacity-80">
-          {props.post.data.topics?.map((topic) => {
-            return (
-              <div
-                key={topic}
-                class="inline-block rounded-md px-2 py-1 text-sm capitalize"
-              >
-                {topic}
-              </div>
-            );
-          })}
-          <div class="text-base opacity-75">
-            {props.post.data.date?.toLocaleDateString()}
+        <div class="flex justify-between items-center">
+          <h2 class="headline-accent">{props.post.data.title}</h2>
+  
+          <div class="flex items-center gap-2 py-2 opacity-80">
+            {props.post.data.topics?.map((topic) => {
+              return (
+                <div
+                  key={topic}
+                  class="inline-block rounded-md px-2 py-1 text-sm capitalize"
+                >
+                  {topic}
+                </div>
+              );
+            })}
+            <div class="text-base opacity-75">
+              {props.post.data.date?.toLocaleDateString()}
+            </div>
           </div>
         </div>
 

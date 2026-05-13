@@ -5,23 +5,23 @@ import Headline from "../../components/Headline.astro";
 import Page from "../../layouts/default.astro";
 
 export interface Props {
-  post: CollectionEntry<"post">;
+    post: CollectionEntry<"post">;
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("post");
-  return allPosts
-    .map((post) => {
-      const slug = post.id;
-      const isDraft = slug.includes("-draft-");
-      return {
-        params: { slug },
-        props: { post, isDraft },
-      };
-    })
-    .filter((post) => {
-      return import.meta.env.DEV || !post.props.isDraft;
-    });
+    const allPosts = await getCollection("post");
+    return allPosts
+        .map((post) => {
+            const slug = post.id;
+            const isDraft = slug.includes("-draft-");
+            return {
+                params: { slug },
+                props: { post, isDraft },
+            };
+        })
+        .filter((post) => {
+            return import.meta.env.DEV || !post.props.isDraft;
+        });
 }
 
 const { post } = Astro.props;
@@ -30,46 +30,71 @@ const postData = post?.data;
 const { Content } = await render(post);
 ---
 
-<Page meta={{
-  title: `${postData?.title} - luckydye`,
-  description: postData?.description,
-}}>
-  <main slot="main" class="overflow-hidden mx-auto px-8 max-w-[1200px]">
-    <div class="container my-40 text-lg">
-      <Headline>{postData?.title}</Headline>
+<Page
+    meta={{
+        title: `${postData?.title} - luckydye`,
+        description: postData?.description,
+    }}
+>
+    <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
+        <div class="container my-40 text-lg">
+            <Headline>{postData?.title}</Headline>
 
-      <div class="flex gap-2 items-center pb-5 text-sm text-zinc-400">
-        {
-          postData.topics
-          ? postData.topics.map((topic) => {
-                return <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">{topic}</div>;
-              })
-            : null
-        }
-      </div>
+            <div class="flex gap-2 items-center pb-2 text-sm text-zinc-400">
+                {
+                    postData.topics
+                        ? postData.topics.map((topic) => {
+                              return (
+                                  <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">
+                                      {topic}
+                                  </div>
+                              );
+                          })
+                        : null
+                }
+            </div>
 
-      <div class="flex justify-start text-base opacity-50 pb-10 gap-6">
-        <time>
-          {postData.date?.toLocaleDateString()}
-        </time>
+            <div class="flex justify-start text-base opacity-50 pb-20 gap-6">
+                <time>
+                    {postData.date?.toLocaleDateString()}
+                </time>
 
-        {postData.author ? <div>
-          by <a class="underline" href="/">{postData.author}</a>
-        </div> : null}
-      </div>
+                {
+                    postData.author ? (
+                        <div>
+                            by{" "}
+                            <a class="underline" href="/">
+                                {postData.author}
+                            </a>
+                        </div>
+                    ) : null
+                }
+            </div>
+            
+            <div class="pb-6 text-zinc-400">
+                {postData.description}
+            </div>
 
-      <div class="content">
-        <Content />
-      </div>
+            <div class="content">
+                <Content />
+            </div>
 
-      {postData.links ? <div class="pt-20">
-        <h2>Links</h2>
-        {postData.links.map((link) => {
-          return <div>
-            <a target="_blank" href={link}>{link}</a>
-          </div>
-        })}
-      </div> : null}
-    </div>
-  </main>
+            {
+                postData.links ? (
+                    <div class="pt-20">
+                        <h2>Links</h2>
+                        {postData.links.map((link) => {
+                            return (
+                                <div>
+                                    <a target="_blank" href={link}>
+                                        {link}
+                                    </a>
+                                </div>
+                            );
+                        })}
+                    </div>
+                ) : null
+            }
+        </div>
+    </main>
 </Page>

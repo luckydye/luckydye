@@ -3,9 +3,7 @@
   position: relative;
   z-index: 100;
 }
-.description {
-  max-width: 600px;
-}
+
 .background {
   overflow: hidden;
   position: relative;

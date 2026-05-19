@@ -5,4 +5,5 @@ images: ["./images/futurenet.png"]
 date: 2025-09-04
 links: []
 tags: [project, webdev]
+layout: md:col-span-4
 ---

@@ -6,6 +6,7 @@ description: A basic voxel renderer and world generator written from scratch usi
 url: https://uncut-projects.web.app/voxel-world/
 images: [./images/voxel-world.jpg]
 topics: [Web, 3D, WebGL]
+layout: md:col-span-4
 ---
 
 This gallary outlines my journey through learning 3D Computer Graphics.

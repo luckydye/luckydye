@@ -30,6 +30,7 @@ export const collections = {
         url: z.string().optional(),
         links: z.string().array().optional(),
         images: z.array(image()).optional(),
+        layout: z.string().optional(),
       }),
   }),
   page: defineCollection({

@@ -3,6 +3,7 @@ title: Decoding time from an audio signal
 description: Javascript implementation of a Linear Timecode reader.
 date: 2023-05-13
 author: Tim Havlicek
+images: [./images/ltc-abelton.png]
 topics: [LTC, Web Audio API, Javascript]
 tags: [webdev, tools]
 ---

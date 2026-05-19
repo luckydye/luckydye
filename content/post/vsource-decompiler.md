@@ -7,6 +7,7 @@ images: [./images/vsource.jpg]
 date: 2021-08-10
 links: [https://github.com/luckydye/vsource-decompiler, https://vsource-viewer.web.app/]
 topics: [Web, 3D, WebGL, Games]
+layout: md:col-span-4
 ---
 
 The idea behind this project was to render a full map of the game in the browser, to allow for real-time visualization of a live game for spectating.

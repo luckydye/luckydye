@@ -4,4 +4,5 @@ description: Customizable Visualizations of many Gigabytes of internal data from
 images: ["./images/visio.png"]
 date: 2023-12-07
 tags: [project, webdev, dataviz]
+layout: md:col-span-4
 ---

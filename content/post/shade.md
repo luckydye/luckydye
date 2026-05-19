@@ -5,4 +5,5 @@ images: ["./images/shade.png"]
 date: 2026-03-25
 links: [https://shade.luckydye.dev/]
 tags: [project, tools]
+layout: md:col-span-4
 ---

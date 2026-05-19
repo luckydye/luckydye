@@ -3,6 +3,7 @@ import { createMemo, createSignal } from "solid-js";
 import { byDate } from "../utils";
 import { Post } from "./Post";
 import "@sv/elements/toggle";
+import { twMerge } from "tailwind-merge";
 
 export function FilteredPosts(props: {
   posts: CollectionEntry<"post">[];
@@ -28,7 +29,10 @@ export function FilteredPosts(props: {
 
   return (
     <div class="pt-10">
-      <div class="grid grid-cols-4 max-w-[1200px] mx-auto">
+      <div class={twMerge(
+        "grid grid-cols-6 max-w-[1600px] mx-auto gap-4",
+        "[&_article]:first:col-span-4"
+      )}>
         {posts().length > 0 ? posts() : <p>No posts found</p>}
       </div>
     </div>

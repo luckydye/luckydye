@@ -25,7 +25,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
           </div>
         </div>
 
-        <div class="description pt-2">{props.post.data.description}</div>
+        <div class="description pt-2 max-w-[40rem]">{props.post.data.description}</div>
 
         <br />
 

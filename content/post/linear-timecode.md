@@ -208,7 +208,7 @@ function parseLTCChunk(chunk) {
 Now we receive a timecode object about every 33ms, or 30 times a second, from the AudioWorklet and we can render it to the page.
 
 <video width="100%" muted autoplay loop>
-  <source src="/media/ltc-timecode_s.mp4" type="video/mp4">
+  <source src="/content/ltc/ltc-timecode_s.mp4" type="video/mp4">
 </video>
 
 <br/>

@@ -1,5 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import Introduction from "./Introduction.astro";
+import { getSiteAssets } from "../vektor-content";
+
+const siteAssets = getSiteAssets(await getCollection("pages"));
 ---
 
 <script>
@@ -9,11 +13,11 @@ import Introduction from "./Introduction.astro";
 <div class="pt-16 pb-6">
     <div class="container grid px-8">
       <div class="stage-background absolute inset-0">
-        <video src="/content/portfolio.webm" width="1280" height="720" class="w-full h-full" muted autoplay playsinline loop />
+        <video src={siteAssets.portfolioVideo} width="1280" height="720" class="w-full h-full" muted autoplay playsinline loop />
       </div>
 
       <div class="logo">
-          <a-animation width={200} height={400} src="/logo.riv"></a-animation>
+          <a-animation width={200} height={400} src={siteAssets.logoRive}></a-animation>
       </div>
 
       <Introduction />

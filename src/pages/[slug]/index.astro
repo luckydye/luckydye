@@ -1,100 +1,118 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 
 import Headline from "../../components/Headline.astro";
+import PageContent from "../../components/PageContent.astro";
 import Page from "../../layouts/default.astro";
+import {
+  formatDate,
+  sourceCollection,
+  toWebsitePost,
+  type VektorEntry,
+  type WebsitePost,
+} from "../../vektor-content";
 
 export interface Props {
-    post: CollectionEntry<"post">;
+  type: "post" | "page";
+  entry: VektorEntry;
+  post?: WebsitePost;
 }
 
 export async function getStaticPaths() {
-    const allPosts = await getCollection("post");
-    return allPosts
-        .map((post) => {
-            const slug = post.id;
-            const isDraft = slug.includes("-draft-");
-            return {
-                params: { slug },
-                props: { post, isDraft },
-            };
-        })
-        .filter((post) => {
-            return import.meta.env.DEV || !post.props.isDraft;
-        });
+  const entries = await getCollection("pages");
+  return entries
+    .filter((entry) => ["post", "page"].includes(sourceCollection(entry) ?? ""))
+    .map((entry) => {
+      const collection = sourceCollection(entry);
+      const post = collection === "post" ? toWebsitePost(entry) : undefined;
+      return {
+        params: { slug: entry.id },
+        props: {
+          type: collection === "post" ? ("post" as const) : ("page" as const),
+          entry,
+          post,
+        },
+      };
+    });
 }
 
-const { post } = Astro.props;
-
-const postData = post?.data;
-const { Content } = await render(post);
+const props = Astro.props;
+const pageData = props.entry.data;
+const postData = props.post?.data;
 ---
 
-<Page
-    meta={{
-        title: `${postData?.title} - luckydye`,
-        description: postData?.description,
-    }}
->
-    <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
+{
+  props.type === "post" && postData ? (
+    <Page
+      meta={{
+        title: `${postData.title} - luckydye`,
+        description: postData.description,
+      }}
+    >
+      <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
         <div class="container my-40 text-lg">
-            <Headline>{postData?.title}</Headline>
+          <Headline>{postData.title}</Headline>
 
-            <div class="flex gap-2 items-center pb-2 text-sm text-zinc-400">
-                {
-                    postData.topics
-                        ? postData.topics.map((topic) => {
-                              return (
-                                  <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">
-                                      {topic}
-                                  </div>
-                              );
-                          })
-                        : null
-                }
+          <div class="flex gap-2 items-center pb-2 text-sm text-zinc-400">
+            {postData.topics
+              ? postData.topics.map((topic) => (
+                  <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">
+                    {topic}
+                  </div>
+                ))
+              : null}
+          </div>
+
+          <div class="flex justify-start text-base opacity-50 pb-20 gap-6">
+            <time>{formatDate(postData.date)}</time>
+
+            {postData.author ? (
+              <div>
+                by{" "}
+                <a class="underline" href="/">
+                  {postData.author}
+                </a>
+              </div>
+            ) : null}
+          </div>
+
+          <div class="pb-6 text-zinc-400">{postData.description}</div>
+
+          {postData.content ? <PageContent html={postData.content} /> : null}
+
+          {postData.links ? (
+            <div class="pt-20">
+              <h2>Links</h2>
+              {postData.links.map((link) => (
+                <div>
+                  <a target="_blank" href={link}>
+                    {link}
+                  </a>
+                </div>
+              ))}
             </div>
-
-            <div class="flex justify-start text-base opacity-50 pb-20 gap-6">
-                <time>
-                    {postData.date?.toLocaleDateString()}
-                </time>
-
-                {
-                    postData.author ? (
-                        <div>
-                            by{" "}
-                            <a class="underline" href="/">
-                                {postData.author}
-                            </a>
-                        </div>
-                    ) : null
-                }
-            </div>
-            
-            <div class="pb-6 text-zinc-400">
-                {postData.description}
-            </div>
-
-            <div class="content">
-                <Content />
-            </div>
-
-            {
-                postData.links ? (
-                    <div class="pt-20">
-                        <h2>Links</h2>
-                        {postData.links.map((link) => {
-                            return (
-                                <div>
-                                    <a target="_blank" href={link}>
-                                        {link}
-                                    </a>
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : null
-            }
+          ) : null}
         </div>
-    </main>
-</Page>
+      </main>
+    </Page>
+  ) : null
+}
+
+{
+  props.type === "page" ? (
+    <Page
+      meta={{
+        title: `${pageData.title ?? props.entry.id} - luckydye`,
+        description: pageData.properties.description,
+      }}
+    >
+      <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
+        <div class="container my-40 text-lg">
+          <Headline>{pageData.title ?? props.entry.id}</Headline>
+
+          {pageData.content ? <PageContent html={pageData.content} /> : null}
+        </div>
+      </main>
+    </Page>
+  ) : null
+}

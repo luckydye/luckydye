@@ -1,6 +1,6 @@
 [tools]
 bun = "1.2.21"
-node = "20"
+node = "latest"
 
 [tasks.setup]
 description = "Install dependencies"

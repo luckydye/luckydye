@@ -1,7 +1,9 @@
 ---
 import "../style/main.css";
 
+import { getCollection } from "astro:content";
 import Link from "../components/Link.astro";
+import { getSiteAssets } from "../vektor-content";
 
 import { svg } from "svg-sprites:sheet";
 
@@ -14,6 +16,7 @@ export type Props = {
 };
 
 const props = Astro.props;
+const siteAssets = getSiteAssets(await getCollection("pages"));
 ---
 
 <script>
@@ -44,7 +47,7 @@ const props = Astro.props;
       ) : null
     }
 
-    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href={siteAssets.favicon} type="image/x-icon" />
 
     <script defer src="https://abc.luckydye.de/script.js" data-website-id="0be44dad-9f23-410d-ae1f-61b43415cd5d"></script>
 

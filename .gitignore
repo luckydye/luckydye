@@ -5,3 +5,5 @@ dist
 .task
 .vercel
 .DS_Store
+.env
+public/vektor-assets

@@ -1,5 +1,6 @@
 ---
-import { getCollection, getDataEntryById } from "astro:content";
+import { getCollection } from "astro:content";
+import { sourceCollection, toWebsiteLink } from "../vektor-content";
 
 interface Props {
   link: string;
@@ -7,10 +8,13 @@ interface Props {
 
 const { link } = Astro.props;
 
-const linkEntry = (await getCollection("link")).find((entry) => entry.id === link);
+const linkEntry = (await getCollection("pages"))
+  .filter((entry) => sourceCollection(entry) === "link")
+  .map(toWebsiteLink)
+  .find((entry) => entry.id === link);
 ---
 
-<a href={linkEntry?.data.link} target={linkEntry?.data.target}>
+<a href={linkEntry?.link} target={linkEntry?.target}>
   <slot />
 </a>
 

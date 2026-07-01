@@ -25,6 +25,7 @@ export type WebsitePost = {
     url?: string;
     links?: string[];
     images?: WebsiteImage[];
+    headerImage?: string;
     layout?: string;
     content?: string;
   };
@@ -92,6 +93,7 @@ export function toWebsitePost(entry: VektorEntry): WebsitePost {
       url: properties.url,
       links: parseJsonArray(properties.links),
       images,
+      headerImage: entry.data.headerImage ?? undefined,
       layout: properties.layout,
       content: entry.data.content ?? undefined,
     },

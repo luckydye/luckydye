@@ -10,7 +10,7 @@
     "prepare": "git lfs pull || true"
   },
   "dependencies": {
-    "@vektorapp/api": "^0.2.2"
+    "@vektorapp/api": "^0.2.3"
   },
   "devDependencies": {
     "@sv/elements": "^2.13.0",

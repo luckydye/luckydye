@@ -26,6 +26,7 @@ export const collections = {
       docId: z.string(),
       parentId: z.string().nullable(),
       title: z.string().nullable(),
+      headerImage: z.string().nullable(),
       content: z.string().nullable(),
       updatedAt: z.string(),
       currentRev: z.number(),

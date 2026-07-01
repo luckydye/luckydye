@@ -1,8 +1,8 @@
-import type { CollectionEntry } from "astro:content";
+import { formatDate, type WebsitePost } from "../vektor-content";
 
 const MAX_TOPICS = 3;
 
-export function Teaser(props: { post: CollectionEntry<"post"> }) {
+export function Teaser(props: { post: WebsitePost }) {
   return (
     <article class="teaser relative">
       <div>
@@ -28,7 +28,7 @@ export function Teaser(props: { post: CollectionEntry<"post"> }) {
           </ul>
           <div class="flex flex-wrap items-center gap-4">
             <div class="text-base opacity-75">
-              {props.post.data.date?.toLocaleDateString()}
+              {formatDate(props.post.data.date)}
             </div>
           </div>
         </div>

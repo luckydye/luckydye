@@ -1,11 +1,14 @@
-import type { CollectionEntry } from "astro:content";
 import { getPostType } from "../utils";
+import type { WebsitePost } from "../vektor-content";
 import { Images } from "./Images";
 import { Project } from "./Project";
 import { Teaser } from "./Teaser";
 import { twMerge } from "tailwind-merge";
 
-export function Post(props: { post: CollectionEntry<"post"> }) {
+const layoutClassSafelist = "md:col-span-4";
+void layoutClassSafelist;
+
+export function Post(props: { post: WebsitePost }) {
   const type = getPostType(props.post);
 
   return (

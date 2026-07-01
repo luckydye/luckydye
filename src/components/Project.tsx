@@ -1,7 +1,7 @@
-import type { CollectionEntry } from "astro:content";
+import { formatDate, type WebsitePost } from "../vektor-content";
 import { LinkButton } from "./LinkButton";
 
-export function Project(props: { post: CollectionEntry<"post"> }) {
+export function Project(props: { post: WebsitePost }) {
   return (
     <div class="relative">
       <div class="caption absolute inset-0">
@@ -20,7 +20,7 @@ export function Project(props: { post: CollectionEntry<"post"> }) {
               );
             })}
             <div class="text-base opacity-75">
-              {props.post.data.date?.toLocaleDateString()}
+              {formatDate(props.post.data.date)}
             </div>
           </div>
         </div>

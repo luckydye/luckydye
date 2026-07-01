@@ -4,16 +4,21 @@ import { FilteredPosts } from "../components/FilteredPosts";
 import SectionLink from "../components/SectionLink.astro";
 import Stage from "../components/Stage.astro";
 import Page from "../layouts/default.astro";
+import { sourceCollection, toWebsitePost, toWebsiteTag } from "../vektor-content";
 
 const excludeTags = ["gallary", "project", "post"];
 
-const tags = await getCollection("tags")
-  .then((tags) => tags.map((tag) => tag.data))
-  .then((tags) => tags.filter((tag) => !excludeTags.includes(tag.id)));
+const entries = await getCollection("pages");
 
-const posts = await getCollection("post").then((posts) => {
-  return posts.filter((post) => !post.id.includes("-draft-"));
-});
+const tags = entries
+  .filter((entry) => sourceCollection(entry) === "tags")
+  .map(toWebsiteTag)
+  .filter((tag) => !excludeTags.includes(tag.id));
+
+const posts = entries
+  .filter((entry) => sourceCollection(entry) === "post")
+  .map(toWebsitePost)
+  .filter((post) => !post.id.includes("-draft-"));
 ---
 
 <Page

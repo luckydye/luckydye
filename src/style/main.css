@@ -2,8 +2,6 @@
 @import "tailwindcss/theme";
 @import "tailwindcss/utilities";
 
-@source "../../content/post";
-
 @import "./global.css";
 @import "./images.css";
 @import "./project.css";

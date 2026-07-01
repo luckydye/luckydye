@@ -1,10 +1,10 @@
 import "@sv/elements/track";
-import type { CollectionEntry } from "astro:content";
+import { formatDate, type WebsiteImage } from "../vektor-content";
 
 export function Images(props: {
-  images: CollectionEntry<"post">["data"]["images"];
+  images: WebsiteImage[] | undefined;
   title: string;
-  date: Date;
+  date?: string;
 }) {
   return (
     <div class="images relative">
@@ -33,11 +33,7 @@ export function Images(props: {
       <div class="circle pt-5">
         <div class="title inline-flex w-[calc(100%-180px)] justify-between">
           <span>{props.title}</span>
-          {props.date && (
-            <span class="opacity-50">
-              {props.date.toUTCString().split(" ").slice(2, 4).join(" ")}
-            </span>
-          )}
+          {props.date && <span class="opacity-50">{formatDate(props.date)}</span>}
         </div>
       </div>
     </div>

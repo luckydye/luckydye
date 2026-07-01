@@ -1,6 +1,5 @@
 import { getPostType } from "../utils";
 import type { WebsitePost } from "../vektor-content";
-import { Images } from "./Images";
 import { Project } from "./Project";
 import { Teaser } from "./Teaser";
 import { twMerge } from "tailwind-merge";

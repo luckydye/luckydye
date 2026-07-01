@@ -1,9 +1,6 @@
 import type { WebsitePost } from "./vektor-content";
 
 export function getPostType(post: WebsitePost) {
-  if ((post.data.images?.length || 0) > 1) {
-    return "images";
-  }
   if (post.data.tags?.find((t) => t.id === "project")) {
     return "project";
   }

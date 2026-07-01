@@ -14,7 +14,7 @@ const vektorCurrentLoader: Loader = import.meta.env.VEKTOR_URL
         revision: "current",
         assetMode: "download",
         propertyFilters: { sourceCollection: null },
-        assetProperties: ["images", "assets"],
+        assetProperties: ["assets"],
       },
     )
   : { name: "vektor-loader-disabled", load: async () => {} };

@@ -7,12 +7,6 @@ export type WebsiteTag = {
   title: string;
 };
 
-export type WebsiteImage = {
-  src: string;
-  width: number;
-  height: number;
-};
-
 export type WebsitePost = {
   id: string;
   data: {
@@ -24,7 +18,6 @@ export type WebsitePost = {
     date?: string;
     url?: string;
     links?: string[];
-    images?: WebsiteImage[];
     headerImage?: string;
     layout?: string;
     content?: string;
@@ -75,11 +68,6 @@ export function sourceCollection(entry: VektorEntry): string | undefined {
 export function toWebsitePost(entry: VektorEntry): WebsitePost {
   const properties = entry.data.properties;
   const tags = parseJsonArray(properties.tags)?.map((id) => ({ id, title: id }));
-  const images = parseJsonArray(properties.images)?.map((src) => ({
-    src,
-    width: 16,
-    height: 9,
-  }));
 
   return {
     id: properties.slug ?? entry.id,
@@ -92,7 +80,6 @@ export function toWebsitePost(entry: VektorEntry): WebsitePost {
       date: properties.date,
       url: properties.url,
       links: parseJsonArray(properties.links),
-      images,
       headerImage: entry.data.headerImage ?? undefined,
       layout: properties.layout,
       content: entry.data.content ?? undefined,

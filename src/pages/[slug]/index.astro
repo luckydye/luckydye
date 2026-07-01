@@ -2,99 +2,125 @@
 import { type CollectionEntry, getCollection, render } from "astro:content";
 
 import Headline from "../../components/Headline.astro";
+import PageContent from "../../components/PageContent.astro";
 import Page from "../../layouts/default.astro";
 
 export interface Props {
-    post: CollectionEntry<"post">;
+    type: "post" | "vektor";
+    post?: CollectionEntry<"post">;
+    page?: CollectionEntry<"pages">;
 }
 
 export async function getStaticPaths() {
     const allPosts = await getCollection("post");
-    return allPosts
+    const postPaths = allPosts
         .map((post) => {
             const slug = post.id;
             const isDraft = slug.includes("-draft-");
             return {
                 params: { slug },
-                props: { post, isDraft },
+                props: { type: "post" as const, post, isDraft },
             };
         })
         .filter((post) => {
             return import.meta.env.DEV || !post.props.isDraft;
         });
+
+    const postSlugs = new Set(postPaths.map((post) => post.params.slug));
+
+    const vektorPages = await getCollection("pages");
+    const vektorPaths = vektorPages
+        .filter((page) => !postSlugs.has(page.id))
+        .map((page) => ({
+            params: { slug: page.id },
+            props: { type: "vektor" as const, page },
+        }));
+
+    return [...postPaths, ...vektorPaths];
 }
 
-const { post } = Astro.props;
+const props = Astro.props;
 
-const postData = post?.data;
-const { Content } = await render(post);
+const postData = props.type === "post" ? props.post.data : null;
+const Content = props.type === "post" ? (await render(props.post)).Content : null;
+
+const pageData = props.type === "vektor" ? props.page.data : null;
+const pageId = props.type === "vektor" ? props.page.id : null;
 ---
 
-<Page
-    meta={{
-        title: `${postData?.title} - luckydye`,
-        description: postData?.description,
-    }}
->
-    <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
-        <div class="container my-40 text-lg">
-            <Headline>{postData?.title}</Headline>
+{
+    postData && Content ? (
+        <Page
+            meta={{
+                title: `${postData.title} - luckydye`,
+                description: postData.description,
+            }}
+        >
+            <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
+                <div class="container my-40 text-lg">
+                    <Headline>{postData.title}</Headline>
 
-            <div class="flex gap-2 items-center pb-2 text-sm text-zinc-400">
-                {
-                    postData.topics
-                        ? postData.topics.map((topic) => {
-                              return (
+                    <div class="flex gap-2 items-center pb-2 text-sm text-zinc-400">
+                        {postData.topics
+                            ? postData.topics.map((topic) => (
                                   <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">
                                       {topic}
                                   </div>
-                              );
-                          })
-                        : null
-                }
-            </div>
+                              ))
+                            : null}
+                    </div>
 
-            <div class="flex justify-start text-base opacity-50 pb-20 gap-6">
-                <time>
-                    {postData.date?.toLocaleDateString()}
-                </time>
+                    <div class="flex justify-start text-base opacity-50 pb-20 gap-6">
+                        <time>{postData.date?.toLocaleDateString()}</time>
 
-                {
-                    postData.author ? (
-                        <div>
-                            by{" "}
-                            <a class="underline" href="/">
-                                {postData.author}
-                            </a>
-                        </div>
-                    ) : null
-                }
-            </div>
-            
-            <div class="pb-6 text-zinc-400">
-                {postData.description}
-            </div>
+                        {postData.author ? (
+                            <div>
+                                by{" "}
+                                <a class="underline" href="/">
+                                    {postData.author}
+                                </a>
+                            </div>
+                        ) : null}
+                    </div>
 
-            <div class="content">
-                <Content />
-            </div>
+                    <div class="pb-6 text-zinc-400">{postData.description}</div>
 
-            {
-                postData.links ? (
-                    <div class="pt-20">
-                        <h2>Links</h2>
-                        {postData.links.map((link) => {
-                            return (
+                    <div class="content">
+                        <Content />
+                    </div>
+
+                    {postData.links ? (
+                        <div class="pt-20">
+                            <h2>Links</h2>
+                            {postData.links.map((link) => (
                                 <div>
                                     <a target="_blank" href={link}>
                                         {link}
                                     </a>
                                 </div>
-                            );
-                        })}
-                    </div>
-                ) : null
-            }
-        </div>
-    </main>
-</Page>
+                            ))}
+                        </div>
+                    ) : null}
+                </div>
+            </main>
+        </Page>
+    ) : null
+}
+
+{
+    pageData ? (
+        <Page
+            meta={{
+                title: `${pageData.title ?? pageId} - luckydye`,
+            }}
+        >
+            <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
+                <div class="container my-40 text-lg">
+                    <Headline>{pageData.title ?? pageId}</Headline>
+
+                    {pageData.content ? <PageContent html={pageData.content} /> : null}
+                </div>
+            </main>
+        </Page>
+    ) : null
+}

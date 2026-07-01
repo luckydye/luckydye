@@ -1,5 +1,22 @@
+import type { Loader } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 import { glob } from "astro/loaders";
+import { createVektorClient } from "@vektorapp/api";
+import { vektorLoader } from "@vektorapp/api/loader";
+
+// Vektor isn't configured for every environment (e.g. no VEKTOR_URL set yet),
+// so fall back to a no-op loader instead of failing dev/build on a fetch error.
+const emptyLoader: Loader = { name: "vektor-loader-disabled", load: async () => {} };
+
+const pagesLoader = import.meta.env.VEKTOR_URL
+  ? vektorLoader(
+      createVektorClient({
+        baseUrl: import.meta.env.VEKTOR_URL,
+        accessToken: import.meta.env.VEKTOR_ACCESS_TOKEN,
+      }),
+      import.meta.env.VEKTOR_SPACE_ID || undefined,
+    )
+  : emptyLoader;
 
 export const collections = {
   link: defineCollection({
@@ -41,5 +58,17 @@ export const collections = {
         description: z.string().optional(),
         date: z.date().optional(),
       }),
+  }),
+  pages: defineCollection({
+    loader: pagesLoader,
+    schema: z.object({
+      docId: z.string(),
+      parentId: z.string().nullable(),
+      title: z.string().nullable(),
+      headerImage: z.string().nullable(),
+      content: z.string().nullable(),
+      updatedAt: z.string(),
+      properties: z.record(z.string()),
+    }),
   }),
 };

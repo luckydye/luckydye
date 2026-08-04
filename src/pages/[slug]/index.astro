@@ -7,6 +7,7 @@ import Page from "../../layouts/default.astro";
 import {
   formatDate,
   sourceCollection,
+  toWebsitePage,
   toWebsitePost,
   type VektorEntry,
   type WebsitePost,
@@ -37,7 +38,7 @@ export async function getStaticPaths() {
 }
 
 const props = Astro.props;
-const pageData = props.entry.data;
+const pageData = toWebsitePage(props.entry);
 const postData = props.post?.data;
 ---
 
@@ -102,13 +103,13 @@ const postData = props.post?.data;
   props.type === "page" ? (
     <Page
       meta={{
-        title: `${pageData.title ?? props.entry.id} - luckydye`,
-        description: pageData.properties.description,
+        title: `${pageData.title} - luckydye`,
+        description: pageData.description,
       }}
     >
       <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
         <div class="container my-40 text-lg">
-          <Headline>{pageData.title ?? props.entry.id}</Headline>
+          <Headline>{pageData.title}</Headline>
 
           {pageData.content ? <PageContent html={pageData.content} /> : null}
         </div>

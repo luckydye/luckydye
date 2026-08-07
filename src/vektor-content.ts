@@ -20,7 +20,8 @@ export type WebsitePost = {
 		url?: string;
 		links?: string[];
 		headerImage?: string;
-		layout?: string;
+		/** Number of grid columns the post tile occupies, 1 to 6. */
+		size?: string;
 		content?: string;
 	};
 };
@@ -101,7 +102,7 @@ export function toWebsitePost(entry: VektorEntry): WebsitePost {
 			url: propertyScalar(properties.url),
 			links: propertyList(properties.links),
 			headerImage: entry.data.headerImage ?? undefined,
-			layout: propertyScalar(properties.layout),
+			size: propertyScalar(properties.size),
 			content: entry.data.content ?? undefined,
 		},
 	};

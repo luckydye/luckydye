@@ -1,6 +1,24 @@
+:root {
+  color-scheme: light dark;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1200px;
+}
+
+/*
+ * Reading measure for long-form pages. Body copy is already capped at 880px
+ * further down, so this pulls the surrounding chrome — metadata rows, images,
+ * code blocks — in line with the text instead of out-denting it to 1200px.
+ *
+ * Declared after .container, and as a class rather than a max-w-* utility,
+ * because Tailwind's utilities are emitted earlier in the sheet and would lose
+ * to .container at equal specificity.
+ */
+.container-prose {
+  margin: 0 auto;
+  max-width: 960px;
 }
 
 body {
@@ -51,7 +69,7 @@ p code {
   font-size: 0.8em;
   margin-left: 0.25rem;
   margin-right: 0.25rem;
-  background: #24292f;
+  background: var(--color-bg-1);
   padding: 0.2rem;
 }
 
@@ -108,7 +126,7 @@ section::after {
   bottom: 0;
   left: calc(50% - 50vw);
   position: absolute;
-  border-bottom: 1px solid #ffffff0d;
+  border-bottom: 1px solid var(--color-line);
   pointer-events: none;
 }
 
@@ -119,7 +137,7 @@ main::after {
   left: calc(50% - 195px);
   position: fixed;
   z-index: -1;
-  border-left: 1px solid #ffffff0d;
+  border-left: 1px solid var(--color-line);
   pointer-events: none;
 }
 
@@ -130,11 +148,7 @@ body::after {
   right: 0;
   width: 100%;
   height: 1200px;
-  background: linear-gradient(
-    40deg,
-    transparent 42%,
-    hsl(37.04deg 59.12% 80.14% / 9.02%)
-  );
+  background: linear-gradient(40deg, transparent 42%, var(--glow-warm));
   z-index: -1;
 }
 
@@ -146,7 +160,7 @@ body::before {
   right: 0;
   width: 100%;
   height: 1200px;
-  background: linear-gradient(0deg, transparent 69%, hsl(201deg 100% 69% / 9%));
+  background: linear-gradient(0deg, transparent 69%, var(--glow-cool));
   z-index: -1;
 }
 

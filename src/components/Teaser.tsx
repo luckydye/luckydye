@@ -13,7 +13,7 @@ export function Teaser(props: { post: WebsitePost }) {
                   return (
                     <li
                       key={index}
-                      class="inline-block rounded-md bg-zinc-800 px-2 py-1 text-sm capitalize opacity-70"
+                      class="inline-block rounded-md bg-bg-1 px-2 py-1 text-sm capitalize opacity-70"
                     >
                       {topic}
                     </li>
@@ -21,7 +21,7 @@ export function Teaser(props: { post: WebsitePost }) {
                 })
               : null}
             {props.post.data.topics && props.post.data.topics.length > MAX_TOPICS && (
-              <li class="inline-block rounded-md bg-zinc-800 px-2 py-1 text-sm capitalize opacity-70">
+              <li class="inline-block rounded-md bg-bg-1 px-2 py-1 text-sm capitalize opacity-70">
                 +{props.post.data.topics.length - MAX_TOPICS}
               </li>
             )}

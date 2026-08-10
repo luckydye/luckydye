@@ -3,10 +3,10 @@ import { twMerge } from "tailwind-merge";
 
 const variants = {
   default: [
-    "group w-full resize-y rounded-md border border-zinc-700 bg-transparent leading-normal px-3 py-1 hover:border-zinc-600 focus:border-zinc-500",
-    "outline-none focus-visible:ring focus-visible:ring-zinc-500",
+    "group w-full resize-y rounded-md border border-fg-1 bg-transparent leading-normal px-3 py-1 hover:border-fg-0 focus:border-fg-0",
+    "outline-none focus-visible:ring focus-visible:ring-fg-0",
   ],
-  error: ["border-red-600"],
+  error: ["border-danger"],
 };
 
 export type InputProps = {
@@ -39,7 +39,7 @@ export function Input(props: InputProps & ParentProps) {
       <div class="text-sm">
         <label
           class={twMerge(
-            "pb-5 font-bold text-green-200 text-xs uppercase",
+            "pb-5 font-bold text-fg-0 text-xs uppercase",
             props.multiline ? "mx-5 lg:mx-0" : "",
           )}
           for={props.id}
@@ -108,7 +108,7 @@ export function Input(props: InputProps & ParentProps) {
       </div>
 
       {props.error ? (
-        <div class="pt-2 text-md text-yellow">
+        <div class="pt-2 text-md text-danger">
           <label for={props.id}>{props.error}</label>
         </div>
       ) : null}

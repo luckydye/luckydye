@@ -27,7 +27,7 @@ export function FilteredPosts(props: {
   return (
     <div class="pt-10 px-5">
       <div class={twMerge(
-        "grid grid-cols-6 max-w-[1600px] mx-auto gap-x-4 gap-y-8"
+        "grid grid-cols-6 max-w-[1200px] mx-auto gap-x-4 gap-y-8"
       )}>
         {posts().length > 0 ? posts() : <p>No posts found</p>}
       </div>

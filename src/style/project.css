@@ -19,9 +19,9 @@
   left: 0;
   background: linear-gradient(
     -25deg,
-    hsl(240 3% 9% / 1) -10%,
-    var(--color-bg-0),
-    rgba(20, 20, 22, 0.25) 50%
+    var(--scrim-edge) -10%,
+    var(--bg-0),
+    var(--scrim-veil) 50%
   );
 }
 h2 {

@@ -51,13 +51,13 @@ const postData = props.post?.data;
       }}
     >
       <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
-        <div class="container my-40 text-lg">
+        <div class="container-prose my-40 text-lg">
           <Headline>{postData.title}</Headline>
 
-          <div class="flex gap-2 items-center pb-2 text-sm text-zinc-400">
+          <div class="flex gap-2 items-center pb-2 text-sm text-fg-0">
             {postData.topics
               ? postData.topics.map((topic) => (
-                  <div class="capitalize rounded-md bg-zinc-800 inline-block px-2 py-1">
+                  <div class="capitalize rounded-md bg-bg-1 inline-block px-2 py-1">
                     {topic}
                   </div>
                 ))
@@ -77,7 +77,7 @@ const postData = props.post?.data;
             ) : null}
           </div>
 
-          <div class="pb-6 text-zinc-400">{postData.description}</div>
+          <div class="pb-6 text-fg-0">{postData.description}</div>
 
           {postData.content ? <PageContent html={postData.content} /> : null}
 
@@ -108,7 +108,7 @@ const postData = props.post?.data;
       }}
     >
       <main slot="main" class="overflow-hidden mx-auto px-8 pt-20">
-        <div class="container my-40 text-lg">
+        <div class="container-prose my-40 text-lg">
           <Headline>{pageData.title}</Headline>
 
           {pageData.content ? <PageContent html={pageData.content} /> : null}

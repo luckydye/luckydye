@@ -6,7 +6,7 @@
   xmlns="http://www.w3.org/2000/svg"
 >
   <g opacity="0.69">
-    <rect x="0.5" y="3.6739" width="6.82609" height="6.82609" stroke="white" />
-    <path d="M5.21729 1H9.99989V5.34783" stroke="white" />
+    <rect x="0.5" y="3.6739" width="6.82609" height="6.82609" stroke="currentColor" />
+    <path d="M5.21729 1H9.99989V5.34783" stroke="currentColor" />
   </g>
 </svg>

@@ -23,6 +23,10 @@
     max-width: 600px;
   }
 
+  .caption h1 {
+    font-weight: var(--weight-display);
+  }
+
   /* Links */
 
   :root {
@@ -30,12 +34,12 @@
   }
 
   a.text-link[href] {
-    color: var(--color-zinc-400);
+    color: var(--color-fg-0);
     @apply no-underline;
   }
 
   a.text-link[href]:hover {
-    color: white;
+    color: var(--color-text);
     @apply underline;
   }
 

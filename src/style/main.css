@@ -6,17 +6,99 @@
 @import "./images.css";
 @import "./project.css";
 
+/*
+ * Theming
+ *
+ * Every themed value is a plain custom property declared twice below: once on
+ * :root for light mode, once under prefers-color-scheme: dark. Nothing else in
+ * the codebase should hardcode a colour — read these vars instead, and both
+ * modes come for free.
+ *
+ * The @theme block only maps the palette onto Tailwind's --color-* namespace so
+ * utilities (bg-bg-1, text-fg-0, border-fg-1, …) resolve through the same vars.
+ */
 @theme {
-  --color-bg-0: hsl(180 2% 10% / 1);
-  --color-bg-1: hsl(240 3% 15% / 1);
-  --color-fg-0: #4e5b5c;
-  --color-fg-1: hsl(240 3% 20% / 1);
-  --color-accent: #eb9124;
-  --color-text: #f9f6f4;
+  --color-bg-0: var(--bg-0);
+  --color-bg-1: var(--bg-1);
+  --color-fg-0: var(--fg-0);
+  --color-fg-1: var(--fg-1);
+  --color-accent: var(--accent);
+  --color-text: var(--text);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
 
   --breakpoint-\*: initial;
   --breakpoint-sm: 690px;
   --breakpoint-md: 1200px;
   --breakpoint-lg: 1600px;
   --breakpoint-xl: 2200px;
+}
+
+:root {
+  /* Palette */
+  --bg-0: hsl(40 20% 98% / 1);
+  --bg-1: hsl(40 12% 92% / 1);
+  --fg-0: #5a6668;
+  --fg-1: hsl(40 8% 85% / 1);
+  --accent: #a8560a;
+  --text: #1b1a19;
+  --danger: #c02626;
+
+  /* Hairline rules drawn over the page background. */
+  --line: rgb(0 0 0 / 0.08);
+
+  /* Ambient corner tints behind the page content. */
+  --glow-warm: hsl(37.04deg 70% 55% / 14%);
+  --glow-cool: hsl(201deg 90% 50% / 12%);
+
+  /*
+   * Scrims that fade imagery and video into the page. --scrim-clear must be the
+   * page ground at zero alpha rather than `transparent`, so the midpoint of a
+   * gradient never muddies toward the opposite theme.
+   */
+  --scrim-edge: var(--bg-1);
+  --scrim-veil: rgb(255 255 255 / 0.25);
+  --scrim-clear: rgb(255 255 255 / 0);
+
+  /* Video sits behind text, so it is pushed away from the page ground. */
+  --media-brightness: 0.95;
+
+  /*
+   * Display headings. Dark-on-light renders optically thinner than light-on-dark,
+   * which blooms, so light mode needs a step more weight to match the dark design.
+   */
+  --weight-display: 400;
+
+  /*
+   * The logo's colours are baked into logo.riv as a light-on-dark mark, so light
+   * mode flips it rather than shipping a second asset.
+   */
+  --logo-filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-0: hsl(180 2% 10% / 1);
+    --bg-1: hsl(240 3% 15% / 1);
+    --fg-0: #4e5b5c;
+    --fg-1: hsl(240 3% 20% / 1);
+    --accent: #eb9124;
+    --text: #f9f6f4;
+    --danger: #f87171;
+
+    --line: rgb(255 255 255 / 0.05);
+
+    --glow-warm: hsl(37.04deg 59.12% 80.14% / 9.02%);
+    --glow-cool: hsl(201deg 100% 69% / 9%);
+
+    --scrim-edge: hsl(240 3% 9% / 1);
+    --scrim-veil: rgb(20 20 22 / 0.25);
+    --scrim-clear: rgb(15 15 15 / 0);
+
+    --media-brightness: 0.75;
+
+    --weight-display: 300;
+
+    --logo-filter: none;
+  }
 }

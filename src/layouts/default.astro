@@ -28,7 +28,16 @@ const siteAssets = getSiteAssets(await getCollection("pages"));
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="theme-color" content="#1e1e20" />
+    <meta
+      name="theme-color"
+      content="#faf8f5"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1e1e20"
+      media="(prefers-color-scheme: dark)"
+    />
 
     <title>{props.meta?.title}</title>
 

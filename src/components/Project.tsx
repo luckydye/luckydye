@@ -34,7 +34,7 @@ export function Project(props: { post: WebsitePost }) {
             <a
               target="_blank"
               href={props.post.data.url}
-              class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit whitespace-nowrap"
+              class="border border-fg-1 px-4 py-2 text-base transition-all hover:bg-bg-1 active:bg-inherit whitespace-nowrap"
               rel="noreferrer"
               style="text-decoration: none;"
             >
@@ -50,7 +50,7 @@ export function Project(props: { post: WebsitePost }) {
                   fill-rule="evenodd"
                   clip-rule="evenodd"
                   d="M0.191712 15.81C-0.063904 15.5567 -0.063904 15.146 0.191712 14.8927L7.14706 8L0.191712 1.10731C-0.0639038 0.853999 -0.0639038 0.443298 0.191712 0.189984C0.447328 -0.063329 0.861763 -0.063329 1.11738 0.189984L8.53556 7.54134C8.79118 7.79465 8.79118 8.20535 8.53556 8.45866L1.11738 15.81C0.861763 16.0633 0.447328 16.0633 0.191712 15.81Z"
-                  fill="white"
+                  fill="currentColor"
                 />
               </svg>
             </a>
@@ -62,7 +62,7 @@ export function Project(props: { post: WebsitePost }) {
                   key={link}
                   target="_blank"
                   href={link}
-                  class="border border-zinc-700 px-4 py-2 text-base transition-all hover:bg-zinc-900 active:bg-inherit whitespace-nowrap"
+                  class="border border-fg-1 px-4 py-2 text-base transition-all hover:bg-bg-1 active:bg-inherit whitespace-nowrap"
                   rel="noreferrer"
                   style="text-decoration: none;"
                 >
@@ -78,7 +78,7 @@ export function Project(props: { post: WebsitePost }) {
                       fill-rule="evenodd"
                       clip-rule="evenodd"
                       d="M0.191712 15.81C-0.063904 15.5567 -0.063904 15.146 0.191712 14.8927L7.14706 8L0.191712 1.10731C-0.0639038 0.853999 -0.0639038 0.443298 0.191712 0.189984C0.447328 -0.063329 0.861763 -0.063329 1.11738 0.189984L8.53556 7.54134C8.79118 7.79465 8.79118 8.20535 8.53556 8.45866L1.11738 15.81C0.861763 16.0633 0.447328 16.0633 0.191712 15.81Z"
-                      fill="white"
+                      fill="currentColor"
                     />
                   </svg>
                 </a>

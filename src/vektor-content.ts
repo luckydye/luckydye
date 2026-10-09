@@ -83,7 +83,7 @@ function propertyRecord(
 }
 
 export function sourceCollection(entry: VektorEntry): string | undefined {
-	return propertyScalar(entry.data.properties.sourceCollection);
+	return propertyScalar(entry.data.properties.sourcecollection);
 }
 
 export function toWebsitePost(entry: VektorEntry): WebsitePost {

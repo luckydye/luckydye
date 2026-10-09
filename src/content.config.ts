@@ -32,7 +32,17 @@ export const collections = {
 			currentRev: z.number(),
 			publishedRev: z.number().nullable(),
 			// A Vektor property holds a single value or a list of them.
-			properties: z.record(z.union([z.string(), z.array(z.string())])),
+			// Keys are lowercased so property names are matched case-insensitively.
+			properties: z
+				.record(z.union([z.string(), z.array(z.string())]))
+				.transform((properties) =>
+					Object.fromEntries(
+						Object.entries(properties).map(([key, value]) => [
+							key.toLowerCase(),
+							value,
+						]),
+					),
+				),
 		}),
 	}),
 };

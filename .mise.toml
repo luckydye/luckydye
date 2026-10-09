@@ -1,28 +1,3 @@
 [tools]
 bun = "1.2.21"
 node = "latest"
-
-[tasks.setup]
-description = "Install dependencies"
-run = [
-  "bun install"
-]
-
-[tasks.dev]
-description = "Dev"
-depends = ["setup"]
-run = [
-  "bun x astro dev"
-]
-
-[tasks.build]
-description = "Build the project"
-depends = ["setup"]
-run = [
-  "bun x astro build"
-]
-
-[tasks.fix]
-run = [
-  "bun x biome check --unsafe --write .",
-]

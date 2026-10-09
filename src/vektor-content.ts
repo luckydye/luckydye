@@ -82,12 +82,24 @@ function propertyRecord(
 	}
 }
 
+/** An entry's properties keyed by lowercased name, so lookups ignore case. */
+function entryProperties(
+	entry: VektorEntry,
+): Record<string, PropertyValue | undefined> {
+	return Object.fromEntries(
+		Object.entries(entry.data.properties).map(([key, value]) => [
+			key.toLowerCase(),
+			value,
+		]),
+	);
+}
+
 export function sourceCollection(entry: VektorEntry): string | undefined {
-	return propertyScalar(entry.data.properties.sourcecollection);
+	return propertyScalar(entryProperties(entry).sourcecollection);
 }
 
 export function toWebsitePost(entry: VektorEntry): WebsitePost {
-	const properties = entry.data.properties;
+	const properties = entryProperties(entry);
 	const tags = propertyList(properties.tags)?.map((id) => ({ id, title: id }));
 
 	return {
@@ -109,7 +121,7 @@ export function toWebsitePost(entry: VektorEntry): WebsitePost {
 }
 
 export function toWebsiteTag(entry: VektorEntry): WebsiteTag {
-	const properties = entry.data.properties;
+	const properties = entryProperties(entry);
 	return {
 		id:
 			propertyScalar(properties.id) ??
@@ -120,7 +132,7 @@ export function toWebsiteTag(entry: VektorEntry): WebsiteTag {
 }
 
 export function toWebsiteLink(entry: VektorEntry): WebsiteLink {
-	const properties = entry.data.properties;
+	const properties = entryProperties(entry);
 	return {
 		id:
 			propertyScalar(properties.id) ??
@@ -133,7 +145,7 @@ export function toWebsiteLink(entry: VektorEntry): WebsiteLink {
 }
 
 export function toWebsitePage(entry: VektorEntry): WebsitePage {
-	const properties = entry.data.properties;
+	const properties = entryProperties(entry);
 	return {
 		title: propertyScalar(properties.title) ?? entry.data.title ?? entry.id,
 		description: propertyScalar(properties.description),
@@ -145,7 +157,7 @@ export function getSiteAssets(entries: VektorEntry[]): SiteAssets {
 	const manifest = entries.find(
 		(entry) => sourceCollection(entry) === "asset-manifest",
 	);
-	return propertyRecord(manifest?.data.properties.assets);
+	return propertyRecord(manifest && entryProperties(manifest).assets);
 }
 
 export function formatDate(value: string | undefined): string | undefined {

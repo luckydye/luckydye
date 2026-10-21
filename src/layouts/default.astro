@@ -1,9 +1,7 @@
 ---
 import "../style/main.css";
 
-import { getCollection } from "astro:content";
 import Link from "../components/Link.astro";
-import { getSiteAssets } from "../vektor-content";
 
 import { svg } from "svg-sprites:sheet";
 
@@ -16,7 +14,6 @@ export type Props = {
 };
 
 const props = Astro.props;
-const siteAssets = getSiteAssets(await getCollection("pages"));
 ---
 
 <script>
@@ -56,7 +53,7 @@ const siteAssets = getSiteAssets(await getCollection("pages"));
       ) : null
     }
 
-    <link rel="shortcut icon" href={siteAssets.favicon} type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 
     <slot name="head" />
   </head>
@@ -70,7 +67,7 @@ const siteAssets = getSiteAssets(await getCollection("pages"));
       <div class="container pt-10 pb-20">
         <h2 class="mb-4 text-2xl">Connect</h2>
         <div class="mb-1">
-          <Link link="mail">t.havlicek@lkydy.dev</Link>
+          <Link href="mailto:t.havlicek@lkydy.dev">t.havlicek@lkydy.dev</Link>
         </div>
       </div>
     </footer>

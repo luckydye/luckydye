@@ -26,25 +26,10 @@ export type WebsitePost = {
 	};
 };
 
-export type WebsiteLink = {
-	id: string;
-	title: string;
-	link: string;
-	target?: string;
-};
-
 export type WebsitePage = {
 	title: string;
 	description?: string;
 	content?: string;
-};
-
-export type SiteAssets = {
-	favicon?: string;
-	logoRive?: string;
-	logoSvg?: string;
-	portfolioVideo?: string;
-	portfolioVideoMp4?: string;
 };
 
 /**
@@ -63,23 +48,6 @@ function propertyList(value: PropertyValue | undefined): string[] | undefined {
 		// Not JSON, so it is a single value.
 	}
 	return [value];
-}
-
-/** Reads a property holding a JSON object, such as the site-asset manifest. */
-function propertyRecord(
-	value: PropertyValue | undefined,
-): Record<string, string> {
-	if (!value || Array.isArray(value)) return {};
-	try {
-		const parsed = JSON.parse(value);
-		return parsed && typeof parsed === "object" && !Array.isArray(parsed)
-			? Object.fromEntries(
-					Object.entries(parsed).map(([key, val]) => [key, String(val)]),
-				)
-			: {};
-	} catch {
-		return {};
-	}
 }
 
 /** An entry's properties keyed by lowercased name, so lookups ignore case. */
@@ -131,19 +99,6 @@ export function toWebsiteTag(entry: VektorEntry): WebsiteTag {
 	};
 }
 
-export function toWebsiteLink(entry: VektorEntry): WebsiteLink {
-	const properties = entryProperties(entry);
-	return {
-		id:
-			propertyScalar(properties.id) ??
-			propertyScalar(properties.slug) ??
-			entry.id,
-		title: propertyScalar(properties.title) ?? entry.data.title ?? entry.id,
-		link: propertyScalar(properties.link) ?? "#",
-		target: propertyScalar(properties.target),
-	};
-}
-
 export function toWebsitePage(entry: VektorEntry): WebsitePage {
 	const properties = entryProperties(entry);
 	return {
@@ -151,13 +106,6 @@ export function toWebsitePage(entry: VektorEntry): WebsitePage {
 		description: propertyScalar(properties.description),
 		content: entry.data.content ?? undefined,
 	};
-}
-
-export function getSiteAssets(entries: VektorEntry[]): SiteAssets {
-	const manifest = entries.find(
-		(entry) => sourceCollection(entry) === "asset-manifest",
-	);
-	return propertyRecord(manifest && entryProperties(manifest).assets);
 }
 
 export function formatDate(value: string | undefined): string | undefined {

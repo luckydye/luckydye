@@ -3,20 +3,28 @@ import { VektorClient } from "@vektorapp/api";
 import { vektorLoader } from "@vektorapp/api/loader";
 import type { Loader } from "astro/loaders";
 
+async function createVektorLoader(): Promise<Loader> {
+	const client = new VektorClient({
+		baseUrl: import.meta.env.VEKTOR_URL,
+		accessToken: import.meta.env.VEKTOR_ACCESS_TOKEN,
+	});
+	const spaceId = import.meta.env.VEKTOR_SPACE_ID;
+	if (!spaceId) throw new Error("VEKTOR_SPACE_ID is required");
+	// Only documents nested directly under the "home" document make up the site.
+	const home = await client.getDocumentBySlug(spaceId, "home-1");
+	if (!home) throw new Error("Vektor document \"home-1\" not found");
+
+	return vektorLoader(client, {
+		spaceId,
+		revision: import.meta.env.PROD ? "published" : "current",
+		assetMode: "download",
+		propertyFilters: { sourceCollection: null },
+		filter: (document) => document.parentId === home.id,
+	});
+}
+
 const vektorCurrentLoader: Loader = import.meta.env.VEKTOR_URL
-	? vektorLoader(
-			new VektorClient({
-				baseUrl: import.meta.env.VEKTOR_URL,
-				accessToken: import.meta.env.VEKTOR_ACCESS_TOKEN,
-			}),
-			{
-				spaceId: import.meta.env.VEKTOR_SPACE_ID,
-				revision: "current",
-				assetMode: "download",
-				propertyFilters: { sourceCollection: null },
-				assetProperties: ["assets"],
-			},
-		)
+	? await createVektorLoader()
 	: { name: "vektor-loader-disabled", load: async () => {} };
 
 export const collections = {

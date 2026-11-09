@@ -42,6 +42,8 @@ import Introduction from "./Introduction.astro";
         flex: none;
         max-height: 100%;
         color: var(--text);
+        /* colour of the streaks (read by Logo.ts); the outline itself uses `color` */
+        border-top-color: var(--logo-hot);
     }
     @media screen and (max-width: 640px) {
         .container {
@@ -59,72 +61,63 @@ import Introduction from "./Introduction.astro";
 
 <style is:global>
     /*
-     * Light cast by the logo onto the page (see Logo.ts). It sits above the
-     * content but never takes input, so text near a streak is lit too.
+     * Light cast by the logo onto the page (see Logo.ts). The streaks are
+     * light: on a dark page they are white-ish, on a light page white would
+     * vanish, so they become orange.
+     *
+     * The overlays sit above the content but never take input, so text near a
+     * streak is lit too. They are canvases drawn on the GPU and blended by the
+     * compositor; nothing here is updated per frame.
      */
-    .logo-light {
+    :root {
+        --logo-hot: #ff7a14;
+    }
+    .logo-light,
+    .logo-tint {
         position: fixed;
         inset: 0;
         width: 100%;
         height: 100%;
         pointer-events: none;
         z-index: 50;
-        color: var(--accent);
-        opacity: 0.5;
+        color: var(--logo-hot);
+    }
+    /* Light mode: an orange pool on the page... */
+    .logo-light {
+        opacity: 0.55;
+    }
+    /*
+     * ...and a glint on the text. Added on top, the light vanishes into the
+     * near-white page but lifts dark text towards orange.
+     */
+    .logo-tint {
+        mix-blend-mode: plus-lighter;
+        opacity: 0.6;
     }
     @media (prefers-color-scheme: dark) {
+        :root {
+            --logo-hot: var(--text);
+        }
         .logo-light {
             /* additive: light on a dark page */
             mix-blend-mode: plus-lighter;
             color: color-mix(in srgb, var(--text) 75%, var(--accent));
             opacity: 1;
         }
-    }
-    /*
-     * Specular highlight: a glint on the text itself, at the dash heads (their
-     * positions are published as --lit-N-x/y by Logo.ts). The gradients are
-     * fixed to the viewport and clipped to the glyphs, so every piece of text
-     * picks up the light where it sits on screen. Only in dark mode, where
-     * light can be added to the page.
-     */
-    html[data-lit] {
-        --lit-0-x: -9999px;
-        --lit-0-y: -9999px;
-        --lit-1-x: -9999px;
-        --lit-1-y: -9999px;
-        /* Warm light: the glint reads as a tint even on near-white text. */
-        --spec-core: color-mix(in srgb, var(--accent) 40%, white);
-        --spec-halo: color-mix(in srgb, var(--spec-core) 45%, transparent);
-    }
-    @media (prefers-color-scheme: dark) {
-        html[data-lit] :is(h1, h2, h3, h4, p, a:not(:has(div))) {
-            background:
-                radial-gradient(
-                    circle 300px at var(--lit-0-x) var(--lit-0-y),
-                    var(--spec-core),
-                    var(--spec-halo) 35%,
-                    transparent
-                ),
-                radial-gradient(
-                    circle 300px at var(--lit-1-x) var(--lit-1-y),
-                    var(--spec-core),
-                    var(--spec-halo) 35%,
-                    transparent
-                ),
-                linear-gradient(currentColor, currentColor);
-            background-attachment: fixed, fixed, scroll;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        /* Links inside text keep their own colour; the text around them is lit. */
-        html[data-lit] :is(h1, h2, h3, h4, p) a {
-            background: none;
-            -webkit-text-fill-color: currentColor;
+        .logo-tint {
+            /*
+             * Near-white text can't get brighter, so the glint is a warm tint
+             * instead: multiplying leaves the dark page alone and turns text
+             * near the light cream.
+             */
+            mix-blend-mode: multiply;
+            color: color-mix(in srgb, var(--accent) 40%, white);
+            opacity: 1;
         }
     }
     @media print {
-        .logo-light {
+        .logo-light,
+        .logo-tint {
             display: none;
         }
     }

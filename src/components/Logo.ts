@@ -28,25 +28,65 @@ const OUTLINES: { points: Point[]; speed: number; phase: number }[] = [
   { points: [[179, 320.416], [113.794, 358.263], [113.794, 91.502], [179, 129.349]], speed: 46, phase: 120 },
 ];
 
-/** Position of a dash head, in logo units. Mirrors headPos() in the shader. */
-function dashHead(outline: (typeof OUTLINES)[number], time: number, scroll: number): Point {
+function perimeterOf(outline: (typeof OUTLINES)[number]) {
   const { points } = outline;
-  const lengths = points.map((a, i) => {
+  return points.reduce((sum, a, i) => {
     const b = points[(i + 1) % points.length];
-    return Math.hypot(b[0] - a[0], b[1] - a[1]);
-  });
-  const total = lengths.reduce((sum, l) => sum + l, 0);
-  let arc = (((time * outline.speed + outline.phase + scroll * 0.15) % total) + total) % total;
+    return sum + Math.hypot(b[0] - a[0], b[1] - a[1]);
+  }, 0);
+}
+
+/** Arc length position of a dash head. Mirrors headPos() in the shader. */
+function headArc(outline: (typeof OUTLINES)[number], time: number, scroll: number) {
+  const total = perimeterOf(outline);
+  return (((time * outline.speed + outline.phase + scroll * 0.15) % total) + total) % total;
+}
+
+/** Point on an outline at an arc length position (wraps around). */
+function pointAt(outline: (typeof OUTLINES)[number], arc: number): Point {
+  const { points } = outline;
+  const total = perimeterOf(outline);
+  arc = ((arc % total) + total) % total;
   for (let i = 0; i < points.length; i++) {
-    if (arc <= lengths[i] || i === points.length - 1) {
-      const a = points[i];
-      const b = points[(i + 1) % points.length];
-      const t = Math.min(arc / lengths[i], 1);
+    const a = points[i];
+    const b = points[(i + 1) % points.length];
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    if (arc <= len || i === points.length - 1) {
+      const t = Math.min(arc / len, 1);
       return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
     }
-    arc -= lengths[i];
+    arc -= len;
   }
   return points[0];
+}
+
+// Light sources along each dash (same fraction of the outline as TAIL in the shader).
+const TAIL = 0.16;
+const SOURCES_PER_DASH = 8;
+// Corners are rounded off with a gaussian window along the path, so the light
+// bends gradually around a corner instead of snapping with the geometry.
+const CORNER_SIGMA = 20;
+
+/** Smoothed light source positions along a dash, head first. */
+function dashSources(outline: (typeof OUTLINES)[number], head: number): Point[] {
+  const tail = TAIL * perimeterOf(outline);
+  const out: Point[] = [];
+  for (let k = 0; k < SOURCES_PER_DASH; k++) {
+    const arc = head - (k / SOURCES_PER_DASH) * tail;
+    let x = 0;
+    let y = 0;
+    let weight = 0;
+    for (let tap = -4; tap <= 4; tap++) {
+      const offset = tap * (CORNER_SIGMA / 2);
+      const w = Math.exp(-(offset * offset) / (2 * CORNER_SIGMA * CORNER_SIGMA));
+      const [px, py] = pointAt(outline, arc + offset);
+      x += px * w;
+      y += py * w;
+      weight += w;
+    }
+    out.push([x / weight, y / weight]);
+  }
+  return out;
 }
 
 const VERT = `#version 300 es
@@ -69,7 +109,7 @@ const float PAD = ${PAD}.0;
 const vec2 VIEW = SIZE + 2.0 * PAD;
 
 const float HALF_WIDTH = 0.75;   // half stroke width, logo units
-const float TAIL = 0.16;         // dash length as a fraction of the outline
+const float TAIL = ${TAIL.toFixed(2)};         // dash length as a fraction of the outline
 
 // The two outlines.
 #define OUTLINE_A vec2(66.676, 1.731), vec2(66.676, 268.034), vec2(1.0, 230.179), vec2(1.0, 39.586)
@@ -128,8 +168,8 @@ float spill(float d) {
 
 // Light from the lit part of an outline, as a function of the distance to the
 // dash itself (not to the whole outline), so it is even along the dash and
-// rounds off at its ends and around corners. mode 0 = bloom, 1 = spill.
-float dashField(vec2 p, vec2 a, vec2 b, vec2 c, vec2 d, float head, int mode) {
+// rounds off at its ends and around corners.
+float dashField(vec2 p, vec2 a, vec2 b, vec2 c, vec2 d, float head) {
   vec2 P[4] = vec2[4](a, b, c, d);
   float L = perimeter(a, b, c, d);
   float dl = TAIL * L;
@@ -149,7 +189,7 @@ float dashField(vec2 p, vec2 a, vec2 b, vec2 c, vec2 d, float head, int mode) {
         float h = clamp(dot(pa, qa) / dot(qa, qa), 0.0, 1.0);
         float dist = length(pa - qa * h);
         float inten = pow(1.0 - (hd - (lo + h * (hi - lo))) / dl, 1.5);
-        best = max(best, inten * (mode == 0 ? bloom(dist) : spill(dist)));
+        best = max(best, inten * bloom(dist));
       }
     }
     off += len;
@@ -164,6 +204,7 @@ float headB() { return headPos(perimeter(OUTLINE_B), 46.0, 120.0); }
 const LOGO_FRAG = `${COMMON}
 uniform vec2 u_pointer;  // pointer in logo units (far away when idle)
 uniform float u_hover;   // 0..1 pointer presence
+uniform vec3 u_hot;      // colour of the streaks and their bloom
 
 void main() {
   // Fit the artboard (plus margin) inside the canvas ("contain"), centred.
@@ -183,22 +224,28 @@ void main() {
   float lit = max(covA * dash(A.y, A.z, hA), covB * dash(B.y, B.z, hB));
 
   float glow = 0.9 * max(
-    dashField(p, OUTLINE_A, hA, 0),
-    dashField(p, OUTLINE_B, hB, 0)
+    dashField(p, OUTLINE_A, hA),
+    dashField(p, OUTLINE_B, hB)
   );
 
   // Pointer proximity lights the outline.
   float near = (cov > 0.0) ? 1.0 - smoothstep(0.0, 70.0, distance(p, u_pointer)) : 0.0;
   near *= u_hover;
 
-  float a = clamp(cov * clamp(0.14 + 0.55 * near + lit, 0.0, 1.0) + glow, 0.0, 1.0);
-  outColor = vec4(u_color * a, a);            // premultiplied alpha
+  // The resting outline (and pointer glow) in the page colour, the streaks in the hot colour.
+  float aBase = cov * clamp(0.14 + 0.55 * near, 0.0, 1.0);
+  float aHot = clamp(cov * lit + glow, 0.0, 1.0);
+  float a = clamp(aBase + aHot, 0.0, 1.0);
+  vec3 rgb = min(u_color * aBase + u_hot * aHot, vec3(a));
+  outColor = vec4(rgb, a);                    // premultiplied alpha
 }`;
 
 const LIGHT_FRAG = `${COMMON}
 uniform vec2 u_viewport; // viewport size, CSS pixels
 uniform vec2 u_center;   // centre of the logo canvas, CSS pixels
 uniform float u_unit;    // CSS pixels per logo unit
+uniform float u_gain;    // overall strength of this layer
+uniform vec2 u_src[${2 * SOURCES_PER_DASH}]; // smoothed light sources along both dashes, head first (logo units)
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
 
@@ -206,10 +253,14 @@ void main() {
   vec2 css = vec2(gl_FragCoord.x, u_res.y - gl_FragCoord.y) / u_res * u_viewport;
   vec2 p = (css - u_center) / u_unit + 0.5 * SIZE;
 
-  float light = dashField(p, OUTLINE_A, headA(), 1)
-              + dashField(p, OUTLINE_B, headB(), 1);
+  // Sum of point lights spread along each dash, brightest at the head.
+  float light = 0.0;
+  for (int i = 0; i < ${2 * SOURCES_PER_DASH}; i++) {
+    float k = float(i % ${SOURCES_PER_DASH}) / ${SOURCES_PER_DASH}.0;
+    light += pow(1.0 - k, 1.5) * spill(distance(p, u_src[i]));
+  }
 
-  float a = 0.20 * light;
+  float a = u_gain * 0.2 * 0.3 * light;
   a += (hash(gl_FragCoord.xy) - 0.5) / 255.0; // dither, avoids banding in the gradient
   a = clamp(a, 0.0, 1.0);
   outColor = vec4(u_color * a, a);            // premultiplied alpha
@@ -271,14 +322,18 @@ function createLayer(canvas: HTMLCanvasElement, frag: string, uniformNames: stri
       gl.viewport(0, 0, w, h);
       gl.uniform2f(u.u_res, w, h);
     },
-    /** Take the theme colour from the CSS `color` of the canvas. */
+    /** Take theme colours from CSS: `color` for the page colour, and `border-top-color` for the hot colour. */
     readColor() {
-      // Computed colours are either "rgb(r g b)" (0-255) or, e.g. for color-mix(),
-      // "color(srgb r g b)" (0-1).
-      const css = getComputedStyle(canvas).color;
-      const m = css.match(/[\d.]+/g)?.map(Number) ?? [255, 255, 255];
-      const k = css.startsWith("color(") ? 1 : 1 / 255;
-      gl.uniform3f(u.u_color, m[0] * k, m[1] * k, m[2] * k);
+      const set = (name: string, css: string) => {
+        // Computed colours are either "rgb(r g b)" (0-255) or, e.g. for color-mix(),
+        // "color(srgb r g b)" (0-1).
+        const m = css.match(/[\d.]+/g)?.map(Number) ?? [255, 255, 255];
+        const k = css.startsWith("color(") ? 1 : 1 / 255;
+        gl.uniform3f(u[name], m[0] * k, m[1] * k, m[2] * k);
+      };
+      const style = getComputedStyle(canvas);
+      set("u_color", style.color);
+      if (u.u_hot) set("u_hot", style.borderTopColor);
     },
     draw(time: number, scroll: number) {
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -290,21 +345,30 @@ function createLayer(canvas: HTMLCanvasElement, frag: string, uniformNames: stri
 }
 
 export function mountLogo(canvas: HTMLCanvasElement) {
-  const logo = createLayer(canvas, LOGO_FRAG, ["u_pointer", "u_hover"]);
+  const logo = createLayer(canvas, LOGO_FRAG, ["u_pointer", "u_hover", "u_hot"]);
 
-  // Full-viewport light overlay, rendered at a quarter of the resolution: the
+  // Full-viewport light overlays, rendered at a quarter of the resolution: the
   // light is smooth, and the browser scales it up with bilinear filtering.
-  const lightCanvas = document.createElement("canvas");
-  lightCanvas.className = "logo-light";
-  lightCanvas.setAttribute("aria-hidden", "true");
-  const light = createLayer(lightCanvas, LIGHT_FRAG, ["u_viewport", "u_center", "u_unit"]);
-  document.body.append(lightCanvas);
-  document.documentElement.dataset.lit = "";
+  // Everything is drawn on the GPU and composited with CSS blend modes, so
+  // nothing in the page's DOM or styles is touched per frame.
+  //  - "logo-light": the light itself, spilling over the page.
+  //  - "logo-tint": the same light again with a different blend mode (see
+  //    Stage.astro), so text near the light picks up its colour as a glint.
+  const lightLayers = [
+    { className: "logo-light", gain: 1 },
+    { className: "logo-tint", gain: 1.4 },
+  ].map(({ className, gain }) => {
+    const el = document.createElement("canvas");
+    el.className = className;
+    el.setAttribute("aria-hidden", "true");
+    document.body.append(el);
+    return { el, gain, layer: createLayer(el, LIGHT_FRAG, ["u_viewport", "u_center", "u_unit", "u_gain", "u_src"]) };
+  });
 
   // Theme colours
   const readColors = () => {
     logo.readColor();
-    light.readColor();
+    for (const { layer } of lightLayers) layer.readColor();
   };
   readColors();
   const scheme = matchMedia("(prefers-color-scheme: dark)");
@@ -315,7 +379,7 @@ export function mountLogo(canvas: HTMLCanvasElement) {
     logo.resize(canvas.clientWidth * dpr, canvas.clientHeight * dpr);
   };
   const resizeLight = () => {
-    light.resize(window.innerWidth / 4, window.innerHeight / 4);
+    for (const { layer } of lightLayers) layer.resize(window.innerWidth / 4, window.innerHeight / 4);
   };
   const resizeObserver = new ResizeObserver(resizeLogo);
   resizeObserver.observe(canvas);
@@ -361,21 +425,21 @@ export function mountLogo(canvas: HTMLCanvasElement) {
     logo.gl.uniform1f(logo.u.u_hover, pointer.hover);
     logo.draw(time, scroll);
 
-    // The light layer is positioned relative to wherever the logo is on screen.
+    // The light layers are positioned relative to wherever the logo is on screen.
     const r = canvas.getBoundingClientRect();
-    light.gl.uniform2f(light.u.u_viewport, window.innerWidth, window.innerHeight);
-    light.gl.uniform2f(light.u.u_center, r.left + r.width / 2, r.top + r.height / 2);
-    light.gl.uniform1f(light.u.u_unit, Math.min(r.width / VIEW_W, r.height / VIEW_H));
-    light.draw(time, scroll);
-
-    // Publish the dash heads (in viewport pixels) for the text highlight in CSS.
+    const center = [r.left + r.width / 2, r.top + r.height / 2];
     const unit = Math.min(r.width / VIEW_W, r.height / VIEW_H);
-    const root = document.documentElement.style;
-    OUTLINES.forEach((outline, i) => {
-      const [x, y] = dashHead(outline, time, scroll);
-      root.setProperty(`--lit-${i}-x`, `${(r.left + r.width / 2 + (x - ART_W / 2) * unit).toFixed(1)}px`);
-      root.setProperty(`--lit-${i}-y`, `${(r.top + r.height / 2 + (y - ART_H / 2) * unit).toFixed(1)}px`);
-    });
+    const sources = new Float32Array(
+      OUTLINES.flatMap((outline) => dashSources(outline, headArc(outline, time, scroll)).flat()),
+    );
+    for (const { layer, gain } of lightLayers) {
+      layer.gl.uniform1f(layer.u.u_gain, gain);
+      layer.gl.uniform2f(layer.u.u_viewport, window.innerWidth, window.innerHeight);
+      layer.gl.uniform2f(layer.u.u_center, center[0], center[1]);
+      layer.gl.uniform1f(layer.u.u_unit, unit);
+      layer.gl.uniform2fv(layer.u.u_src, sources);
+      layer.draw(time, scroll);
+    }
 
     if (visible && !reduced) frame = requestAnimationFrame(draw);
   };
@@ -390,7 +454,7 @@ export function mountLogo(canvas: HTMLCanvasElement) {
   const intersection = new IntersectionObserver(
     ([entry]) => {
       visible = entry.isIntersecting;
-      lightCanvas.style.visibility = visible ? "visible" : "hidden";
+      for (const { el } of lightLayers) el.style.visibility = visible ? "visible" : "hidden";
       if (visible && !frame) frame = requestAnimationFrame(draw);
     },
     { rootMargin: "300px" },
@@ -407,8 +471,7 @@ export function mountLogo(canvas: HTMLCanvasElement) {
     window.removeEventListener("scroll", onScroll);
     canvas.removeEventListener("pointermove", onMove);
     canvas.removeEventListener("pointerleave", onLeave);
-    lightCanvas.remove();
-    delete document.documentElement.dataset.lit;
+    for (const { el } of lightLayers) el.remove();
   };
 }
 

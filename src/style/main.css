@@ -6,6 +6,9 @@
 @import "./images.css";
 @import "./project.css";
 
+/* Geist: a clean, slightly technical grotesque; the variable font covers every weight in use. */
+@import "@fontsource-variable/geist";
+
 /*
  * Theming
  *
@@ -26,6 +29,8 @@
   --color-text: var(--text);
   --color-line: var(--line);
   --color-danger: var(--danger);
+
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
 
   --breakpoint-\*: initial;
   --breakpoint-sm: 690px;
@@ -92,6 +97,6 @@
 
     --media-brightness: 0.75;
 
-    --weight-display: 300;
+    --weight-display: 400;
   }
 }

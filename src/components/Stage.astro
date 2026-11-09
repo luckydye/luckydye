@@ -25,6 +25,7 @@ import Introduction from "./Introduction.astro";
         grid-gap: 100px;
     }
     .logo {
+        position: relative; /* the bloom canvas is laid over the logo canvas */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -67,8 +68,8 @@ import Introduction from "./Introduction.astro";
      * light: on a dark page they are white-ish, on a light page white would
      * vanish, so they become orange.
      *
-     * The overlays sit above the content but never take input, so text near a
-     * streak is lit too. They are canvases drawn on the GPU and blended by the
+     * The overlay sits above the content but never takes input, so text near a
+     * streak is lit too. It is a canvas drawn on the GPU and blended by the
      * compositor; nothing here is updated per frame.
      */
     :root {
@@ -77,8 +78,7 @@ import Introduction from "./Introduction.astro";
         --logo-metal-lo: #4a4d51;
         --logo-metal-hi: #f6f5f3;
     }
-    .logo-light,
-    .logo-tint {
+    .logo-light {
         position: fixed;
         inset: 0;
         width: 100%;
@@ -86,23 +86,47 @@ import Introduction from "./Introduction.astro";
         pointer-events: none;
         z-index: 50;
         color: var(--logo-hot);
-    }
-    /*
-     * Light mode: a pool of light on the page. It is added on top like all
-     * light, so it can only brighten the page, never darken it...
-     */
-    .logo-light {
+        /*
+         * Light is added on top, so it can only brighten the page, never darken
+         * it (on a light page that leaves a soft pool of light, not a stain).
+         */
         mix-blend-mode: plus-lighter;
         opacity: 0.3;
     }
+
     /*
-     * ...and a glint on the text. Added on top, the light vanishes into the
-     * near-white page but lifts dark text towards orange.
+     * The hero (logo and copy) is drawn by one canvas and one shader (Logo.ts).
+     * The canvas sits over the layout grid with some room around it for the
+     * bloom, and lets all input through. The empty .logo canvas only reserves
+     * the logo's place.
+     *
+     * The copy is drawn a second time by that shader. The real text stays in the
+     * DOM, selectable, searchable and readable by crawlers and screen readers;
+     * once the canvas is ready only its fill is made transparent, so selection,
+     * links and focus rings keep working, and the text is plain if WebGL is
+     * unavailable.
      */
-    .logo-tint {
-        mix-blend-mode: plus-lighter;
-        opacity: 0.45;
+    .has-hero {
+        position: relative;
     }
+    .logo-hero {
+        position: absolute;
+        --hero-margin: 60px;
+        left: calc(-1 * var(--hero-margin));
+        top: calc(-1 * var(--hero-margin));
+        width: calc(100% + 2 * var(--hero-margin));
+        height: calc(100% + 2 * var(--hero-margin));
+        pointer-events: none;
+        color: var(--text);
+        /* colours for the shader, which reads them back resolved (see Logo.ts) */
+        border-top-color: var(--logo-hot);
+        border-bottom-color: var(--logo-metal-lo);
+        border-left-color: var(--logo-metal-hi);
+    }
+    html[data-glyphs] [data-glyphs-host] :is(h1, p, a) {
+        -webkit-text-fill-color: transparent;
+    }
+
     @media (prefers-color-scheme: dark) {
         :root {
             --logo-hot: var(--text);
@@ -113,21 +137,21 @@ import Introduction from "./Introduction.astro";
             color: color-mix(in srgb, var(--text) 75%, var(--accent));
             opacity: 1; /* dark mode can take the full strength */
         }
-        .logo-tint {
-            /*
-             * Near-white text can't get brighter, so the glint is a warm tint
-             * instead: multiplying leaves the dark page alone and turns text
-             * near the light cream.
-             */
-            mix-blend-mode: multiply;
-            color: color-mix(in srgb, var(--accent) 40%, white);
-            opacity: 1;
+        /*
+         * Near-white text can't get brighter, so the copy beside the logo rests a
+         * little dimmer, like the unlit metal, and flares when light reaches it.
+         */
+        .caption :is(h1, p) {
+            color: color-mix(in srgb, var(--text) 42%, var(--bg-0));
         }
     }
     @media print {
         .logo-light,
-        .logo-tint {
+        .logo-hero {
             display: none;
+        }
+        html[data-glyphs] [data-glyphs-host] :is(h1, p, a) {
+            -webkit-text-fill-color: currentColor;
         }
     }
 </style>

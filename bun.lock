@@ -10,7 +10,6 @@
       "devDependencies": {
         "@astrojs/solid-js": "7.0.2",
         "@biomejs/biome": "^1.9.4",
-        "@rive-app/canvas-advanced": "^2.31.2",
         "@sv/elements": "^2.13.0",
         "@tailwindcss/vite": "^4.1.12",
         "astro": "7.3.3",
@@ -315,7 +314,6 @@
 
     "@resvg/resvg-js-win32-x64-msvc": ["@resvg/resvg-js-win32-x64-msvc@2.6.2", "", { "os": "win32", "cpu": "x64" }, "sha512-ZXtYhtUr5SSaBrUDq7DiyjOFJqBVL/dOBN7N/qmi/pO0IgiWW/f/ue3nbvu9joWE5aAKDoIzy/CxsY0suwGosQ=="],
 
-    "@rive-app/canvas-advanced": ["@rive-app/canvas-advanced@2.31.2", "", {}, "sha512-vLMSkK1oZUq0zA39aAao3udhrNLCrUSnaJRIyOhLKFsM21jUgtQObO4exjtZoqgbMQR0vt+wkEZUbU6AV//luQ=="],
 
     "@rive-app/canvas-advanced-lite": ["@rive-app/canvas-advanced-lite@2.31.2", "", {}, "sha512-QGvACYaH0MXnA5ZQVaYLrq/qbMy0iYtm0fzNaellezNWLAthwqGsrheRYl+Bxene4FAu2ArSO/4pwTEuq4ygQA=="],
 

@@ -69,11 +69,6 @@
    */
   --weight-display: 400;
 
-  /*
-   * The logo's colours are baked into logo.riv as a light-on-dark mark, so light
-   * mode flips it rather than shipping a second asset.
-   */
-  --logo-filter: invert(1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -98,7 +93,5 @@
     --media-brightness: 0.75;
 
     --weight-display: 300;
-
-    --logo-filter: none;
   }
 }

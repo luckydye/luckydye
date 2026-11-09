@@ -56,3 +56,76 @@ import Introduction from "./Introduction.astro";
         }
     }
 </style>
+
+<style is:global>
+    /*
+     * Light cast by the logo onto the page (see Logo.ts). It sits above the
+     * content but never takes input, so text near a streak is lit too.
+     */
+    .logo-light {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        color: var(--accent);
+        opacity: 0.5;
+    }
+    @media (prefers-color-scheme: dark) {
+        .logo-light {
+            /* additive: light on a dark page */
+            mix-blend-mode: plus-lighter;
+            color: color-mix(in srgb, var(--text) 75%, var(--accent));
+            opacity: 1;
+        }
+    }
+    /*
+     * Specular highlight: a glint on the text itself, at the dash heads (their
+     * positions are published as --lit-N-x/y by Logo.ts). The gradients are
+     * fixed to the viewport and clipped to the glyphs, so every piece of text
+     * picks up the light where it sits on screen. Only in dark mode, where
+     * light can be added to the page.
+     */
+    html[data-lit] {
+        --lit-0-x: -9999px;
+        --lit-0-y: -9999px;
+        --lit-1-x: -9999px;
+        --lit-1-y: -9999px;
+        /* Warm light: the glint reads as a tint even on near-white text. */
+        --spec-core: color-mix(in srgb, var(--accent) 40%, white);
+        --spec-halo: color-mix(in srgb, var(--spec-core) 45%, transparent);
+    }
+    @media (prefers-color-scheme: dark) {
+        html[data-lit] :is(h1, h2, h3, h4, p, a:not(:has(div))) {
+            background:
+                radial-gradient(
+                    circle 300px at var(--lit-0-x) var(--lit-0-y),
+                    var(--spec-core),
+                    var(--spec-halo) 35%,
+                    transparent
+                ),
+                radial-gradient(
+                    circle 300px at var(--lit-1-x) var(--lit-1-y),
+                    var(--spec-core),
+                    var(--spec-halo) 35%,
+                    transparent
+                ),
+                linear-gradient(currentColor, currentColor);
+            background-attachment: fixed, fixed, scroll;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Links inside text keep their own colour; the text around them is lit. */
+        html[data-lit] :is(h1, h2, h3, h4, p) a {
+            background: none;
+            -webkit-text-fill-color: currentColor;
+        }
+    }
+    @media print {
+        .logo-light {
+            display: none;
+        }
+    }
+</style>

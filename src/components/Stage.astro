@@ -44,6 +44,8 @@ import Introduction from "./Introduction.astro";
         color: var(--text);
         /* colour of the streaks (read by Logo.ts); the outline itself uses `color` */
         border-top-color: var(--logo-hot);
+        border-bottom-color: var(--logo-metal-lo);
+        border-left-color: var(--logo-metal-hi);
     }
     @media screen and (max-width: 640px) {
         .container {
@@ -71,6 +73,9 @@ import Introduction from "./Introduction.astro";
      */
     :root {
         --logo-hot: #ff7a14;
+        /* The outlines are metal: how dark it is in shadow, and how bright in reflections. */
+        --logo-metal-lo: #4a4d51;
+        --logo-metal-hi: #f6f5f3;
     }
     .logo-light,
     .logo-tint {
@@ -82,9 +87,13 @@ import Introduction from "./Introduction.astro";
         z-index: 50;
         color: var(--logo-hot);
     }
-    /* Light mode: an orange pool on the page... */
+    /*
+     * Light mode: a pool of light on the page. It is added on top like all
+     * light, so it can only brighten the page, never darken it...
+     */
     .logo-light {
-        opacity: 0.55;
+        mix-blend-mode: plus-lighter;
+        opacity: 0.3;
     }
     /*
      * ...and a glint on the text. Added on top, the light vanishes into the
@@ -92,17 +101,17 @@ import Introduction from "./Introduction.astro";
      */
     .logo-tint {
         mix-blend-mode: plus-lighter;
-        opacity: 0.6;
+        opacity: 0.45;
     }
     @media (prefers-color-scheme: dark) {
         :root {
             --logo-hot: var(--text);
+            --logo-metal-lo: #181b1d;
+            --logo-metal-hi: #c4cbcf;
         }
         .logo-light {
-            /* additive: light on a dark page */
-            mix-blend-mode: plus-lighter;
             color: color-mix(in srgb, var(--text) 75%, var(--accent));
-            opacity: 1;
+            opacity: 1; /* dark mode can take the full strength */
         }
         .logo-tint {
             /*

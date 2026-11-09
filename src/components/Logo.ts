@@ -101,6 +101,7 @@ uniform vec2 u_res;      // canvas size in device pixels
 uniform float u_time;    // seconds
 uniform float u_scroll;  // window scroll position, CSS pixels
 uniform vec3 u_color;
+uniform vec2 u_src[${2 * SOURCES_PER_DASH}]; // smoothed light sources along both dashes, head first (logo units)
 
 out vec4 outColor;
 
@@ -108,7 +109,7 @@ const vec2 SIZE = vec2(${ART_W}.0, ${ART_H}.0);
 const float PAD = ${PAD}.0;
 const vec2 VIEW = SIZE + 2.0 * PAD;
 
-const float HALF_WIDTH = 0.75;   // half stroke width, logo units
+const float HALF_WIDTH = 2.0;    // half width of the ridge, logo units
 const float TAIL = ${TAIL.toFixed(2)};         // dash length as a fraction of the outline
 
 // The two outlines.
@@ -120,18 +121,19 @@ float perimeter(vec2 a, vec2 b, vec2 c, vec2 d) {
 }
 
 // Returns (distance to outline, arc length position of the closest point, perimeter).
-vec3 poly(vec2 p, vec2 a, vec2 b, vec2 c, vec2 d) {
+vec3 poly(vec2 p, vec2 a, vec2 b, vec2 c, vec2 d, out vec2 dir) {
   vec2 P[4] = vec2[4](a, b, c, d);
   float L = perimeter(a, b, c, d);
 
   float best = 1e9, arc = 0.0, off = 0.0;
+  dir = vec2(0.0);
   for (int i = 0; i < 4; i++) {
     vec2 s = P[i], e = P[(i + 1) % 4];
     vec2 pa = p - s, ba = e - s;
     float len = length(ba);
     float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
     float dist = length(pa - ba * h);
-    if (dist < best) { best = dist; arc = off + h * len; }
+    if (dist < best) { best = dist; arc = off + h * len; dir = pa - ba * h; }
     off += len;
   }
   return vec3(best, arc, L);
@@ -204,7 +206,28 @@ float headB() { return headPos(perimeter(OUTLINE_B), 46.0, 120.0); }
 const LOGO_FRAG = `${COMMON}
 uniform vec2 u_pointer;  // pointer in logo units (far away when idle)
 uniform float u_hover;   // 0..1 pointer presence
-uniform vec3 u_hot;      // colour of the streaks and their bloom
+uniform vec3 u_hot;      // colour of the streaks, their bloom and the specular highlights
+uniform vec3 u_lo;       // metal in shadow
+uniform vec3 u_hi;       // metal in reflected light
+
+// Height of the lights above the surface, logo units.
+const float LIGHT_Z = 16.0;
+const float SHININESS = 60.0;
+// Opacity of the outline where no light reaches it.
+const float REST_VISIBILITY = 0.28;
+// Beyond this distance from an outline the bloom is below 1/255.
+const float GLOW_REACH = 48.0;
+
+// Blinn-Phong from a point light; returns (diffuse, specular).
+vec2 pointLight(vec3 pos, vec3 N, vec2 light, float height) {
+  vec3 Ld = vec3(light - pos.xy, height);
+  float d2 = dot(Ld, Ld);
+  vec3 L = Ld * inversesqrt(d2);
+  vec3 H = normalize(L + vec3(0.0, 0.0, 1.0));          // the viewer looks straight down
+  float q = 1.0 + d2 / (60.0 * 60.0);
+  float att = 1.0 / (q * q);                          // steep falloff: only the part near a light catches it
+  return att * vec2(max(dot(N, L), 0.0), pow(max(dot(N, H), 0.0), SHININESS));
+}
 
 void main() {
   // Fit the artboard (plus margin) inside the canvas ("contain"), centred.
@@ -213,31 +236,65 @@ void main() {
   vec2 p = (frag - 0.5 * u_res) / scale + 0.5 * SIZE;
   float px = 1.0 / scale;                     // one device pixel in logo units
 
-  vec3 A = poly(p, OUTLINE_A);
-  vec3 B = poly(p, OUTLINE_B);
+  vec2 dirA, dirB;
+  vec3 A = poly(p, OUTLINE_A, dirA);
+  vec3 B = poly(p, OUTLINE_B, dirB);
+  bool useA = A.x < B.x;
+  float dist = useA ? A.x : B.x;
+  vec2 dir = useA ? dirA : dirB;
 
-  float covA = 1.0 - smoothstep(HALF_WIDTH - px * 0.5, HALF_WIDTH + px * 0.5, A.x);
-  float covB = 1.0 - smoothstep(HALF_WIDTH - px * 0.5, HALF_WIDTH + px * 0.5, B.x);
-  float cov = max(covA, covB);
+  float cov = 1.0 - smoothstep(HALF_WIDTH - px, HALF_WIDTH, dist);
 
   float hA = headA(), hB = headB();
-  float lit = max(covA * dash(A.y, A.z, hA), covB * dash(B.y, B.z, hB));
+  float lit = useA ? dash(A.y, A.z, hA) : dash(B.y, B.z, hB);
 
+  vec3 ridge = vec3(0.0);
+  float reveal = 0.0;                         // how visible the metal is here
+  if (cov > 0.0) {
+    // The outline is a rounded ridge: a half cylinder, so its normal tilts
+    // away from the centre line towards the edges (a "U" in cross-section).
+    float t = clamp(dist / HALF_WIDTH, 0.0, 1.0);
+    vec2 side = dist > 1e-4 ? dir / dist : vec2(0.0);
+    vec3 N = normalize(vec3(side * t, sqrt(max(1.0 - t * t, 0.0))));
+
+    // Studio reflection: a soft key from the top left, a fainter kicker from
+    // the bottom right, so the two sides of each ridge read differently.
+    vec3 R = reflect(vec3(0.0, 0.0, -1.0), N);
+    float key = smoothstep(-0.1, 0.9, dot(R.xy, normalize(vec2(-0.6, -0.8))) * 1.3);
+    float kicker = smoothstep(0.55, 1.0, dot(R.xy, normalize(vec2(0.7, 0.7))));
+    float env = 0.05 + 0.22 * key + 0.09 * kicker;
+
+    // The travelling streaks and the pointer are point lights over the surface.
+    vec2 ds = vec2(0.0);
+    for (int i = 0; i < ${2 * SOURCES_PER_DASH}; i++) {
+      float k = float(i % ${SOURCES_PER_DASH}) / ${SOURCES_PER_DASH}.0;
+      ds += pow(1.0 - k, 1.5) * pointLight(vec3(p, 0.0), N, u_src[i], LIGHT_Z);
+    }
+    ds += 1.5 * u_hover * pointLight(vec3(p, 0.0), N, u_pointer, LIGHT_Z);
+
+    float shade = clamp(env + 0.60 * ds.x, 0.0, 1.0);
+    vec3 metal = mix(u_lo, u_hi, shade);
+    vec3 specular = mix(vec3(1.0), u_hot, 0.45) * ds.y * 5.5;
+
+    // The dash itself is emissive: that is where the light sits.
+    ridge = clamp(mix(metal + specular, u_hot, lit * 0.9), 0.0, 1.0);
+
+    // At rest the metal is only faintly there; the lights bring it out.
+    reveal = clamp(REST_VISIBILITY + 0.8 * ds.y + 0.12 * ds.x + lit, 0.0, 1.0);
+  }
+
+  // Bloom around the streaks, in the hot colour.
+  // Skipped for pixels the bloom can't reach: it's the most expensive part.
   float glow = 0.9 * max(
-    dashField(p, OUTLINE_A, hA),
-    dashField(p, OUTLINE_B, hB)
+    A.x < GLOW_REACH ? dashField(p, OUTLINE_A, hA) : 0.0,
+    B.x < GLOW_REACH ? dashField(p, OUTLINE_B, hB) : 0.0
   );
 
-  // Pointer proximity lights the outline.
-  float near = (cov > 0.0) ? 1.0 - smoothstep(0.0, 70.0, distance(p, u_pointer)) : 0.0;
-  near *= u_hover;
-
-  // The resting outline (and pointer glow) in the page colour, the streaks in the hot colour.
-  float aBase = cov * clamp(0.14 + 0.55 * near, 0.0, 1.0);
-  float aHot = clamp(cov * lit + glow, 0.0, 1.0);
-  float a = clamp(aBase + aHot, 0.0, 1.0);
-  vec3 rgb = min(u_color * aBase + u_hot * aHot, vec3(a));
-  outColor = vec4(rgb, a);                    // premultiplied alpha
+  // The metal is opaque where it is. The bloom is light, so it is only ever
+  // added to what is behind it: premultiplied colour with no alpha behind it,
+  // which can brighten the page but never darken it, on light pages too.
+  float a = cov * reveal;
+  outColor = vec4(ridge * a + u_hot * glow * (1.0 - a), a);
 }`;
 
 const LIGHT_FRAG = `${COMMON}
@@ -245,8 +302,6 @@ uniform vec2 u_viewport; // viewport size, CSS pixels
 uniform vec2 u_center;   // centre of the logo canvas, CSS pixels
 uniform float u_unit;    // CSS pixels per logo unit
 uniform float u_gain;    // overall strength of this layer
-uniform vec2 u_src[${2 * SOURCES_PER_DASH}]; // smoothed light sources along both dashes, head first (logo units)
-
 float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
 
 void main() {
@@ -283,6 +338,7 @@ function createLayer(canvas: HTMLCanvasElement, frag: string, uniformNames: stri
     alpha: true,
     premultipliedAlpha: true,
     antialias: false,
+    powerPreference: "low-power",
   });
   if (!gl) throw new Error("WebGL2 not available");
 
@@ -322,7 +378,7 @@ function createLayer(canvas: HTMLCanvasElement, frag: string, uniformNames: stri
       gl.viewport(0, 0, w, h);
       gl.uniform2f(u.u_res, w, h);
     },
-    /** Take theme colours from CSS: `color` for the page colour, and `border-top-color` for the hot colour. */
+    /** Take theme colours from CSS (see Stage.astro). */
     readColor() {
       const set = (name: string, css: string) => {
         // Computed colours are either "rgb(r g b)" (0-255) or, e.g. for color-mix(),
@@ -333,7 +389,11 @@ function createLayer(canvas: HTMLCanvasElement, frag: string, uniformNames: stri
       };
       const style = getComputedStyle(canvas);
       set("u_color", style.color);
+      // Extra colours are smuggled through otherwise unused border colours,
+      // because the browser resolves those (var(), color-mix()) to plain rgb.
       if (u.u_hot) set("u_hot", style.borderTopColor);
+      if (u.u_lo) set("u_lo", style.borderBottomColor);
+      if (u.u_hi) set("u_hi", style.borderLeftColor);
     },
     draw(time: number, scroll: number) {
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -345,7 +405,7 @@ function createLayer(canvas: HTMLCanvasElement, frag: string, uniformNames: stri
 }
 
 export function mountLogo(canvas: HTMLCanvasElement) {
-  const logo = createLayer(canvas, LOGO_FRAG, ["u_pointer", "u_hover", "u_hot"]);
+  const logo = createLayer(canvas, LOGO_FRAG, ["u_pointer", "u_hover", "u_hot", "u_lo", "u_hi", "u_src"]);
 
   // Full-viewport light overlays, rendered at a quarter of the resolution: the
   // light is smooth, and the browser scales it up with bilinear filtering.
@@ -374,8 +434,13 @@ export function mountLogo(canvas: HTMLCanvasElement) {
   const scheme = matchMedia("(prefers-color-scheme: dark)");
   scheme.addEventListener("change", readColors);
 
+  // Quality steps, used if the device can't keep up (see the draw loop).
+  const RESOLUTION = [1, 0.75, 0.6];
+  let quality = 0;
+
   const resizeLogo = () => {
-    const dpr = Math.max(window.devicePixelRatio || 1, 2);
+    // 2x supersampling is plenty; high density phone screens don't need more.
+    const dpr = Math.max(Math.min(window.devicePixelRatio || 1, 2) * RESOLUTION[quality], 1);
     logo.resize(canvas.clientWidth * dpr, canvas.clientHeight * dpr);
   };
   const resizeLight = () => {
@@ -404,12 +469,36 @@ export function mountLogo(canvas: HTMLCanvasElement) {
   canvas.addEventListener("pointerleave", onLeave);
 
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // The motion is slow, so touch devices don't need more than 30 frames a second.
+  const frameInterval = matchMedia("(pointer: coarse), (max-width: 700px)").matches ? 1000 / 30 : 0;
+  let lastDraw = 0;
+  let slowFrames = 0;
   let frame = 0;
   let visible = true;
   const start = performance.now();
 
   const draw = (now: number) => {
     frame = 0;
+
+    if (frameInterval && lastDraw && now - lastDraw < frameInterval - 2) {
+      if (visible && !reduced) frame = requestAnimationFrame(draw);
+      return;
+    }
+
+    // Step quality down if frames keep taking much longer than they should.
+    if (lastDraw && !reduced) {
+      const dt = now - lastDraw;
+      const expected = Math.max(frameInterval, 1000 / 60);
+      slowFrames = dt > expected * 1.6 && dt < 500 ? slowFrames + 1 : Math.max(slowFrames - 1, 0);
+      if (slowFrames > 45 && quality < RESOLUTION.length - 1) {
+        quality++;
+        slowFrames = 0;
+        resizeLogo();
+        if (quality === RESOLUTION.length - 1) lightLayers[1].el.style.display = "none"; // drop the text tint
+      }
+    }
+    lastDraw = now;
+
     const time = reduced ? 3.0 : (now - start) / 1000;
     const scroll = window.scrollY;
 
@@ -421,6 +510,10 @@ export function mountLogo(canvas: HTMLCanvasElement) {
     pointer.y += (target.y - pointer.y) * 0.15;
     pointer.hover += (target.hover - pointer.hover) * 0.1;
 
+    const sources = new Float32Array(
+      OUTLINES.flatMap((outline) => dashSources(outline, headArc(outline, time, scroll)).flat()),
+    );
+    logo.gl.uniform2fv(logo.u.u_src, sources);
     logo.gl.uniform2f(logo.u.u_pointer, pointer.x, pointer.y);
     logo.gl.uniform1f(logo.u.u_hover, pointer.hover);
     logo.draw(time, scroll);
@@ -429,10 +522,8 @@ export function mountLogo(canvas: HTMLCanvasElement) {
     const r = canvas.getBoundingClientRect();
     const center = [r.left + r.width / 2, r.top + r.height / 2];
     const unit = Math.min(r.width / VIEW_W, r.height / VIEW_H);
-    const sources = new Float32Array(
-      OUTLINES.flatMap((outline) => dashSources(outline, headArc(outline, time, scroll)).flat()),
-    );
     for (const { layer, gain } of lightLayers) {
+      if (quality === RESOLUTION.length - 1 && gain !== 1) continue; // text tint dropped
       layer.gl.uniform1f(layer.u.u_gain, gain);
       layer.gl.uniform2f(layer.u.u_viewport, window.innerWidth, window.innerHeight);
       layer.gl.uniform2f(layer.u.u_center, center[0], center[1]);
